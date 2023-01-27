@@ -1,8 +1,9 @@
+import HomePage from "./pages/HomePage";
 
 function App() {
     return (
         <div className="App">
-            <p>Hello world!</p>
+            <HomePage />
         </div>
     );
 }
