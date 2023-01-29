@@ -22,7 +22,7 @@ geocacheRouter.get("/", async (request, response) => {
 
 geocacheRouter.get("/:id", async (request, response) => {
     const geocache = geocaches.find(g => g.id === request.params.id)
-    if(geocache){
+    if(geocache !== undefined){
         response.json(geocache);
     }
     else{
