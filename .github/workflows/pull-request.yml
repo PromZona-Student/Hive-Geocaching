@@ -12,8 +12,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: Navigate to frontend directory
-        run: cd ./frontend
       - name: Install modules
         run: npm install
       - name: Run eslint
