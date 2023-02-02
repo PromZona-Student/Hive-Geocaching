@@ -12,5 +12,7 @@ jobs:
         run: cd frontend
       - name: Install modules
         run: npm install
+      - name: Run eslint
+        run: npm run lint
       - name: Run tests, show coverage
         run: npm run test:coverage
