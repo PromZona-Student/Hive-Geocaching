@@ -3,7 +3,7 @@ on: [pull_request]
 defaults:
   run:
     shell: bash
-    working-directory: scripts
+    working-directory: frontend
 jobs:
   run-frontend-tests:
     runs-on: ubuntu-latest
