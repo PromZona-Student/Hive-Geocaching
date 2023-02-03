@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
+import "./MapPage.scss";
 
 const MapPage: React.FC = () => {
     
@@ -12,7 +12,6 @@ const MapPage: React.FC = () => {
                 center={center}
                 zoom={zoom}
                 scrollWheelZoom={true}
-                style={{ height: "100vh", width: "100%" }}
             >
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
