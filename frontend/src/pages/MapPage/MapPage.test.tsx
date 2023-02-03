@@ -6,5 +6,5 @@ let component = null;
 
 test("component loads", async () => {
     component = render(<MapPage />);
-    expect(component).toBeTruthy();
+    expect(component).toBeVisible();
 });
