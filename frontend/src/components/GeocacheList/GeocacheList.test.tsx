@@ -4,5 +4,5 @@ import "@testing-library/jest-dom";
 
 test("component loads", async () => {
     render(<GeocacheList/>);
-    expect(screen.getByText("This is a list of geocaches")).toBeVisible();
+    expect(screen.getByText("New geocaches")).toBeVisible();
 });

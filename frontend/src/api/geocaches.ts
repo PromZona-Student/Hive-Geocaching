@@ -1,11 +1,9 @@
 import axios from "axios";
-import { Geocache } from "../model/Geocache"; 
 
 export const getGeoCaches = async () => {
-    const geocaches: Array<Geocache> = await axios.get("/api/geocaches");
+    const geocaches = await axios(
+        "/api/geocaches",
+    );
     return geocaches;
-};   
-
-
-  
+};
 
