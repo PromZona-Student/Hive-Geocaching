@@ -51,5 +51,8 @@
     "eslint-plugin-react": "^7.32.1",
     "react-scripts": "5.0.1"
   },
+  "jest": {
+    "transformIgnorePatterns": ["node_modules/(?!(axios|react-leaflet|@react-leaflet))"]
+  },
   "proxy": "http://localhost:3001"
 }
