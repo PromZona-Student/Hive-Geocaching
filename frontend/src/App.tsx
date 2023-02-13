@@ -1,14 +1,10 @@
-import HomePage from "./pages/HomePage";
-import { Route, Routes } from "react-router";
-import MapViewPage from "./pages/MapViewPage";
+import NavBar from "./components/NavBar/NavBar";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
     return (
         <div className="App">
-            <Routes>
-                <Route path="/" element={<HomePage/>}/>
-                <Route path="/map" element={<MapViewPage/>}/>
-            </Routes>
+            <NavBar/>
         </div>
     );
 }
