@@ -1,27 +1,29 @@
-import NavBar from "./NavBar";
-import {render, screen} from "@testing-library/react";
+import {render, screen, waitFor} from "@testing-library/react";
+import { createMemoryHistory } from "history";
+import {Router} from "react-router-dom";
+import App from "../../App";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom";
 
-test("Navbar in home (default page)", async () => {
-    render(<NavBar/>);
-    expect(screen.getByText("New geocaches")).toBeInTheDocument();
-});
-
-test("Go to map page", async () => {
-    render(<NavBar/>);
-    userEvent.click(screen.getByText("Map"));
-    expect(screen.getByText("OpenStreetMap")).toBeInTheDocument();
-});
-
-test("Go to home page from navbar", async () => {
-    render(<NavBar/>);
+test("Loads and navigates", async () => {
+    const history = createMemoryHistory();
+    render(
+        <Router location={history.location} navigator={history}>
+            <App />
+        </Router>
+    );
+    await waitFor(()=>{
+        expect(history.location.pathname).toEqual("/");
+    });
     userEvent.click(screen.getByText("Home"));
-    expect(screen.getByText("New geocaches")).toBeInTheDocument();
-});
-
-test("Go to home page from logo", async () => {
-    render(<NavBar/>);
+    await waitFor(()=>{
+        expect(history.location.pathname).toEqual("/");
+    });
+    userEvent.click(screen.getByText("Map"));
+    await waitFor(()=>{
+        expect(history.location.pathname).toEqual("/map");
+    });
     userEvent.click(screen.getByText("Geocache.fi"));
-    expect(screen.getByText("New geocaches")).toBeInTheDocument();
+    await waitFor(()=>{
+        expect(history.location.pathname).toEqual("/");
+    });
 });
