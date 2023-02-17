@@ -20,7 +20,7 @@ const GeocacheList = () => {
 
     const columns: ColumnDefinitionType<Geocache, keyof Geocache>[] = [
         {
-            key: "id",
+            key: "referenceCode",
             header: "ID",
         },
         {
