@@ -4,11 +4,11 @@ import "../../styles/common.scss";
 import {getGeoCaches} from "../../api/geocaches";
 
 const GeocacheList = () => {
-    const [geocaches, setGeocaches] = useState([]);
+    const [geocaches, setGeocaches] = useState<Array<Geocache>>([]);
 
     useEffect(() => {
         getGeoCaches().then(geocachesResult => {
-            setGeocaches(geocachesResult.data);
+            setGeocaches(geocachesResult);
         });
     }, []); 
 
