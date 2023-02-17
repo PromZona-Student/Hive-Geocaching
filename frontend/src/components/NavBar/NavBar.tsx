@@ -3,7 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import {Link} from "react-router-dom";
-import "./NavBar.scss";
+import "./Navbar.scss";
 import { AiOutlineUser } from "react-icons/ai";
 import logo from "../../images/gcfi_only_logo_big_orange.png";
 
