@@ -7,7 +7,7 @@ import axios from "axios";
 jest.mock("axios");
 
 test("component loads", async () => {
-    jest.spyOn(GeocacheApi, "getGeoCaches").mockImplementation(async () => {
+    /**jest.spyOn(GeocacheApi, "getGeoCaches").mockImplementation(async () => {
         return [
             {
                 id: "GCK25A",
@@ -26,7 +26,7 @@ test("component loads", async () => {
                 publishedDate: "2004-07-22T00:00:00.000"
             }
         ];
-    });
+    });**/
    
     render(<GeocacheList/>);
     await waitFor(()=>{

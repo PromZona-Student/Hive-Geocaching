@@ -1,7 +1,6 @@
 import { Icon } from "leaflet";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { Geocache } from "../../model/Geocache";
-import MapMenu from "../MapMenu";
 import "./Map.scss";
 
 interface Props{

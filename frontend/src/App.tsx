@@ -8,8 +8,6 @@ function App() {
         <div>
             <div className="App">
                 <NavBar/>
-            </div>
-            <div>
                 <Routes>
                     <Route path="/" element={<HomePage/>}/>
                     <Route path="/map" element={<MapViewPage/>}/>

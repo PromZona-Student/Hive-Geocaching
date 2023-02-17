@@ -10,7 +10,7 @@ import logo from "../../images/gcfi_only_logo_big_orange.png";
 const NavBar = () => {
     return (
         <div>
-            <Navbar className="color-nav" variant="dark" expand="lg">
+            <Navbar fixed="top" className="color-nav" variant="dark" expand="lg">
                 <Container>                        
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">

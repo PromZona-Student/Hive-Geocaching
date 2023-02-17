@@ -11,13 +11,15 @@ const MapViewPage: React.FC = () => {
 
     useEffect(() => {
         getGeoCaches().then(geocaches => {
-            setGeoCaches(geocaches.data);
+            setGeoCaches(geocaches);
         });
     }, []);
 
     return (
-        <div>
-            <MapMenu/>
+        <div className="map-view-page">
+            <div className="map-menu-wrapper">
+                <MapMenu/>
+            </div>
             <Map geocaches={geoCaches}/>
         </div>
     );

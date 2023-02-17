@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
 import "./MapMenu.scss";
 
 const MapMenu = () => {
