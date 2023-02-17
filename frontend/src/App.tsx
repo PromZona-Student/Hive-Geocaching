@@ -1,14 +1,20 @@
-import HomePage from "./pages/HomePage";
-import { Route, Routes } from "react-router";
-import MapViewPage from "./pages/MapViewPage";
+import NavBar from "./components/NavBar";
+import {Routes,Route} from "react-router-dom";
+import MapViewPage from "./pages/MapViewPage/MapViewPage";
+import HomePage from "./pages/HomePage/HomePage";
 
 function App() {
     return (
-        <div className="App">
-            <Routes>
-                <Route path="/" element={<HomePage/>}/>
-                <Route path="/map" element={<MapViewPage/>}/>
-            </Routes>
+        <div>
+            <div className="App">
+                <NavBar/>
+            </div>
+            <div>
+                <Routes>
+                    <Route path="/" element={<HomePage/>}/>
+                    <Route path="/map" element={<MapViewPage/>}/>
+                </Routes>
+            </div>
         </div>
     );
 }
