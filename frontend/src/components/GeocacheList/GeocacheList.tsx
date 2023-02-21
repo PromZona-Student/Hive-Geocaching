@@ -14,7 +14,7 @@ const GeocacheList = () => {
 
     return (
         <div>
-            <h3>Uusimmat geokätköt</h3>
+            <h3>New geocaches</h3>
             <ul>
                 {
                     geocaches.map(cache => {

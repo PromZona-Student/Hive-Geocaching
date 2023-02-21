@@ -2,8 +2,6 @@ import GeocacheList from "./GeocacheList";
 import {render, screen, waitFor} from "@testing-library/react";
 import "@testing-library/jest-dom";
 import * as GeocacheApi from "../../api/geocaches";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import axios from "axios";
 import { Filters } from "../../model/Filters";
 jest.mock("axios");
 
