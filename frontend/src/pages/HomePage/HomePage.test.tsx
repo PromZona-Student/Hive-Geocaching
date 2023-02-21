@@ -1,8 +1,10 @@
-//import {render, screen} from "@testing-library/react";
+import {render, screen, waitFor} from "@testing-library/react";
 import "@testing-library/jest-dom";
-//import HomePage from "./HomePage";
+import HomePage from "./HomePage";
 
 test("component loads", async () => {
-    //render(<HomePage/>);
-    //expect(screen.getByText("Uusimmat")).toBeVisible();
+    render(<HomePage/>);
+    await waitFor(() => {
+        expect(screen.getByText("Uusimmat")).toBeVisible();
+    });    
 });
