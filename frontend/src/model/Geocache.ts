@@ -9,10 +9,6 @@ export interface Geocache{
         latitude: number;
         longitude: number;  
     };
-    location: {
-        country: string;
-        state: string;
-    };
     lastVisitedDate: string,
     isPremiumOnly: boolean,
     shortDescription: string,

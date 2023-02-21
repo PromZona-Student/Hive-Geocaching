@@ -59,10 +59,6 @@ export function generateGeoCaches(amount: number) {
                 latitude: randomNumInRange(60.085318, 68.542486),
                 longitude: randomNumInRange(21.243898, 31.436180)
             },
-            location: {
-                country: "Finland",
-                state: "Tampere"
-            },
             lastVisitedDate: placedDate.toISOString(),
             isPremiumOnly: randomBool(),
             shortDescription: randomSentence(3) + " " + "kätkö",
