@@ -50,7 +50,7 @@ export function generateGeoCaches(amount: number) {
         const placedDate = randomDate((new Date(1999, 2)).getTime(), Date.now());
         const cache: Geocache = {
             referenceCode: randomId(6),
-            name: randomSentence(3),
+            name: `Geocache ${i}`,
             placedDate: placedDate.toISOString(),
             publishedDate: placedDate.toISOString(),
             type: "GeocachingHq",
@@ -73,19 +73,3 @@ export function generateGeoCaches(amount: number) {
     }
     return geocaches;
 }
-
-
-
-/**
-const filePath = path.join(process.cwd(), "..", "src", "data", "geocaches.json");
-fs.writeFile(filePath, JSON.stringify(geocaches), {
-    encoding: "utf8",
-}, (err: Error) => {
-    if(err){
-        console.log("error writing to file");
-        console.log(err);
-    }
-    else{
-        console.log(`Wrote ${amount} geocaches`)
-    }
-})**/

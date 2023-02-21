@@ -7,7 +7,7 @@ const GeocacheList = () => {
     const [geocaches, setGeocaches] = useState<Array<Geocache>>([]);
 
     useEffect(() => {
-        getGeoCaches().then(geocachesResult => {
+        getGeoCaches({limit: 10}).then(geocachesResult => {
             setGeocaches(geocachesResult);
         });
     }, []);

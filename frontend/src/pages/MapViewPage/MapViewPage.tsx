@@ -10,7 +10,7 @@ const MapViewPage: React.FC = () => {
     const [geoCaches, setGeoCaches] = useState<Array<Geocache>>([]);
 
     useEffect(() => {
-        getGeoCaches().then(geocaches => {
+        getGeoCaches({limit: 100}).then(geocaches => {
             setGeoCaches(geocaches);
         });
     }, []);
