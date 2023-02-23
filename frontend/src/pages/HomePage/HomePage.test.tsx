@@ -34,6 +34,6 @@ test("component loads", async () => {
 
     render(<HomePage />);
     await waitFor(() => {
-        expect(screen.getByText("Uusimmat")).toBeVisible();
+        expect(screen.getByText("Uusimmat geokätköt")).toBeVisible();
     });
 });

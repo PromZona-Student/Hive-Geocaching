@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import { getGeoCaches } from "../../api/geocaches";
 import { Container, Card, Row } from "react-bootstrap";
 import "./HomePage.scss";
+import { Geocache } from "../../model/Geocache";
 
 const HomePage = () => {
-    const [geocaches, setGeocaches] = useState([]);
+    const [geocaches, setGeocaches] = useState<Array<Geocache>>([]);
 
     useEffect(() => {
         getGeoCaches().then(geocachesResult => {
-            setGeocaches(geocachesResult.data);
+            setGeocaches(geocachesResult);
         });
     }, []);
 
@@ -23,10 +24,10 @@ const HomePage = () => {
                             geocaches.map((cache) => {
                                
                                 return (
-                                    <Row key={cache["id"]} className="mx-auto p-2">
+                                    <Row key={cache.id} className="mx-auto p-2">
                                         <Card className="mx-5">
-                                            <div>{cache["name"]}</div>
-                                            <div>{cache["publishedDate"]}</div>
+                                            <div>{cache.name}</div>
+                                            <div>{cache.publishedDate}</div>
                                         </Card>
                                     </Row>
                                 );
