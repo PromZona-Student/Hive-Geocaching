@@ -2,10 +2,20 @@ $color-dark-green: #163e3d;
 $color-green: #234e4d;
 $color-light-green: #7bc7ab;
 $color-orange: #f5a200;
-table {
-    border-collapse: collapse;
+
+$navbar-height: 41.547px + (2 * 8px);
+
+
+.page{
+    background-color:$color-dark-green;
+    min-height: 100vh;
+    color: white;
+    margin-top: $navbar-height;
 }
-th {
-    min-width: 100px;
-    border-bottom: 2px solid black;
+.page-content{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    padding-top: 60px;
 }

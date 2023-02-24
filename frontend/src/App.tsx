@@ -7,7 +7,6 @@ function App() {
     return (
         <div>
             <div className="App">
-                <NavBar/>
                 <Routes>
                     <Route path="/" element={<HomePage/>}/>
                     <Route path="/map" element={<MapViewPage/>}/>

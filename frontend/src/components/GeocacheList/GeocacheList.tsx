@@ -1,32 +1,33 @@
 import { useState, useEffect } from "react";
 import { Geocache } from "../../model/Geocache";
 import "../../styles/common.scss";
-import {getGeoCaches} from "../../api/geocaches";
+import "./GeocacheList.scss";
+import { getGeoCaches } from "../../api/geocaches";
+import { Card } from "react-bootstrap";
 
-const GeocacheList = () => {
-    const [geocaches, setGeocaches] = useState<Array<Geocache>>([]);
+interface Props {
+    geocaches: Array<Geocache>
+}
 
-    useEffect(() => {
-        getGeoCaches({limit: 10}).then(geocachesResult => {
-            setGeocaches(geocachesResult);
-        });
-    }, []);
+const GeocacheList = ({
+    geocaches
+}: Props) => {
 
     return (
-        <div>
-            <h3>New geocaches</h3>
-            <ul>
-                {
-                    geocaches.map(cache => {
-                        return (
-                            <li key={cache.referenceCode}>
-                                {cache.name}
-                            </li>
-                        );
-                    })
-                }
-            </ul>
-        </div>
+        <ul className="geocachelist">
+            {
+                geocaches.map(cache => {
+                    return (
+                        <li key={cache.referenceCode}>
+                            <div className="geocache-item">
+                                <p>{cache.placedDate}</p>
+                                <b>{cache.name}</b>
+                            </div>
+                        </li>
+                    );
+                })
+            }
+        </ul>
     );
 };
 

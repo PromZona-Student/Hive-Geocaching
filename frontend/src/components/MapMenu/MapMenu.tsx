@@ -17,7 +17,7 @@ const MapMenu = () => {
                 <button className="map-menu-toolbar-item map-menu-button" onClick={filterButtonOnClick}><FilterLogo/></button>
             </div>
             <div className="map-menu-toolbar-bottom">
-                <button className="map-menu-toolbar-item map-menu-button" onClick={searchButtonOnClick}>Search</button>
+                <button className="map-menu-toolbar-item map-menu-button" onClick={searchButtonOnClick}>Etsi alueelta</button>
             </div>
         </div>
     );

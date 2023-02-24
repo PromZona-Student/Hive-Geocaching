@@ -31,7 +31,8 @@ const Map = ({
                     geocaches.map((cache) => {
                         return(
                             <Marker key={cache.referenceCode} position={[cache.postedCoordinates.latitude, cache.postedCoordinates.longitude]} icon={new Icon({
-                                iconUrl: "katko2.gif"
+                                iconUrl: "katko2.gif",
+                                iconSize: [24,18]
                             })}>
                                 <Popup>
                                     {cache.name}
