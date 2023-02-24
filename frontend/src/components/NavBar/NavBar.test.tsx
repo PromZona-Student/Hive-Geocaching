@@ -1,7 +1,6 @@
 import {render, screen, waitFor} from "@testing-library/react";
 import { createMemoryHistory } from "history";
 import {Router} from "react-router-dom";
-import App from "../../App";
 import userEvent from "@testing-library/user-event";
 import NavBar from "./NavBar";
 

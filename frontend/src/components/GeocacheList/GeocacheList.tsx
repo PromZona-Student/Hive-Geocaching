@@ -1,9 +1,6 @@
-import { useState, useEffect } from "react";
 import { Geocache } from "../../model/Geocache";
 import "../../styles/common.scss";
 import "./GeocacheList.scss";
-import { getGeoCaches } from "../../api/geocaches";
-import { Card } from "react-bootstrap";
 
 interface Props {
     geocaches: Array<Geocache>
