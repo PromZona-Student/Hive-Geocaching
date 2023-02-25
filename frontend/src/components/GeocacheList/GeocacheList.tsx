@@ -1,75 +1,30 @@
-import { useState, useEffect } from "react";
 import { Geocache } from "../../model/Geocache";
 import "../../styles/common.scss";
-import {getGeoCaches} from "../../api/geocaches";
+import "./GeocacheList.scss";
 
-const GeocacheList = () => {
-    const [geocaches, setGeocaches] = useState<Array<Geocache>>([]);
+interface Props {
+    geocaches: Array<Geocache>
+}
 
-    useEffect(() => {
-        getGeoCaches().then(geocachesResult => {
-            setGeocaches(geocachesResult);
-        });
-    }, []); 
-
-    type ColumnDefinitionType<T, K extends keyof T> = {
-        key: K;
-        header: string;
-        width?: number;
-    }
-
-    const columns: ColumnDefinitionType<Geocache, keyof Geocache>[] = [
-        {
-            key: "id",
-            header: "ID",
-        },
-        {
-            key: "publishedDate",
-            header: "Date & time"
-        },
-        {
-            key: "name",
-            header: "Name"
-        }
-    ];
-
-    const headers = columns.map((column, index) => {
-        return (
-            <th
-                key={`headCell-${index}`}
-            >
-                {column.header}
-            </th>
-        );
-    });
-
-    const rows = geocaches.map((row, index) => {
-        return (
-            <tr key={`row-${index}`}>
-                {columns.map((column, index2) => {
-                    return (
-                        <td key={`cell-${index2}`}>
-                            {row[column.key]}
-                        </td>
-                    );
-                }
-                )}
-            </tr>
-        );
-    });
+const GeocacheList = ({
+    geocaches
+}: Props) => {
 
     return (
-        <div>
-            <h3>New geocaches</h3>
-            <table>
-                <thead>
-                    <tr>{headers}</tr>
-                </thead>
-                <tbody>
-                    {rows}
-                </tbody>
-            </table>
-        </div>
+        <ul className="geocachelist">
+            {
+                geocaches.map(cache => {
+                    return (
+                        <li key={cache.referenceCode}>
+                            <div className="geocache-item">
+                                <p>{cache.placedDate}</p>
+                                <b>{cache.name}</b>
+                            </div>
+                        </li>
+                    );
+                })
+            }
+        </ul>
     );
 };
 

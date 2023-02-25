@@ -1,14 +1,14 @@
 import {render, screen, waitFor} from "@testing-library/react";
 import { createMemoryHistory } from "history";
 import {Router} from "react-router-dom";
-import App from "../../App";
 import userEvent from "@testing-library/user-event";
+import NavBar from "./NavBar";
 
 test("Loads and navigates", async () => {
     const history = createMemoryHistory();
     render(
         <Router location={history.location} navigator={history}>
-            <App />
+            <NavBar/>
         </Router>
     );
     await waitFor(()=>{
@@ -22,7 +22,7 @@ test("Loads and navigates", async () => {
     await waitFor(()=>{
         expect(history.location.pathname).toEqual("/map");
     });
-    userEvent.click(screen.getByText("Geocache.fi"));
+    userEvent.click(screen.getByLabelText("Geocache.fi"));
     await waitFor(()=>{
         expect(history.location.pathname).toEqual("/");
     });
