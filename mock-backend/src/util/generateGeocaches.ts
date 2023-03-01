@@ -67,5 +67,50 @@ export function generateGeoCaches(amount: number) {
         }
         geocaches.push(cache);
     }
-    return geocaches;
+
+    // Specific cache has been temporarily added for testing
+    const caches: Array<Geocache> = [];
+    const placedDate = randomDate((new Date(1999, 2)).getTime(), Date.now());
+    const cache1: Geocache = {
+        
+        referenceCode: "abc123",
+        name: "Testikätkö",
+        placedDate: placedDate.toISOString(),
+        publishedDate: placedDate.toISOString(),
+        type: "Multikätkö",
+        size: "Joku",
+        postedCoordinates: {
+            latitude: randomNumInRange(60.085318, 68.542486),
+            longitude: randomNumInRange(21.243898, 31.436180)
+        },
+        lastVisitedDate: placedDate.toISOString(),
+        isPremiumOnly: false,
+        shortDescription: randomSentence(3),
+        longDescription: randomSentence(6),
+        hints: "Ei vihjeitä"
+    }
+    
+    caches.push(cache1);
+
+    const cache2: Geocache = {
+        
+        referenceCode: "zyx",
+        name: "Esimerkkikätkö",
+        placedDate: placedDate.toISOString(),
+        publishedDate: placedDate.toISOString(),
+        type: "Multikätkö",
+        size: "Joku",
+        postedCoordinates: {
+            latitude: randomNumInRange(60.085318, 68.542486),
+            longitude: randomNumInRange(21.243898, 31.436180)
+        },
+        lastVisitedDate: placedDate.toISOString(),
+        isPremiumOnly: false,
+        shortDescription: randomSentence(3),
+        longDescription: randomSentence(6),
+        hints: "Ei vihjeitä"
+    }
+    
+    caches.push(cache2);
+    return caches;
 }
