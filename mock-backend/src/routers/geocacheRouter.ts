@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { Geocache } from "../../../frontend/src/model/Geocache"
 import { generateGeoCaches } from "../util/generateGeocaches";
 
 export const geocacheRouter = Router();
