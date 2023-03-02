@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { users } from "../data/users";
 import { User } from "../../../frontend/src/model/User"
+import { generateSession } from "../data/sessions";
 export const authRouter = Router();
 
 interface LoginRequest {
@@ -20,6 +21,10 @@ authRouter.post("/login", async (request, response) => {
     if (!user || (loginRequest.password !== user.password)) {
         return response.status(401).send();
     }
+
+    const session = generateSession(user.id);
+
+    response.cookie("SID", session.sessionId);
 
     return response.json(
         {

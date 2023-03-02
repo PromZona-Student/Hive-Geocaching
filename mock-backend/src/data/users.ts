@@ -1,6 +1,6 @@
-import { UserFull } from "../model/UserFull"
+import { UserDetails } from "../model/UserDetails"
 
-export const users: Array<UserFull> = [
+export const users: Array<UserDetails> = [
     {
         id: "usr1",
         username: "teppo",
