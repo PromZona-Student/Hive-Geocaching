@@ -26,11 +26,14 @@ function CachePage() {
     });
 
     if (cacheId?.at(0) == ":") { cacheId = cacheId.slice(1); }
+
     useEffect(() => {
-        getCache(cacheId).then(cacheResult => {
-            setCache(cacheResult);
-        });
-    });
+        if (cacheId !== undefined) {
+            getCache(cacheId).then(cacheResult => {
+                setCache(cacheResult);
+            });
+        }
+    },[cacheId]);
 
     if (cacheId && cache && cache.name) {
         return (
@@ -40,7 +43,7 @@ function CachePage() {
                     <div className="cache-page-content">
                         <div className="feed-section">
                             <h3>{cache.name}</h3>
-                            <p>({cacheId})</p>
+                            <p>({cache.referenceCode})</p>
                         </div>
                         <div className="feed-section">
 
@@ -51,9 +54,6 @@ function CachePage() {
                             <p>Koko: {cache.size}</p>
                             <p>{cache.shortDescription}</p>
 
-                        </div>
-                        <div className="feed-section">
-                            <button className="button">Lisätietoja</button>
                         </div>
                     </div>
                 </div>
