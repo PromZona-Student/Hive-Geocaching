@@ -6,7 +6,7 @@ import NavBar from "../../components/NavBar";
 import "./CachePage.scss";
 
 function CachePage() {
-    let { cacheId } = useParams();
+    const { cacheId } = useParams();
     const [cache, setCache] = useState<Geocache>({
         referenceCode: "",
         name: "",
@@ -24,8 +24,6 @@ function CachePage() {
         longDescription: "",
         hints: ""
     });
-
-    if (cacheId?.at(0) == ":") { cacheId = cacheId.slice(1); }
 
     useEffect(() => {
         if (cacheId !== undefined) {
