@@ -7,3 +7,8 @@ export const getGeoCaches = async (filters?: Filters) => {
     return geocaches.data as Array<Geocache>;
 };
 
+export const getCache = async (id: string) => {
+    const path = "/api/geocaches/" + id; 
+    const response = await axios.get(path);
+    return response.data as Geocache;
+};
