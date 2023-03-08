@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { getGeoCaches } from "../../api/geocaches";
 import "./HomePage.scss";
 import { Geocache } from "../../model/Geocache";
@@ -19,7 +20,13 @@ const HomePage = () => {
             <div className="home-page-content">
                 <div className="feed-section">
                     <h3>Uusimmat geokätköt</h3>
-                    <GeocacheList geocaches={geocaches} />
+                    {geocaches.map(cache =>
+                        <div key={cache.referenceCode} className="feed-link">
+                            <Link to={"/geocaches/" + cache.referenceCode} className="feed-link">
+                                {<GeocacheList geocaches={[cache]} />}</Link>
+                        </div>
+                    )}
+                    
                     <button className="button">Näytä lisää</button>
                 </div>
                 <div className="feed-section">
