@@ -9,13 +9,13 @@ const SignUpForm = (props:SignUpProps) => {
     return (
         <div>
             <Modal.Header closeButton>
-                <Modal.Title>Rekisteröidy</Modal.Title>
+                <Modal.Title data-testid="signup-title">Rekisteröidy</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 SIGN UP FORM
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="link" onClick={props.handleOnClick}>
+                <Button data-testid="login-button" variant="link" onClick={props.handleOnClick}>
                 Kirjaudu
                 </Button>
             </Modal.Footer>

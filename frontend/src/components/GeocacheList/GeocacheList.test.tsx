@@ -1,8 +1,6 @@
 import GeocacheList from "./GeocacheList";
 import {render, screen, waitFor} from "@testing-library/react";
 import "@testing-library/jest-dom";
-import * as GeocacheApi from "../../api/geocaches";
-import { Filters } from "../../model/Filters";
 import { Geocache } from "../../model/Geocache";
 jest.mock("axios");
 

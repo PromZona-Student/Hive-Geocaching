@@ -4,14 +4,22 @@ import { Formik} from "formik";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import * as Yup from "yup";
-import { login } from "../../api/geocaches"; //TODO: change to own file, api for user
+import { login } from "../../api/auth";
+import { useState } from "react";
+import Alert from "react-bootstrap/Alert";
+import UserContext from "../../Context/UserContext";
+import {useContext} from "react";
 
 interface LoginProps {
     handleOnClick: () => void;
+    toggleShowParent: () => void;
 }
 
-//Rekisteröidy = sign up, Salasana unohtui? = forgot password?
 const LoginForm = (props: LoginProps) => {
+
+    const userContext = useContext(UserContext);
+
+    const [showAlert, setShowAlert] = useState(false);
 
     const schema = Yup.object().shape({
         username: Yup.string().required("Tämä kenttä on pakollinen"),
@@ -21,14 +29,27 @@ const LoginForm = (props: LoginProps) => {
     return (
         <div>
             <Modal.Header closeButton>
-                <Modal.Title>Kirjaudu</Modal.Title>
+                <Modal.Title data-testid="login-title">Kirjaudu</Modal.Title>
             </Modal.Header>
             <Modal.Body>
+
+                <Alert show={showAlert} variant="danger" onClose={() => setShowAlert(false)} dismissible>
+                Ei sallittu.
+                </Alert>
                 
                 <Formik
                     validationSchema={schema}
-                    onSubmit={(values, { setSubmitting }) => {
-                        console.log(login(values.username,values.password));
+                    onSubmit={(values) => {
+                        login(values.username,values.password).then(result => {
+                            if(result==null){
+                                setShowAlert(true);
+                            }
+                            else{      
+                                userContext.setUser(result);
+                                props.toggleShowParent();                              
+                            }
+                        });
+                        
                     }}
                     initialValues={{
                         username: "",
@@ -45,6 +66,7 @@ const LoginForm = (props: LoginProps) => {
                             <Form.Group as={Row} md="3" controlId="usernameField">
                                 <Form.Label>Nimimerkki</Form.Label>
                                 <Form.Control
+                                    data-testid="username-login"
                                     type="text"                                    
                                     name="username"
                                     value={values.username}
@@ -58,7 +80,8 @@ const LoginForm = (props: LoginProps) => {
                             <Form.Group as={Row} md="3" controlId="passwordField">
                                 <Form.Label>Salasana</Form.Label>
                                 <Form.Control
-                                    type="text"                                    
+                                    data-testid="password-login"
+                                    type="password"                                  
                                     name="password"
                                     value={values.password}
                                     onChange={handleChange}
@@ -69,7 +92,7 @@ const LoginForm = (props: LoginProps) => {
                                 </Form.Control.Feedback>
                             </Form.Group>
                             <Form.Group as={Row} md="3" className="mt-3">
-                                <Button  type="submit">Kirjaudu</Button>
+                                <Button data-testid="login-submit"  type="submit">Kirjaudu</Button>
                             </Form.Group>
                             
                         </Form>
@@ -81,7 +104,7 @@ const LoginForm = (props: LoginProps) => {
                 <Button variant="link">
                 Salasana unohtui?
                 </Button>
-                <Button variant="link" onClick={props.handleOnClick}>
+                <Button data-testid="signup-button" variant="link" onClick={props.handleOnClick}>
                 Rekisteröidy
                 </Button>
             </Modal.Footer>

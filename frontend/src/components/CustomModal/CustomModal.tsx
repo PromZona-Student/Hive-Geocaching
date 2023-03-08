@@ -12,7 +12,7 @@ const CustomModal = (props: ModalProps) => {
     const [contentType, setContentType] = useState(true);
     const setContent = () => {
         if(contentType){
-            return  <LoginForm handleOnClick={toggleContent}/>; 
+            return  <LoginForm handleOnClick={toggleContent} toggleShowParent={props.toggle}/>; 
         }
         else{
             return <SignUpForm handleOnClick={toggleContent}/>; 
