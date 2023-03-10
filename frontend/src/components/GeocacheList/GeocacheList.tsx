@@ -1,4 +1,5 @@
 import { Geocache } from "../../model/Geocache";
+import { Link } from "react-router-dom";
 import "../../styles/common.scss";
 import "./GeocacheList.scss";
 
@@ -16,10 +17,12 @@ const GeocacheList = ({
                 geocaches.map(cache => {
                     return (
                         <li key={cache.referenceCode}>
-                            <div className="geocache-item">
-                                <p>{cache.placedDate}</p>
-                                <b>{cache.name}</b>
-                            </div>
+                            <Link to={`/geocaches/${cache.referenceCode}`}>
+                                <div className="geocache-item">
+                                    <p>{cache.placedDate}</p>
+                                    <b>{cache.name}</b>
+                                </div>
+                            </Link>
                         </li>
                     );
                 })
