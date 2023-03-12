@@ -9,9 +9,9 @@ interface ModalProps {
 }
 
 const CustomModal = (props: ModalProps) => {
-    const [contentType, setContentType] = useState(true);
+    const [isLogin, setIsLogin] = useState(true);
     const setContent = () => {
-        if(contentType){
+        if(isLogin){
             return  <LoginForm handleOnClick={toggleContent} toggleShowParent={props.toggle}/>; 
         }
         else{
@@ -19,7 +19,7 @@ const CustomModal = (props: ModalProps) => {
         }
     };
     const toggleContent = () => {
-        setContentType(!contentType);
+        setIsLogin(!isLogin);
     };
     return (
         <Modal show={props.isOpen} onHide={props.toggle}>

@@ -10,9 +10,9 @@ interface LoginRequest {
 }
 
 authRouter.post("/login", async (request, response) => {
-    //console.log(request);
-    const loginRequest = request.body.params as LoginRequest;
-
+    
+    const loginRequest = request.body as LoginRequest;
+    
     if (!loginRequest.username || !loginRequest.password) {
         return response.status(401).send();
     }

@@ -9,7 +9,7 @@ import { AiOutlineUser } from "react-icons/ai";
 import { GrLogout } from "react-icons/gr";
 import logo from "../../images/gcfi_only_logo_big_orange.png";
 import CustomModal from "../CustomModal";
-import useModal from "../../Hooks/useModal";
+import { useState } from "react";
 import UserContext, { UserContextType } from "../../Context/UserContext";
 import {useContext} from "react";
 import premiumOn from "../../images/premium_on.png";
@@ -23,8 +23,12 @@ const NavBar = ({
     fixedTop = false,
     sticky = false
 }: Props) => {
-    const { isOpen, toggle } = useModal();
+    const [isOpen, setisOpen] = useState(false);
     const userContext = useContext(UserContext);
+
+    const toggle = () => {
+        setisOpen(!isOpen);
+    };
 
     const logout = () => {
         userContext.setUser(null);

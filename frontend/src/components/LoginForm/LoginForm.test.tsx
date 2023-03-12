@@ -28,7 +28,7 @@ test("Login api call is made", async () => {
     await waitFor(()=>{      
         expect(axios.post).toBeCalledWith(
             "/api/auth/login",
-            {params:{username, password}},
+            {username, password},
         );              
     });
 });
