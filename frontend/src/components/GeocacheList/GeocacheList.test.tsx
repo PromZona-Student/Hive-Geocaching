@@ -2,6 +2,7 @@ import GeocacheList from "./GeocacheList";
 import {render, screen, waitFor} from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { Geocache } from "../../model/Geocache";
+import { BrowserRouter } from "react-router-dom";
 jest.mock("axios");
 
 test("component loads", async () => {
@@ -42,9 +43,12 @@ test("component loads", async () => {
         }
     ];
    
-    render(<GeocacheList geocaches={geocaches}/>);
+    render(
+        <BrowserRouter>
+            <GeocacheList geocaches={geocaches}/>
+        </BrowserRouter>
+    );
     await waitFor(()=>{
         expect(screen.getByText("Geo 1")).toBeVisible();
-    });
-    
+    });   
 });

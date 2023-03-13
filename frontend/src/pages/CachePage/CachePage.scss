@@ -3,11 +3,11 @@
 .button-basic{
     border: solid 1px $color-light-green;
 }
-.home-page-content{
+.cache-page-content{
     align-items: center;
     display: flex;
     flex-direction: column;
-    gap: 60px;
+    gap: 30px;
     padding-top: 60px;
 }
 
@@ -19,4 +19,17 @@
     align-items: center;
     display: flex;
     flex-direction: column;
+}
+
+.layout{
+    color: black;
+    background-color: white;
+    min-height: 100vh;
+    margin-top: $navbar-height;
+}
+
+.button{
+    background-color: #7BC7AB;
+    color: #163E3D;
+    padding: 10px;
 }

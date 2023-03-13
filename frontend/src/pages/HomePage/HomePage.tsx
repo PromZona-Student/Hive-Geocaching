@@ -6,6 +6,7 @@ import GeocacheList from "../../components/GeocacheList";
 import PageLayout from "../../components/PageLayout";
 
 const HomePage = () => {
+
     const [geocaches, setGeocaches] = useState<Array<Geocache>>([]);
 
     useEffect(() => {
