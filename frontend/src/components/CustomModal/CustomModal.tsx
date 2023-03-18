@@ -15,7 +15,7 @@ const CustomModal = (props: ModalProps) => {
             return  <LoginForm handleOnClick={toggleContent} toggleShowParent={props.toggle}/>; 
         }
         else{
-            return <SignUpForm handleOnClick={toggleContent}/>; 
+            return <SignUpForm handleOnClick={toggleContent} toggleShowParent={props.toggle}/>; 
         }
     };
     const toggleContent = () => {
