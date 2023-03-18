@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { User } from "../model/User";
 
 export const login = async (username: string, password: string) => {
@@ -26,8 +26,8 @@ export const register = async (username: string, email: string, password: string
             return { status: 400, message: "Ei sallittu" };
         }
     } catch (err) {
-        // TODO: get err.response.data out of the error message, and return it instead of msg
-        const msg = "Käyttäjänimi on jo käytössä";
+        const error = err as AxiosError<Error>;
+        const msg = error.response?.data;
         return { status: 400, message: msg };
     }
 };

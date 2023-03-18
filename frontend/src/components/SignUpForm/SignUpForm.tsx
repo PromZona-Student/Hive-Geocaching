@@ -51,7 +51,7 @@ const SignUpForm = (props: SignUpProps) => {
                             } 
                             else {
                                 if(result.message) {
-                                    setAlertMessage(result.message);
+                                    setAlertMessage(result.message as string);
                                 } else {
                                     setAlertMessage("Ei sallittu.");
                                 }
