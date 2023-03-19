@@ -27,7 +27,8 @@ export const register = async (username: string, email: string, password: string
         }
     } catch (err) {
         const error = err as AxiosError<Error>;
+        const status = error.response?.status;
         const msg = error.response?.data;
-        return { status: 400, message: msg };
+        return { status: status, message: msg };
     }
 };
