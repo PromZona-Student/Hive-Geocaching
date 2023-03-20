@@ -14,4 +14,13 @@ export interface Geocache{
     shortDescription: string,
     longDescription: string,
     hints: string,
+    location: {
+        country: string;
+        countryId: number;
+        state: string;
+        stateId: number;
+    };
+    ownerAlias: string;
+    difficulty: number;
+    terrain: number;
 }

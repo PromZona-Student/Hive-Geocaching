@@ -1,0 +1,51 @@
+@import url("../../styles/common.scss");
+@import "leaflet/dist/leaflet.css";
+
+.border-0 {
+    border-bottom: 0;
+}
+
+.pop-up .leaflet-popup-content-wrapper {
+    border-radius: 0px;
+    width:100% !important;
+    height:100% !important;
+}
+
+hr {
+    margin: 0 !important;
+    color: #F5A200 !important;
+    border: 0 !important;
+    border-top: 2px solid !important;
+    opacity: 100 !important;
+}
+
+.cache-name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.cache-code {
+    font-size: 18px;
+}
+
+.cache-attribute {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.cache-text {
+    font-size: 16px;
+}
+
+.cache-button{
+    background: #7BC7AB;
+    min-width: 80%;
+    min-height: 40px;
+    margin:0 auto;
+    display:block;
+    border-radius: 5px;
+    border: 0px;
+    font-size: 16px;
+    color: #163E3D;
+    font-weight: bold;
+}
