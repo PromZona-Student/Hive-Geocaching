@@ -13,8 +13,8 @@ const GeocacheModal = (props: ModalProps) => {
     const handlePremiumCont = (isPremiumOnly:boolean) => {
         if(isPremiumOnly){
             return(
-                <div className="flex-row">
-                    <label className="cache-attribute">PREMIUM</label><br/><br/>
+                <div className="flex-row bottom-space">
+                    <label className="cache-attribute">PREMIUM</label>
                 </div>
             );
         }
@@ -29,13 +29,13 @@ const GeocacheModal = (props: ModalProps) => {
                 <div>
                     <div className="cache-name">{props.cache.name}</div>
                     <hr/>
-                    <div className="cache-code">{`(${props.cache.referenceCode})`}</div><br/>
+                    <div className="cache-code bottom-space">{`(${props.cache.referenceCode})`}</div>
 
                     {handlePremiumCont(props.cache.isPremiumOnly)}                                    
 
                     <div className="flex-row">
                         <img width="20px" src="katko2.gif"/> <div className="cache-text">{props.cache.type}</div>
-                    </div><br/>
+                    </div>
 
                     <div className="flex-row">
                         <div className="cache-attribute">N</div> <div className="cache-text">{props.cache.postedCoordinates.latitude}</div>
@@ -43,14 +43,14 @@ const GeocacheModal = (props: ModalProps) => {
                     <div className="flex-row">
                         <div className="cache-attribute">E</div> <div className="cache-text">{props.cache.postedCoordinates.longitude}</div>
                     </div>
-                    <div className="cache-text">{props.cache.location.state}</div><br/>
+                    <div className="cache-text bottom-space">{props.cache.location.state}</div>
 
                     <div className="flex-row">
                         <div className="cache-attribute">Piilottaja:</div> <div className="cache-text">{props.cache.ownerAlias}</div>
                     </div>
-                    <div className="flex-row">
+                    <div className="flex-row bottom-space">
                         <div className="cache-attribute">Piilotettu:</div> <div className="cache-text">{formatDate(props.cache.placedDate)}</div>
-                    </div><br/>
+                    </div>
 
                     <div className="flex-row">
                         <div className="cache-attribute">Koko:</div> <div className="cache-text">{props.cache.size}</div>
@@ -58,8 +58,8 @@ const GeocacheModal = (props: ModalProps) => {
                     <div className="flex-row">
                         <div className="cache-attribute">Vaikeus:</div> <div className="cache-text">{props.cache.difficulty}/5</div>
                     </div>
-                    <div className="flex-row">
-                        <div className="cache-attribute">Maasto:</div> <div className="cache-text"></div>{props.cache.terrain}/5<br/><br/>
+                    <div className="flex-row big-bottom-space">
+                        <div className="cache-attribute">Maasto:</div> <div className="cache-text"></div>{props.cache.terrain}/5
                     </div>
                     
                     <Link to={`/geocaches/${props.cache.referenceCode}`}>                                        
