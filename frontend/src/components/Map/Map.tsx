@@ -10,34 +10,7 @@ interface Props{
 
 const Map = ({geocaches}: Props) => {
     const [isOpen, setisOpen] = useState(false);
-    const [currentCache, setCurrentCache] = useState<Geocache>(
-        {
-            referenceCode: "",
-            name: "",
-            placedDate: "",
-            publishedDate: "",
-            type: "",
-            size: "",
-            postedCoordinates: {
-                latitude: 0,
-                longitude: 0,
-            },
-            lastVisitedDate: "",
-            isPremiumOnly: false,
-            shortDescription: "",
-            longDescription: "",
-            hints: "",
-            location: {
-                country: "",
-                countryId: 0,
-                state: "",
-                stateId: 0,
-            },
-            ownerAlias: "",
-            difficulty: 0,
-            terrain: 0
-        }
-    );
+    const [currentCache, setCurrentCache] = useState<Geocache| null>(null);
     const center: [number, number] = [65.284255, 26.243655];
     const zoom = 5;
 

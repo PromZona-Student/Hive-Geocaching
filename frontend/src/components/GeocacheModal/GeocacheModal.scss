@@ -5,6 +5,11 @@
     border-bottom: 0;
 }
 
+.flex-row {
+    display: flex;
+    gap: 10px;
+}
+
 .pop-up .leaflet-popup-content-wrapper {
     border-radius: 0px;
     width:100% !important;
