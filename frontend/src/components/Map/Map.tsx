@@ -1,18 +1,26 @@
 import { Icon } from "leaflet";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import { Geocache } from "../../model/Geocache";
-import "./Map.scss";
+import { useState } from "react";
+import GeocacheModal from "../GeocacheModal";
 
 interface Props{
     geocaches: Array<Geocache>
 }
 
-const Map = ({
-    geocaches
-}: Props) => {
-    
+const Map = ({geocaches}: Props) => {
+    const [isOpen, setisOpen] = useState(false);
+    const [currentCache, setCurrentCache] = useState<Geocache| null>(null);
     const center: [number, number] = [65.284255, 26.243655];
     const zoom = 5;
+
+    const toggle = () => {
+        setisOpen(!isOpen);
+    };
+
+    const handleOnClick = (cache:Geocache) => {
+        setCurrentCache(cache);
+    };
 
     return (
         <div>
@@ -30,17 +38,23 @@ const Map = ({
                 {
                     geocaches.map((cache) => {
                         return(
-                            <Marker key={cache.referenceCode} position={[cache.postedCoordinates.latitude, cache.postedCoordinates.longitude]} icon={new Icon({
-                                iconUrl: "katko2.gif",
-                                iconSize: [24,18]
-                            })}>
-                                <Popup>
-                                    {cache.name}
-                                </Popup>
+                            <Marker key={cache.referenceCode} 
+                                position={[cache.postedCoordinates.latitude, cache.postedCoordinates.longitude]} 
+                                icon={new Icon({
+                                    iconUrl: "katko2.gif",
+                                    iconSize: [24,18]
+                                })}
+                                eventHandlers={{click: () => {                                 
+                                    handleOnClick(cache);
+                                    toggle();
+                                },  
+                                }}
+                            >                                 
                             </Marker>
                         );
                     })
                 }
+                <GeocacheModal isOpen={isOpen} toggle={toggle} cache={currentCache}/>
             </MapContainer>
         </div>
     );

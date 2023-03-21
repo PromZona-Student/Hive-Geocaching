@@ -22,7 +22,16 @@ test("component loads", async () => {
             isPremiumOnly: false,
             shortDescription: "Desc1",
             longDescription: "Desc1",
-            hints: "hints1"
+            hints: "hints1",
+            location: {
+                country: "",
+                countryId: 0,
+                state: "",
+                stateId: 0,
+            },
+            ownerAlias: "",
+            difficulty: 0,
+            terrain: 0
         },
         {
             referenceCode: "GCK25B",
@@ -39,7 +48,16 @@ test("component loads", async () => {
             isPremiumOnly: false,
             shortDescription: "Desc2",
             longDescription: "Desc2",
-            hints: "hints2"
+            hints: "hints2",
+            location: {
+                country: "",
+                countryId: 0,
+                state: "",
+                stateId: 0,
+            },
+            ownerAlias: "",
+            difficulty: 0,
+            terrain: 0
         }
     ];
    
