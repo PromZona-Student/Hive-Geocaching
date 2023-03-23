@@ -4,7 +4,6 @@ import Map from "../../components/Map";
 import MapMenu from "../../components/MapMenu";
 import { Geocache } from "../../model/Geocache";
 import "./MapViewPage.scss";
-import NavBar from "../../components/NavBar";
 import { FiltersContext } from "../../context/FiltersContextProvider";
 import { useMap } from "react-leaflet";
 
@@ -29,7 +28,6 @@ const MapViewPage: React.FC = () => {
 
     return (
         <>
-            <NavBar fixedTop />
             <div className="map-view-page">
                 <div className="map-menu-wrapper">
                     <MapMenu onSearchClicked={searchCaches} />

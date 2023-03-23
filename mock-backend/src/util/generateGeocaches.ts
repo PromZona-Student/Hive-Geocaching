@@ -62,8 +62,8 @@ export function generateGeoCaches(amount: number) {
          },
          lastVisitedDate: placedDate.toISOString(),
          isPremiumOnly: false,
-         shortDescription: randomSentence(3),
-         longDescription: randomSentence(6),
+         shortDescription: "Description",
+         longDescription: "Description",
          hints: "Ei vihjeitä"
      }
      
@@ -83,8 +83,8 @@ export function generateGeoCaches(amount: number) {
          },
          lastVisitedDate: placedDate.toISOString(),
          isPremiumOnly: false,
-         shortDescription: randomSentence(3),
-         longDescription: randomSentence(6),
+         shortDescription: "Description",
+         longDescription: "Description",
          hints: "Ei vihjeitä"
      }
      
@@ -105,8 +105,8 @@ export function generateGeoCaches(amount: number) {
             },
             lastVisitedDate: placedDate.toISOString(),
             isPremiumOnly: randomBool(),
-            shortDescription: randomSentence(3) + " " + "kätkö",
-            longDescription: randomSentence(6) + " " + "kätkö",
+            shortDescription: "This is the geocache's description",
+            longDescription: "This is the geocache's description",
             hints: randomSentence(4),
         }
         geocaches.push(cache);

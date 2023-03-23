@@ -1,26 +1,21 @@
 import { Routes, Route } from "react-router-dom";
-import MapViewPage from "./pages/MapViewPage/MapViewPage";
 import HomePage from "./pages/HomePage/HomePage";
+import { UserContextProvider } from "./Context/UserContextProvider";
 import CachePage from "./pages/CachePage/CachePage";
-import { FiltersContextProvider } from "./context/FiltersContextProvider";
-import { MapContext } from "./context/MapContext";
+import MapViewPageWrapper from "./components/MapViewPageWrapper";
 
 function App() {
     return (
-        <div>
-            <div className="App">
+        <div className="App">
+            <UserContextProvider>
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/map" element={
-                        <FiltersContextProvider>
-                            <MapContext>
-                                <MapViewPage />
-                            </MapContext>
-                        </FiltersContextProvider>
+                        <MapViewPageWrapper/>
                     } />
                     <Route path="/geocaches/:cacheId" element={<CachePage />} />
                 </Routes>
-            </div>
+            </UserContextProvider>
         </div>
     );
 }

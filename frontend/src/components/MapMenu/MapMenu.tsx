@@ -12,7 +12,6 @@ const MapMenu = ({ onSearchClicked }: Props) => {
     const [showFilters, setShowFilters] = useState(false);
 
     const handleShowFilters = () => {
-        console.log("hmm");
         setShowFilters(true);
     };
 
@@ -26,7 +25,6 @@ const MapMenu = ({ onSearchClicked }: Props) => {
     };
 
     const handleConfirmFilters = () => {
-        console.log("jaa");
         setShowFilters(false);
     };
 

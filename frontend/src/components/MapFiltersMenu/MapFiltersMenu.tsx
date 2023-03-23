@@ -1,10 +1,9 @@
-import { Accordion, Button, Dropdown, Modal, NavDropdown, Offcanvas } from "react-bootstrap";
+import { Accordion, Button, Offcanvas } from "react-bootstrap";
 import "./MapFiltersMenu.scss";
+import "../../styles/custom.scss";
 import MapFilterItem from "../MapFilterItem";
 import { ChangeEvent, SyntheticEvent, useContext, useState } from "react";
 import { CacheTypes, Filters } from "../../model/Filters";
-import { Form } from "react-bootstrap";
-import { getGeoCaches } from "../../api/geocaches";
 import { FiltersContext } from "../../context/FiltersContextProvider";
 
 interface Props {
@@ -19,7 +18,9 @@ const initFilters: Filters = {
         vainRatkaistutMysteerit: false,
         vainOmiaMerkittyjäSisältäenMultit: false,
         vainOmiaMerkittyjäSisältäenMysteerit: false
-    }
+    },
+    maxDistance: 200,
+    customRule: "-",
 };
 
 const MapFiltersMenu = ({
@@ -27,7 +28,7 @@ const MapFiltersMenu = ({
     onHide,
     onConfirmFilters
 }: Props) => {
-    const { filters, setFilters } = useContext(FiltersContext);
+    const { setFilters } = useContext(FiltersContext);
     const [mapFilters, setMapFilters] = useState<Filters>(initFilters);
 
     const modifyCustomRule = (e: SyntheticEvent<HTMLSelectElement, Event>) => {
@@ -61,13 +62,13 @@ const MapFiltersMenu = ({
     };
 
     const confirmFilters = () => {
-        setFilters({...mapFilters});
+        setFilters({ ...mapFilters });
         onConfirmFilters();
     };
 
     const resetFilters = () => {
         setMapFilters(initFilters);
-        setFilters({...initFilters});
+        setFilters({ ...initFilters });
     };
 
     return (
@@ -78,14 +79,14 @@ const MapFiltersMenu = ({
             <Offcanvas.Body>
                 <Accordion alwaysOpen>
                     <MapFilterItem header="Oma ehto" eventKey="0">
-                        <select onChange={modifyCustomRule} name="oma-ehto" id="oma-ehto-filter">
+                        <select onChange={modifyCustomRule} name="oma-ehto" id="oma-ehto-filter" value={mapFilters.customRule}>
                             <option value="">-</option>
                             <option value="Löytämättä">Löytämättä</option>
                         </select>
                     </MapFilterItem>
                     <MapFilterItem header="Määrä" eventKey="1">
                         {"Näytä enintään "}
-                        <select onChange={modifyAmount} name="amount" id="amount-filter" defaultValue={"200"}>
+                        <select onChange={modifyAmount} name="amount" id="amount-filter" value={mapFilters.limit}>
                             <option value="100">100</option>
                             <option value="200">200</option>
                             <option value="500">500</option>

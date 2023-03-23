@@ -18,8 +18,9 @@ interface RegisterRequest {
 }
 
 authRouter.post("/login", async (request, response) => {
+    
     const loginRequest = request.body as LoginRequest;
-
+    
     if (!loginRequest.username || !loginRequest.password) {
         return response.status(401).send();
     }

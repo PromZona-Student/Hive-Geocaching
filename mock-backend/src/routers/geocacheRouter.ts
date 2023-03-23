@@ -16,7 +16,6 @@ interface LatLng {
     lng: number
 }
 
-
 // distance between two geographical points (https://en.wikipedia.org/wiki/Spherical_law_of_cosines)
 const meterDistance = (latlng1: LatLng, latlng2: LatLng): number => {
     const rad = Math.PI / 180;
