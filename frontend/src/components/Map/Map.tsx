@@ -1,5 +1,5 @@
 import { Icon } from "leaflet";
-import { MapContainer, Marker, TileLayer } from "react-leaflet";
+import { Marker, TileLayer } from "react-leaflet";
 import { Geocache } from "../../model/Geocache";
 import { useState } from "react";
 import GeocacheModal from "../GeocacheModal";
