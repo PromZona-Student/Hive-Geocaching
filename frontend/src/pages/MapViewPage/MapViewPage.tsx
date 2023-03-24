@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { searchGeoCaches } from "../../api/geocaches";
 import Map from "../../components/Map";
 import MapMenu from "../../components/MapMenu";
@@ -12,6 +12,12 @@ const MapViewPage = () => {
     const [geoCaches, setGeoCaches] = useState<Array<Geocache>>([]);
     const { filters } = useContext(FiltersContext);
     const map = useMap();
+
+    useEffect(() => {
+        searchGeoCaches({}, "newest").then(caches => {
+            setGeoCaches(caches);
+        });
+    }, []);
 
     const searchCaches = async () => {
         const bounds = map.getBounds();

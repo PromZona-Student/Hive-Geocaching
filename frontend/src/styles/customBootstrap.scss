@@ -1,18 +1,20 @@
+@import "./common";
+
 $theme-colors: (
-    "primary": #163e3d,
-    "success": #7bc7ab,
-    "danger": #f5a200
+    "primary": $color-dark-green,
+    "success": $color-light-green,
+    "danger": $color-orange
 );
-$body-bg: #163e3d;
-$modal-content-bg: #163e3d;
-$modal-content-color: #ffff;
-$btn-close-color: #ffff;
-$accordion-color: #ffff;
-$accordion-button-active-bg: #234e4d;
-$accordion-button-active-color: #ffff;
-$accordion-button-focus-border-color: #234e4d;
-$accordion-border-color: #234e4d;
-$accordion-button-focus-box-shadow: 0 0 0 .25rem #234e4d;
+$offcanvas-bg-color: $color-dark-green;
+$offcanvas-color: $color-white;
+$accordion-bg: $color-dark-green;
+$accordion-color: $color-white;
+$accordion-button-active-bg: $color-green;
+$accordion-button-active-color: $color-white;
+$accordion-button-focus-border-color: $color-dark-green;
+$accordion-border-color: $color-green;
+$accordion-button-focus-box-shadow: 0 0 0 1px $color-green;
+$btn-close-color: $color-white;
 
 /* import bootstrap to set changes */
 @import "~bootstrap/scss/bootstrap";
