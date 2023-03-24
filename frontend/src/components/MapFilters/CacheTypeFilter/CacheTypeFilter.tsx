@@ -4,9 +4,11 @@ import MapFilterItem from "../../MapFilterItem";
 
 interface Props{
     onChange: (cacheTypes: CacheTypes) => void;
-    cacheTypes: CacheTypes;
+    cacheTypes?: CacheTypes;
     eventKey: string;
 }
+
+const DEFAULT_DISPLAY_VALUE = false;
 
 const CacheTypeFilter = ({
     onChange,
@@ -32,7 +34,7 @@ const CacheTypeFilter = ({
                         type="checkbox"
                         name="vainRatkaistutMultit"
                         onChange={modifyCacheTypes}
-                        checked={cacheTypes.vainRatkaistutMultit}
+                        checked={cacheTypes?.vainRatkaistutMultit || DEFAULT_DISPLAY_VALUE}
                     />
                     <label htmlFor="vainRatkaistutMultit">Vain ratkaistut multit</label>
                 </div>
@@ -42,7 +44,7 @@ const CacheTypeFilter = ({
                         type="checkbox"
                         name="vainOmiaMerkittyjäSisältäenMultit"
                         onChange={modifyCacheTypes}
-                        checked={cacheTypes.vainOmiaMerkittyjäSisältäenMultit}
+                        checked={cacheTypes?.vainOmiaMerkittyjäSisältäenMultit || DEFAULT_DISPLAY_VALUE}
                     />
                     <label htmlFor="vainRatkaistutMultit">Vain omia merkittyjä sisältäen multit</label>
                 </div>

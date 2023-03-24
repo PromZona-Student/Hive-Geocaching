@@ -8,6 +8,7 @@ import LimitFilter from "../MapFilters/LimitFilter";
 import CustomRuleFilter from "../MapFilters/CustomRuleFilter";
 import ButtonPrimary from "../Buttons/ButtonPrimary";
 import ButtonWarning from "../Buttons/ButtonWarning";
+import { initFilters } from "../../model/Filters";
 
 interface Props {
     show: boolean
@@ -20,7 +21,7 @@ const MapFiltersMenu = ({
     onHide,
     onConfirmFilters
 }: Props) => {
-    const { updateFilters, initFilters } = useContext(FiltersContext);
+    const { updateFilters } = useContext(FiltersContext);
     const [mapFilters, setMapFilters] = useState<Filters>(initFilters);
 
     const modifyCustomRule = (customRule: string) => {
@@ -61,9 +62,9 @@ const MapFiltersMenu = ({
             </Offcanvas.Header>
             <Offcanvas.Body>
                 <Accordion alwaysOpen>
-                    <CustomRuleFilter onChange={modifyCustomRule} customRule={mapFilters.customRule!} eventKey="0"/>
-                    <LimitFilter onChange={modifyLimit} limit={mapFilters.limit!} eventKey="1"/>
-                    <CacheTypeFilter onChange={modifyCacheTypes} cacheTypes={mapFilters.cacheTypes!} eventKey="2"/>
+                    <CustomRuleFilter onChange={modifyCustomRule} customRule={mapFilters.customRule} eventKey="0"/>
+                    <LimitFilter onChange={modifyLimit} limit={mapFilters.limit} eventKey="1"/>
+                    <CacheTypeFilter onChange={modifyCacheTypes} cacheTypes={mapFilters.cacheTypes} eventKey="2"/>
                 </Accordion>
             </Offcanvas.Body>
             <div className="mapfilters-buttons-section">

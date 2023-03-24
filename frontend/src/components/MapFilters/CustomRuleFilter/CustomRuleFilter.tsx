@@ -3,9 +3,11 @@ import MapFilterItem from "../../MapFilterItem";
 
 interface Props{
     onChange: (customRule: string) => void;
-    customRule: string;
+    customRule?: string;
     eventKey: string;
 }
+
+const DEFAULT_DISPLAY_VALUE = "";
 
 const CustomRuleFilter = ({
     onChange,
@@ -20,7 +22,7 @@ const CustomRuleFilter = ({
 
     return (
         <MapFilterItem header="Oma ehto" eventKey={eventKey}>
-            <select data-testid="oma-ehto" onChange={modifyCustomRule} name="oma-ehto" id="oma-ehto-filter" value={customRule}>
+            <select data-testid="oma-ehto" onChange={modifyCustomRule} name="oma-ehto" id="oma-ehto-filter" value={customRule || DEFAULT_DISPLAY_VALUE}>
                 <option value="">-</option>
                 <option value="Löytämättä">Löytämättä</option>
             </select>

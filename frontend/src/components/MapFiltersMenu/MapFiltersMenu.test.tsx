@@ -3,21 +3,21 @@ import "@testing-library/jest-dom";
 import MapFiltersMenu from "./MapFiltersMenu";
 import { BrowserRouter } from "react-router-dom";
 import { MapContext } from "../../context/MapContext";
-import { FiltersContext, initFilters } from "../../context/FiltersContextProvider";
+import { FiltersContext } from "../../context/FiltersContextProvider";
 import { mockMatchMedia } from "../../tests/mockMatchMedia";
+import { initFilters } from "../../model/Filters";
 
 const onHide = jest.fn();
 const onConfirmFilters = jest.fn();
 
 let filters = {...initFilters};
 const updateFilters = jest.fn();
-const resetFilters = jest.fn();
 
 beforeEach(() => {
     mockMatchMedia();
     render(
         <BrowserRouter>
-            <FiltersContext.Provider value={{filters, initFilters, updateFilters, resetFilters}}>
+            <FiltersContext.Provider value={{filters, updateFilters}}>
                 <MapContext>
                     <MapFiltersMenu show={true} onHide={onHide} onConfirmFilters={onConfirmFilters} />
                 </MapContext>

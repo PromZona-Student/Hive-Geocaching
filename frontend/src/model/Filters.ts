@@ -7,6 +7,8 @@ export interface CacheTypes {
     vainRatkaistutMultit?: boolean;
 }
 
+export const initFilters: Filters = {};
+
 export interface Filters{
     limit?: number
     customRule?: string
