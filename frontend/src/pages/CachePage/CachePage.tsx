@@ -22,7 +22,16 @@ function CachePage() {
         isPremiumOnly: false,
         shortDescription: "",
         longDescription: "",
-        hints: ""
+        hints: "",
+        location: {
+            country: "",
+            countryId: 0,
+            state: "",
+            stateId: 0,
+        },
+        ownerAlias: "",
+        difficulty: 0,
+        terrain: 0
     });
 
     useEffect(() => {

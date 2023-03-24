@@ -64,7 +64,16 @@ export function generateGeoCaches(amount: number) {
          isPremiumOnly: false,
          shortDescription: "Description",
          longDescription: "Description",
-         hints: "Ei vihjeitä"
+         hints: "Ei vihjeitä",
+         location: {
+            country: "Finland",
+            countryId: 1,
+            state: "Pirkanmaa",
+            stateId: 50,
+        },
+        ownerAlias: "user_1",
+        difficulty: 3,
+        terrain: 2
      }
      
      geocaches.push(cache1);
@@ -85,7 +94,16 @@ export function generateGeoCaches(amount: number) {
          isPremiumOnly: false,
          shortDescription: "Description",
          longDescription: "Description",
-         hints: "Ei vihjeitä"
+         hints: "Ei vihjeitä",
+         location: {
+            country: "Finland",
+            countryId: 1,
+            state: "Pirkanmaa",
+            stateId: 50,
+        },
+        ownerAlias: "user_2",
+        difficulty: 2,
+        terrain: 5
      }
      
      geocaches.push(cache2);
@@ -107,7 +125,16 @@ export function generateGeoCaches(amount: number) {
             isPremiumOnly: randomBool(),
             shortDescription: "This is the geocache's description",
             longDescription: "This is the geocache's description",
-            hints: randomSentence(4),
+            hints: "Ei vihjeitä",
+            location: {
+                country: "Finland",
+                countryId: 1,
+                state: "Pirkanmaa",
+                stateId: 50,
+            },
+            ownerAlias: "user_"+randomIntInRange(3,90),
+            difficulty: randomIntInRange(1,5),
+            terrain: randomIntInRange(1,5)
         }
         geocaches.push(cache);
     }

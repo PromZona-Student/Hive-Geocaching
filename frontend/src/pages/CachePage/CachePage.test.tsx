@@ -22,7 +22,16 @@ test("component loads", async () => {
         isPremiumOnly: false,
         shortDescription: "",
         longDescription: "",
-        hints: "Ei vihjeitä"
+        hints: "Ei vihjeitä",
+        location: {
+            country: "",
+            countryId: 0,
+            state: "",
+            stateId: 0,
+        },
+        ownerAlias: "",
+        difficulty: 0,
+        terrain: 0
     };
     jest.spyOn(GeocacheApi, "getCache").mockImplementation(async () => {
         return cache;

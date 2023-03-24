@@ -28,7 +28,7 @@ authRouter.post("/login", async (request, response) => {
     const user = users.find(user => user.username === loginRequest.username);
 
     if (!user || (loginRequest.password !== user.password)) {
-        return response.status(401).send();
+        return response.status(401).send("Väärä salasana");
     }
 
     const session = generateSession(user.id);
@@ -49,21 +49,21 @@ authRouter.post("/register", async (request, response) => {
     const registerRequest = request.body as RegisterRequest;
 
     if (!registerRequest.username) {
-        return response.status(400).send("Username is required");
+        return response.status(400).send("Käyttäjätunnus on pakollinen");
     }
 
     if (!registerRequest.password) {
-        return response.status(400).send("Password is required");
+        return response.status(400).send("Salasana on pakollinen");
     }
 
     if (!registerRequest.email) {
-        return response.status(400).send("Email is required");
+        return response.status(400).send("Email on pakollinen");
     }
 
     const foundUser = users.find(user => user.username === registerRequest.username);
 
     if (foundUser !== undefined) {
-        return response.status(400).send("Username already taken");
+        return response.status(400).send("Käyttäjänimi on jo käytössä");
     }
 
     const newUser: UserDetails = {
