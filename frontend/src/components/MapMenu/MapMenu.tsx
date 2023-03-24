@@ -11,32 +11,27 @@ const MapMenu = ({ onSearchClicked }: Props) => {
 
     const [showFilters, setShowFilters] = useState(false);
 
-    const handleShowFilters = () => {
+    const showFilterMenu = () => {
         setShowFilters(true);
-    };
-
-    const handleCloseFilters = () => {
-        setShowFilters(false);
     };
 
     const searchButtonOnClick = () => {
         onSearchClicked();
-        return;
     };
 
-    const handleConfirmFilters = () => {
+    const hideFilterMenu = () => {
         setShowFilters(false);
     };
 
     return (
         <div className="map-menu-container">
             <div className="map-menu-toolbar-left">
-                <button className="map-menu-toolbar-item map-menu-button" onClick={handleShowFilters}><FilterLogo/></button>
+                <button className="map-menu-toolbar-item map-menu-button" onClick={showFilterMenu} aria-label="Tarkenna hakua"><FilterLogo/></button>
             </div>
             <div className="map-menu-toolbar-bottom">
                 <button className="map-menu-toolbar-item map-menu-button" onClick={searchButtonOnClick}>Etsi alueelta</button>
             </div>
-            <MapFiltersMenu show={showFilters} onHide={handleCloseFilters} onConfirmFilters={handleConfirmFilters}/>
+            <MapFiltersMenu show={showFilters} onHide={hideFilterMenu} onConfirmFilters={hideFilterMenu}/>
         </div>
     );
 };

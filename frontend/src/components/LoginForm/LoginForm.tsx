@@ -7,7 +7,7 @@ import * as Yup from "yup";
 import { login } from "../../api/auth";
 import { useState } from "react";
 import Alert from "react-bootstrap/Alert";
-import UserContext from "../../Context/UserContext";
+import UserContext from "../../context/UserContext";
 import {useContext} from "react";
 
 interface LoginProps {

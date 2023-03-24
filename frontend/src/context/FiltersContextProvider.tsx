@@ -3,7 +3,8 @@ import { Filters } from "../model/Filters";
 
 interface FiltersContextType{
     filters: Filters;
-    setFilters: (filters: Filters) => void
+    initFilters: Filters;
+    updateFilters: (filters: Filters) => void
     resetFilters: () => void
 }
 
@@ -13,8 +14,15 @@ interface Props{
 
 export const FiltersContext = createContext({} as FiltersContextType);
 
-const initFilters: Filters = {
-    limit: 200
+export const initFilters: Filters = {
+    cacheTypes: {
+        vainRatkaistutMultit: false,
+        vainRatkaistutMysteerit: false,
+        vainOmiaMerkittyjäSisältäenMultit: false,
+        vainOmiaMerkittyjäSisältäenMysteerit: false
+    },
+    limit: 200,
+    customRule: "-",
 };
 
 export const FiltersContextProvider = ( { children }: Props ) => {
@@ -22,8 +30,11 @@ export const FiltersContextProvider = ( { children }: Props ) => {
     const resetFilters = () => {
         setFilters(initFilters);
     };
+    const updateFilters = (newFilters: Filters) => {
+        setFilters(newFilters);
+    };
     return (
-        <FiltersContext.Provider value={{filters, setFilters, resetFilters}}>
+        <FiltersContext.Provider value={{filters, initFilters, updateFilters, resetFilters}}>
             {children}
         </FiltersContext.Provider>
     );

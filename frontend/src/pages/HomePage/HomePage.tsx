@@ -4,7 +4,6 @@ import "./HomePage.scss";
 import { Geocache } from "../../model/Geocache";
 import GeocacheList from "../../components/GeocacheList";
 import PageLayout from "../../components/PageLayout";
-import { Button } from "react-bootstrap";
 
 const HomePage = () => {
 
@@ -30,9 +29,6 @@ const HomePage = () => {
                     <button className="button">Näytä lisää</button>
                 </div>
             </div>
-            <Button variant="primary">
-                asd
-            </Button>
         </PageLayout>
     );
 };

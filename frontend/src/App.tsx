@@ -1,8 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
-import { UserContextProvider } from "./Context/UserContextProvider";
+import { UserContextProvider } from "./context/UserContextProvider";
 import CachePage from "./pages/CachePage/CachePage";
 import MapViewPageWrapper from "./components/MapViewPageWrapper";
+import "./styles/App.scss";
 
 function App() {
     return (

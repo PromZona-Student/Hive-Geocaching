@@ -7,7 +7,7 @@ import "./MapViewPage.scss";
 import { FiltersContext } from "../../context/FiltersContextProvider";
 import { useMap } from "react-leaflet";
 
-const MapViewPage: React.FC = () => {
+const MapViewPage = () => {
 
     const [geoCaches, setGeoCaches] = useState<Array<Geocache>>([]);
     const { filters } = useContext(FiltersContext);
@@ -22,7 +22,6 @@ const MapViewPage: React.FC = () => {
             maxDistance: kmDistance,
             centerPoint: centerPoint
         });
-        console.log(caches.length);
         setGeoCaches(caches);
     };
 
