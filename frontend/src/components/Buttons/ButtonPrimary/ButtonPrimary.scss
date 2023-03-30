@@ -1,0 +1,10 @@
+@import "../../../styles/common.scss";
+
+.gc-button-primary{
+    background-color: $color-light-green;
+    border: none;
+
+    &:active{
+        background-color: $color-green;
+    }
+}

@@ -6,8 +6,8 @@ import {BrowserRouter} from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 import NavBar from "./NavBar";
 import {User} from "../../model/User";
-import UserContext from "../../Context/UserContext";
-import {UserContextType} from "../../Context/UserContext";
+import UserContext from "../../context/UserContext";
+import {UserContextType} from "../../context/UserContext";
 
 type UserContextProviderType = React.ReactNode;
 

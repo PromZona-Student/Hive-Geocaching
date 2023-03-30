@@ -1,29 +1,43 @@
-import { useEffect, useState } from "react";
-import { getGeoCaches } from "../../api/geocaches";
+import { useContext, useEffect, useState } from "react";
+import { searchGeoCaches } from "../../api/geocaches";
 import Map from "../../components/Map";
 import MapMenu from "../../components/MapMenu";
 import { Geocache } from "../../model/Geocache";
 import "./MapViewPage.scss";
-import NavBar from "../../components/NavBar";
+import { FiltersContext } from "../../context/FiltersContextProvider";
+import { useMap } from "react-leaflet";
 
-const MapViewPage: React.FC = () => {
+const MapViewPage = () => {
 
     const [geoCaches, setGeoCaches] = useState<Array<Geocache>>([]);
+    const { filters } = useContext(FiltersContext);
+    const map = useMap();
 
     useEffect(() => {
-        getGeoCaches({ limit: 100 }).then(geocaches => {
-            setGeoCaches(geocaches);
+        searchGeoCaches({}, "newest").then(caches => {
+            setGeoCaches(caches);
         });
     }, []);
 
+    const searchCaches = async () => {
+        const bounds = map.getBounds();
+        const centerPoint = map.getCenter();
+        const kmDistance = bounds.getNorthEast().distanceTo(centerPoint) / 1000;
+        const caches = await searchGeoCaches({
+            ...filters,
+            maxDistance: kmDistance,
+            centerPoint: centerPoint
+        });
+        setGeoCaches(caches);
+    };
+
     return (
         <>
-            <NavBar fixedTop />
             <div className="map-view-page">
                 <div className="map-menu-wrapper">
-                    <MapMenu />
+                    <MapMenu onSearchClicked={searchCaches} />
                 </div>
-                <Map geocaches={geoCaches} />
+                <Map geocaches={geoCaches}/>
             </div>
         </>
     );
