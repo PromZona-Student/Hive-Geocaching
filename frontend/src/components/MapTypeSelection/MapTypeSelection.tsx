@@ -1,7 +1,7 @@
 import "./MapTypeSelection.scss";
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import tick from "../../images/tick.jpg";
+import empty from "../../images/empty.png";
 
 interface Props {
     open: boolean
@@ -10,20 +10,25 @@ interface Props {
 const MapTypeSelection = ({
     open
 }: Props) => {
-    
-    const [chosen, setChosen] = useState(3);
 
-    return(
+    const [chosen, setChosen] = useState(1);
+
+    const chooseMap = (id: number) => {
+        setChosen(id);
+        return;
+    };
+
+    return (
         <div className="menu-container">
-            {open? (
+            {open ? (
                 <div className="map-menu">
                     <ul>
-                        <DropdownItem img = {chosen==1? tick: null} id={1} text={"OSM-kartta"} />
-                        <DropdownItem img = {chosen==2? tick: null} id={2} text={"ORTO-kartta"} />
-                        <DropdownItem img = {chosen==3? tick: null} id={3} text={"Peruskartta"} />
-                        <DropdownItem img = {chosen==4? tick: null} id={4} text={"Taustakartta"} />
-                        <DropdownItem img = {chosen==5? tick: null} id={5} text={"MapAnt"} />
-                        <DropdownItem img = {chosen==6? tick: null} id={6} text={"Trailmap"} />
+                        <DropdownItem img={chosen == 1 ? tick : empty} text={"OSM-kartta"} onClick={() => chooseMap(1)} />
+                        <DropdownItem img={chosen == 2 ? tick : empty} text={"ORTO-kartta"} onClick={() => chooseMap(2)} />
+                        <DropdownItem img={chosen == 3 ? tick : empty} text={"Peruskartta"} onClick={() => chooseMap(3)} />
+                        <DropdownItem img={chosen == 4 ? tick : empty} text={"Taustakartta"} onClick={() => chooseMap(4)} />
+                        <DropdownItem img={chosen == 5 ? tick : empty} text={"MapAnt"} onClick={() => chooseMap(5)} />
+                        <DropdownItem img={chosen == 6 ? tick : empty} text={"Trailmap"} onClick={() => chooseMap(6)} />
 
                     </ul>
                 </div>) : (
@@ -33,11 +38,17 @@ const MapTypeSelection = ({
     );
 };
 
-function DropdownItem(props: any){
+interface DropDownProps {
+    img: string
+    text: string
+    onClick: () => void
+}
 
-    return(
-        <li className = "map-item">
-            {props.img? (<img src={props.img}></img>): (<img />)}
+function DropdownItem(props: DropDownProps) {
+
+    return (
+        <li className="map-item" onClick={props.onClick}>
+            <img src={props.img}></img>
             {props.text}
         </li>
     );

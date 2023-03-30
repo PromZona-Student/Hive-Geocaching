@@ -1,19 +1,5 @@
 @import "../../styles/common.scss";
 
-.color-nav{
-    background-color: #163E3D;
-}
-
-.color-link{
-    color: white;
-    background-color: transparent !important;
-    border-color: transparent !important;
-}
-
-.logo-navbar{
-    font-family: 'Open Sans', sans-serif;
-}
-
 .map-menu{
     background-color: #FFFFFF;
     border-color: #163E3D;
@@ -28,6 +14,8 @@
     left: 50%;
     transform: translate(-10%, 0);
     pointer-events: none;
+    margin-left: 17px;
+    margin-top: -20px;  
 }
 
 .map-item{
@@ -35,10 +23,14 @@
     list-style-image: none;
     img{
         width: 20px;
+        padding-right: 5px;
     }
+    pointer-events: all;
+    margin-left: -25px;
+    margin-right: 10px;
+    padding-top: 5px;
 }
 
-.map-link{
-    text-decoration: none;
-    color: #000000;   
+.menu-container{
+    pointer-events: all;
 }

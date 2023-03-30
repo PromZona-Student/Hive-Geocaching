@@ -12,6 +12,10 @@ const MapMenu = () => {
     };
 
     const filterButtonOnClick = () => {
+        return;
+    };
+
+    const mapTypeButtonOnClick = () => {
         setisOpen(!isOpen);
         return;
     };
@@ -20,6 +24,7 @@ const MapMenu = () => {
         <div className="map-menu-container">
             <div className="map-menu-toolbar-left">
                 <button className="map-menu-toolbar-item map-menu-button" onClick={filterButtonOnClick}><FilterLogo/></button>
+                <button className="map-menu-toolbar-item map-menu-button" onClick={mapTypeButtonOnClick}><FilterLogo/></button>
                 <MapTypeSelection open={isOpen} />
             </div>
             <div className="map-menu-toolbar-bottom">
