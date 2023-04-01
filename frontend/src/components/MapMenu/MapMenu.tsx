@@ -5,15 +5,13 @@ import { VscGlobe } from "react-icons/vsc";
 import { useState } from "react";
 import MapFiltersMenu from "../MapFiltersMenu";
 
-const MapMenu = () => {
-    
-    const [isOpen, setisOpen] = useState(false);
-
 interface Props{
     onSearchClicked: () => void
 }
 
 const MapMenu = ({ onSearchClicked }: Props) => {
+
+    const [isOpen, setisOpen] = useState(false);
 
     const [showFilters, setShowFilters] = useState(false);
 
@@ -37,13 +35,10 @@ const MapMenu = ({ onSearchClicked }: Props) => {
     return (
         <div className="map-menu-container">
             <div className="map-menu-toolbar-left">
-<<<<<<< HEAD
-                <button className="map-menu-toolbar-item map-menu-button" onClick={filterButtonOnClick}><FilterLogo/></button>
+                <button className="map-menu-toolbar-item map-menu-button" onClick={showFilterMenu} aria-label="Tarkenna hakua"><FilterLogo/></button>
                 <button className="map-menu-toolbar-item map-menu-button" onClick={mapTypeButtonOnClick}><VscGlobe/></button>
                 <MapTypeSelection open={isOpen} />
-=======
-                <button className="map-menu-toolbar-item map-menu-button" onClick={showFilterMenu} aria-label="Tarkenna hakua"><FilterLogo/></button>
->>>>>>> main
+                
             </div>
             <div className="map-menu-toolbar-bottom">
                 <button className="map-menu-toolbar-item map-menu-button" onClick={searchButtonOnClick}>Etsi alueelta</button>
