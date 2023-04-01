@@ -10,7 +10,7 @@ import { GrLogout } from "react-icons/gr";
 import logo from "../../images/gcfi_only_logo_big_orange.png";
 import CustomModal from "../CustomModal";
 import { useState } from "react";
-import UserContext, { UserContextType } from "../../Context/UserContext";
+import UserContext, { UserContextType } from "../../context/UserContext";
 import {useContext} from "react";
 import premiumOn from "../../images/premium_on.png";
 
