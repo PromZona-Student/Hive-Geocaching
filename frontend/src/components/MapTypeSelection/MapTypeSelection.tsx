@@ -47,7 +47,7 @@ function DropdownItem(props: DropDownProps) {
 
     return (
         <li className="map-type-item" onClick={props.onClick}>
-            <span className="tick">{props.tick ? <TiTick />: ""}</span>
+            {props.tick ? <span className="tick"><TiTick/></span>: <span className="untick"><TiTick/></span> }
             {props.text}
         </li>
     );
