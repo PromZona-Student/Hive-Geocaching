@@ -1,6 +1,6 @@
 @import "../../styles/common.scss";
 
-.map-menu{
+.map-type-menu{
     background-color: #FFFFFF;
     border-color: #163E3D;
     border-width: 10px;
@@ -18,10 +18,10 @@
     margin-top: -20px;  
 }
 
-.map-item{
+.map-type-item{
     list-style-type: none;
     list-style-image: none;
-    img{
+    .tick{
         width: 20px;
         padding-right: 5px;
     }
@@ -31,6 +31,6 @@
     padding-top: 5px;
 }
 
-.menu-container{
+.map-type-menu-container{
     pointer-events: all;
 }
