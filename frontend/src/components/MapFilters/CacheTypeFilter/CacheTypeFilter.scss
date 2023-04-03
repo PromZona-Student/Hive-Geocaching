@@ -1,12 +1,16 @@
 @import "../../../styles/common.scss";
 
 .check-box-filters{
-    padding: 10px;
-    
+    padding: 10px;  
+    background-color: #234E4D;
 }
 .check-box-filter{
     padding: 5px;
-}   
+    line-height: 1rem;
+    input{
+        position: relative;
+    }
+}  
 
 .icon{
     width: 20px;
