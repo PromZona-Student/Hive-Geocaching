@@ -90,3 +90,21 @@ test("cache types values are changed correctly", async () => {
     clickReset();
     expect(updateFilters).toHaveBeenCalledWith({...initFilters});
 });
+
+test("cache size values are changed correctly", async () => {
+    const cacheTypeAccordion = screen.getByText("Koko", { selector: "button" });
+    fireEvent.click(cacheTypeAccordion);
+    const virtuaali = screen.getByLabelText("Virtuaali") as HTMLInputElement;
+    expect(virtuaali.checked).toEqual(false);
+    fireEvent.click(virtuaali);
+    clickConfirm();
+    expect(updateFilters).toHaveBeenCalledWith({
+        ...initFilters,
+        size: {
+            ...initFilters.size,
+            virtuaali: true
+        }
+    });
+    clickReset();
+    expect(updateFilters).toHaveBeenCalledWith({...initFilters});
+});
