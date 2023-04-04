@@ -1,6 +1,18 @@
 import { LatLng } from "leaflet";
 
 export interface CacheTypes {
+    peruskätkö?: boolean;
+    multikätkö?: boolean;
+    mysteerikätkö?: boolean;
+    geolodju?: boolean;
+    geokohde?: boolean;
+    whereigokätkö?: boolean;
+    virtuaalikätkö?: boolean;
+    webcamkätkö?: boolean;
+    tapahtuma?: boolean;
+    megatapahtuma?: boolean;
+    siivoustapahtuma?: boolean;
+    yhteisöjuhla?: boolean;
     vainOmiaMerkittyjäSisältäenMysteerit?: boolean;
     vainOmiaMerkittyjäSisältäenMultit?: boolean;
     vainRatkaistutMysteerit?: boolean;
