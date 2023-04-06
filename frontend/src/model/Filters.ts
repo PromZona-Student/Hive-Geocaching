@@ -30,18 +30,16 @@ export interface CacheSize {
 }
 
 export interface Difficulty {
-    yksi?: boolean;
-    puolitoista?: boolean;
-    kaksi?: boolean;
-    kaksijapuoli?: boolean;
-    kolme?: boolean;
-    kolmejapuoli?: boolean;
-    neljä?: boolean;
-    neljäjapuoli?: boolean;
-    viisi?: boolean;
+    1?: boolean;
+    1.5?: boolean;
+    2?: boolean;
+    2.5?: boolean;
+    3?: boolean;
+    3.5?: boolean;
+    4?: boolean;
+    4.5?: boolean;
+    5?: boolean;
 }  
-
-// const dif = ["1", "1,5", "2", "2,5", "3", "3,5", "4", "4,5", "5"];
 
 export const initFilters: Filters = {};
 
@@ -54,7 +52,6 @@ export interface Filters{
     nameContains?: string
     description?: string
     difficulty?: Difficulty
-    //difficulty?: Array<string>
     terrain?: Array<string>
     isPublic?: string
     publicSince?: string

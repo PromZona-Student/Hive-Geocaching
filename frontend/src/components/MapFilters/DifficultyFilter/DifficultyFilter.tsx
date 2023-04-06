@@ -18,7 +18,7 @@ const DifficultyFilter = ({
 }: Props) => {
 
     const modifyDifficulty = (e: ChangeEvent<HTMLInputElement>) => {
-        const name = e.target.name as keyof Difficulty;
+        const name = e.target.name;
         const value = e.target.checked;
         onChange({
             ...difficulty,
@@ -32,93 +32,93 @@ const DifficultyFilter = ({
             <div className="check-box-filters">
                 <div className="check-box-filter">
                     <input
-                        id="yksi"
+                        id="1"
                         type="checkbox"
-                        name="yksi"
+                        name="1"
                         onChange={modifyDifficulty}
-                        checked={difficulty?.yksi || DEFAULT_DISPLAY_VALUE}
+                        checked={difficulty?.[1] || DEFAULT_DISPLAY_VALUE}
                     />
-                    <label htmlFor="yksi">1</label>
+                    <label htmlFor="1">1</label>
                 </div>
                 <div className="check-box-filter">
                     <input
-                        id="puolitoista"
+                        id="1.5"
                         type="checkbox"
-                        name="puolitoista"
+                        name="1.5"
                         onChange={modifyDifficulty}
-                        checked={difficulty?.puolitoista || DEFAULT_DISPLAY_VALUE}
+                        checked={difficulty?.[1.5] || DEFAULT_DISPLAY_VALUE}
                     />
-                    <label htmlFor="puolitoista">1,5</label>
+                    <label htmlFor="1.5">1,5</label>
                 </div>
                 <div className="check-box-filter">
                     <input
-                        id="kaksi"
+                        id="2"
                         type="checkbox"
-                        name="kaksi"
+                        name="2"
                         onChange={modifyDifficulty}
-                        checked={difficulty?.kaksi || DEFAULT_DISPLAY_VALUE}
+                        checked={difficulty?.[2] || DEFAULT_DISPLAY_VALUE}
                     />
                     <label htmlFor="kaksi">2</label>
                 </div>
                 <div className="check-box-filter">
                     <input
-                        id="kaksijapuoli"
+                        id="2.5"
                         type="checkbox"
-                        name="kaksijapuoli"
+                        name="2.5"
                         onChange={modifyDifficulty}
-                        checked={difficulty?.kaksijapuoli || DEFAULT_DISPLAY_VALUE}
+                        checked={difficulty?.[2.5] || DEFAULT_DISPLAY_VALUE}
                     />
-                    <label htmlFor="kaksijapuoli">2,5</label>
+                    <label htmlFor="2.5">2,5</label>
                 </div>
                 <div className="check-box-filter">
                     <input
-                        id="kolme"
+                        id="3"
                         type="checkbox"
-                        name="kolme"
+                        name="3"
                         onChange={modifyDifficulty}
-                        checked={difficulty?.kolme || DEFAULT_DISPLAY_VALUE}
+                        checked={difficulty?.[3] || DEFAULT_DISPLAY_VALUE}
                     />
-                    <label htmlFor="kolme">3</label>
+                    <label htmlFor="3">3</label>
                 </div>
                 <div className="check-box-filter">
                     <input
-                        id="kolmejapuoli"
+                        id="3.5"
                         type="checkbox"
-                        name="kolmejapuoli"
+                        name="3.5"
                         onChange={modifyDifficulty}
-                        checked={difficulty?.kolmejapuoli || DEFAULT_DISPLAY_VALUE}
+                        checked={difficulty?.[3.5] || DEFAULT_DISPLAY_VALUE}
                     />
-                    <label htmlFor="kolmejapuoli">3,5</label>
+                    <label htmlFor="3.5">3,5</label>
                 </div>
                 <div className="check-box-filter">
                     <input
-                        id="neljä"
+                        id="4"
                         type="checkbox"
-                        name="neljä"
+                        name="4"
                         onChange={modifyDifficulty}
-                        checked={difficulty?.neljä || DEFAULT_DISPLAY_VALUE}
+                        checked={difficulty?.[4] || DEFAULT_DISPLAY_VALUE}
                     />
-                    <label htmlFor="neljä">4</label>
+                    <label htmlFor="4">4</label>
                 </div>
                 <div className="check-box-filter">
                     <input
-                        id="neljäjapuoli"
+                        id="4.5"
                         type="checkbox"
-                        name="neljäjapuoli"
+                        name="4.5"
                         onChange={modifyDifficulty}
-                        checked={difficulty?.neljäjapuoli || DEFAULT_DISPLAY_VALUE}
+                        checked={difficulty?.[4.5] || DEFAULT_DISPLAY_VALUE}
                     />
-                    <label htmlFor="neljäjapuoli">4,5</label>
+                    <label htmlFor="4.5">4,5</label>
                 </div>
                 <div className="check-box-filter">
                     <input
-                        id="viisi"
+                        id="5"
                         type="checkbox"
-                        name="viisi"
+                        name="5"
                         onChange={modifyDifficulty}
-                        checked={difficulty?.viisi || DEFAULT_DISPLAY_VALUE}
+                        checked={difficulty?.[5] || DEFAULT_DISPLAY_VALUE}
                     />
-                    <label htmlFor="viisi">5</label>
+                    <label htmlFor="5">5</label>
                 </div>
             </div>
         </MapFilterItem>
