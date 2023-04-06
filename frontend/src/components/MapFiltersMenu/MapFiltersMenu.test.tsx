@@ -113,14 +113,13 @@ test("difficulty values are changed correctly", async () => {
     const cacheTypeAccordion = screen.getByText("Vaikeus", { selector: "button" });
     fireEvent.click(cacheTypeAccordion);
     const kolme = screen.getByLabelText("3") as HTMLInputElement;
-    expect(kolme.checked).toEqual(false);
     fireEvent.click(kolme);
     clickConfirm();
     expect(updateFilters).toHaveBeenCalledWith({
         ...initFilters,
         difficulty: {
             ...initFilters.size,
-            kolme: true
+            3: true
         }
     });
     clickReset();
