@@ -47,7 +47,8 @@ export function generateGeoCaches(amount: number) {
     const geocaches: Array<Geocache> = [];
 
      // Specific cache has been temporarily added for testing
-     const placedDate = randomDate((new Date(1999, 2)).getTime(), Date.now());
+     const placedDate = new Date();
+     placedDate.setMinutes(placedDate.getMinutes()-58);
      const cache1: Geocache = {
          
          referenceCode: "abc123",
@@ -78,19 +79,21 @@ export function generateGeoCaches(amount: number) {
      
      geocaches.push(cache1);
  
+     const placedDate2 = new Date();
+     placedDate2.setMinutes(placedDate2.getMinutes()-15);
      const cache2: Geocache = {
          
          referenceCode: "zyx",
          name: "Esimerkkikätkö",
-         placedDate: placedDate.toISOString(),
-         publishedDate: placedDate.toISOString(),
+         placedDate: placedDate2.toISOString(),
+         publishedDate: placedDate2.toISOString(),
          type: "Multikätkö",
          size: "Joku",
          postedCoordinates: {
              latitude: randomNumInRange(60.085318, 68.542486),
              longitude: randomNumInRange(21.243898, 31.436180)
          },
-         lastVisitedDate: placedDate.toISOString(),
+         lastVisitedDate: placedDate2.toISOString(),
          isPremiumOnly: false,
          shortDescription: randomSentence(3),
          longDescription: randomSentence(6),
