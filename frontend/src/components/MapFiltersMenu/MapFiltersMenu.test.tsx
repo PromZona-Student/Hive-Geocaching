@@ -108,3 +108,15 @@ test("cache size values are changed correctly", async () => {
     clickReset();
     expect(updateFilters).toHaveBeenCalledWith({...initFilters});
 });
+
+test("name contains filter search box text is saved correctly", async () => {
+    const searchInput = screen.getByTestId("name-contains-filter") as HTMLInputElement;
+    fireEvent.change(searchInput, { target: { value: "test" }});
+    expect(searchInput.value).toBe("test");
+});
+
+test("cache description filter search box text is saved correctly", async () => {
+    const searchInput = screen.getByTestId("description-contains-filter") as HTMLInputElement;
+    fireEvent.change(searchInput, { target: { value: "test" }});
+    expect(searchInput.value).toBe("test");
+});
