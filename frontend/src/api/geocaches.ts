@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Geocache } from "../model/Geocache";
+import { Geocache, GeocacheMapDetails } from "../model/Geocache";
 import { Filters } from "../model/Filters";
 
 export interface SearchRequest{
@@ -24,4 +24,12 @@ export const searchGeoCaches = async (filters: Filters, orderBy?: string): Promi
         orderBy
     } as SearchRequest);
     return response.data as Array<Geocache>;
+};
+
+export const searchGeoCacheMapDetails = async (filters: Filters, orderBy?: string): Promise<Array<GeocacheMapDetails>> => {
+    const response = await axios.post("/api/geocaches/mapsearch", {
+        filters,
+        orderBy
+    } as SearchRequest);
+    return response.data as Array<GeocacheMapDetails>;
 };
