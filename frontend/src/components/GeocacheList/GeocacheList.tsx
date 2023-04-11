@@ -17,7 +17,7 @@ const GeocacheList = ({
                 geocaches.map(cache => {
                     return (
                         <li key={cache.referenceCode}>
-                            <Link to={`/kätkö/${cache.referenceCode}`} className="text-decoration-none">
+                            <Link to={`/kätköt/${cache.referenceCode}`} className="text-decoration-none">
                                 <div className="geocache-item">
                                     <p>{cache.placedDate}</p>
                                     <b>{cache.name}</b>

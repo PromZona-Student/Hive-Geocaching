@@ -14,7 +14,7 @@ function App() {
                     <Route path="/kartta" element={
                         <MapViewPageWrapper/>
                     } />
-                    <Route path="/kätkö/:cacheId" element={<CachePage />} />
+                    <Route path="/kätköt/:cacheId" element={<CachePage />} />
                 </Routes>
             </UserContextProvider>
         </div>
