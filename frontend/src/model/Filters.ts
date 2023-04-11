@@ -29,6 +29,30 @@ export interface CacheSize {
     tuntematon?: boolean;
 }
 
+export interface Difficulty {
+    1?: boolean;
+    1.5?: boolean;
+    2?: boolean;
+    2.5?: boolean;
+    3?: boolean;
+    3.5?: boolean;
+    4?: boolean;
+    4.5?: boolean;
+    5?: boolean;
+}
+
+export interface Terrain {
+    1?: boolean;
+    1.5?: boolean;
+    2?: boolean;
+    2.5?: boolean;
+    3?: boolean;
+    3.5?: boolean;
+    4?: boolean;
+    4.5?: boolean;
+    5?: boolean;
+}
+
 export const initFilters: Filters = {};
 
 export interface Filters{
@@ -39,8 +63,8 @@ export interface Filters{
     size?: CacheSize
     nameContains?: string
     description?: string
-    difficulty?: Array<string>
-    terrain?: Array<string>
+    difficulty?: Difficulty
+    terrain?: Terrain
     isPublic?: string
     publicSince?: string
     publicUntil?: string
