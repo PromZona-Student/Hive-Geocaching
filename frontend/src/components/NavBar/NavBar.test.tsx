@@ -36,13 +36,13 @@ test("Loads and navigates", async () => {
     await waitFor(()=>{
         expect(history.location.pathname).toEqual("/");
     });
-    userEvent.click(screen.getByText("Home"));
+    userEvent.click(screen.getByText("Etusivu"));
     await waitFor(()=>{
         expect(history.location.pathname).toEqual("/");
     });
-    userEvent.click(screen.getByText("Map"));
+    userEvent.click(screen.getByText("Kartta"));
     await waitFor(()=>{
-        expect(history.location.pathname).toEqual("/map");
+        expect(history.location.pathname).toEqual("/kartta");
     });
     userEvent.click(screen.getByLabelText("Geocache.fi"));
     await waitFor(()=>{

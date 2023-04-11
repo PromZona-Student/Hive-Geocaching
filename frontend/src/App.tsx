@@ -11,10 +11,10 @@ function App() {
             <UserContextProvider>
                 <Routes>
                     <Route path="/" element={<HomePage />} />
-                    <Route path="/map" element={
+                    <Route path="/kartta" element={
                         <MapViewPageWrapper/>
                     } />
-                    <Route path="/geocaches/:cacheId" element={<CachePage />} />
+                    <Route path="/kätkö/:cacheId" element={<CachePage />} />
                 </Routes>
             </UserContextProvider>
         </div>

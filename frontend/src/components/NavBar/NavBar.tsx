@@ -89,8 +89,8 @@ const NavBar = ({
                     </NavDropdown>
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">                                
-                            <Nav.Link as={Link} to="/">Home</Nav.Link>
-                            <Nav.Link as={Link} to="/map">Map</Nav.Link>                            
+                            <Nav.Link as={Link} to="/">Etusivu</Nav.Link>
+                            <Nav.Link as={Link} to="/kartta">Kartta</Nav.Link>                            
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

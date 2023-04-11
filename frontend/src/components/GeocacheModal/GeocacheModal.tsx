@@ -62,7 +62,7 @@ const GeocacheModal = (props: ModalProps) => {
                         <div className="cache-attribute">Maasto:</div> <div className="cache-text"></div>{props.cache.terrain}/5
                     </div>
                     
-                    <Link to={`/geocaches/${props.cache.referenceCode}`}>                                        
+                    <Link to={`/kätkö/${props.cache.referenceCode}`}>                                        
                         <button type="button" className="cache-button">Lisätietoja</button>
                     </Link>
                 </div>
