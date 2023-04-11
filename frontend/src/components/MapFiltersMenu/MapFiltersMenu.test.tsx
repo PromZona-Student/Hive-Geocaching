@@ -92,8 +92,8 @@ test("cache types values are changed correctly", async () => {
 });
 
 test("cache size values are changed correctly", async () => {
-    const cacheTypeAccordion = screen.getByText("Koko", { selector: "button" });
-    fireEvent.click(cacheTypeAccordion);
+    const cacheSizeAccordion = screen.getByText("Koko", { selector: "button" });
+    fireEvent.click(cacheSizeAccordion);
     const virtuaali = screen.getByLabelText("Virtuaali") as HTMLInputElement;
     expect(virtuaali.checked).toEqual(false);
     fireEvent.click(virtuaali);
@@ -103,6 +103,23 @@ test("cache size values are changed correctly", async () => {
         size: {
             ...initFilters.size,
             virtuaali: true
+        }
+    });
+    clickReset();
+    expect(updateFilters).toHaveBeenCalledWith({...initFilters});
+});
+
+test("terrain values are changed correctly", async () => {
+    const terrainAccordion = screen.getByText("Maasto", { selector: "button" });
+    fireEvent.click(terrainAccordion);
+    const puolitoista = screen.getByLabelText("1,5") as HTMLInputElement;
+    fireEvent.click(puolitoista);
+    clickConfirm();
+    expect(updateFilters).toHaveBeenCalledWith({
+        ...initFilters,
+        terrain: {
+            ...initFilters.size,
+            1.5: true
         }
     });
     clickReset();
