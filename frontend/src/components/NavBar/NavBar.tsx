@@ -66,7 +66,7 @@ const NavBar = ({
                         href="#"
                         onClick={logout}
                     >
-                        <GrLogout size={"25px"}/> Kirjaa ulos
+                        <GrLogout size={"25px"}/> Kirjaudu ulos
                     </NavDropdown.Item>
                 </div>
             );

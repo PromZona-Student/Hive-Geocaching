@@ -4,19 +4,37 @@ import { UserContextProvider } from "./context/UserContextProvider";
 import CachePage from "./pages/CachePage/CachePage";
 import MapViewPageWrapper from "./components/MapViewPageWrapper";
 import "./styles/App.scss";
+import Authorize from "./components/Authorize";
+import { useContext, useEffect } from "react";
+import { refreshSession } from "./api/auth";
+import UserContext from "./context/UserContext";
+
+const unauthorizedMsg = {
+    map: "Kartta näkyy vain sisäänkirjautuneille",
+    cache: "Kätkön tiedot näkyvät vain sisäänkirjautuneille!"
+};
 
 function App() {
+
+    const { setUser } = useContext(UserContext);
+    
+    useEffect(() => {
+        refreshSession().then(usr => {
+            setUser(usr);
+        });
+    }, [setUser]);
+
     return (
         <div className="App">
-            <UserContextProvider>
-                <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/map" element={
-                        <MapViewPageWrapper/>
-                    } />
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route element={<Authorize allowedRoles={["basic", "premium"]} unauthorizedMsg={unauthorizedMsg.map} />}>
+                    <Route path="/map" element={<MapViewPageWrapper />} />
+                </Route>
+                <Route element={<Authorize allowedRoles={["basic", "premium"]} unauthorizedMsg={unauthorizedMsg.cache} />}>
                     <Route path="/geocaches/:cacheId" element={<CachePage />} />
-                </Routes>
-            </UserContextProvider>
+                </Route>
+            </Routes>
         </div>
     );
 }

@@ -85,7 +85,7 @@ describe("Test Dropdown logged in", () => {
             customRender(<NavBar/>, user);
             userEvent.click(screen.getByTestId("drop-button"));
             await waitFor(()=>{
-                expect(screen.getByText("Kirjaa ulos")).toBeVisible();                
+                expect(screen.getByText("Kirjaudu ulos")).toBeVisible();                
             });    
             await waitFor(()=>{               
                 if(user.isPremium){
