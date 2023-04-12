@@ -50,7 +50,7 @@ const GeocacheModal = (props: ModalProps) => {
             return (
                 <div>
                     <div className="cache-name">{cache.name}</div>
-                    <hr />
+                    <hr  className="yellow-hr"/>
                     <div className="cache-code bottom-space">{`(${cache.referenceCode})`}</div>
 
                     {handlePremiumCont(cache.isPremiumOnly)}

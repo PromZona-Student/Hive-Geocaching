@@ -19,3 +19,16 @@ $btn-close-color: $color-white;
 
 /* import bootstrap to set changes */
 @import "~bootstrap/scss/bootstrap";
+
+.dropdown-menu{
+    background-color: $color-dark-green;
+}
+
+.dropdown-item{
+    color: $color-white;
+}
+
+.dropdown-divider {
+    color: $color-white;
+    border-top: .25px solid;
+}
