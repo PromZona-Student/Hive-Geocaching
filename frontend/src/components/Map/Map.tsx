@@ -1,24 +1,24 @@
 import { Icon } from "leaflet";
 import { Marker, TileLayer } from "react-leaflet";
-import { Geocache } from "../../model/Geocache";
+import { Geocache, GeocacheMapDetails } from "../../model/Geocache";
 import { useState } from "react";
 import GeocacheModal from "../GeocacheModal";
 
 interface Props {
-    geocaches: Array<Geocache>
+    geocaches: Array<GeocacheMapDetails>
 }
 const Map = ({
     geocaches,
 }: Props) => {
     const [isOpen, setisOpen] = useState(false);
-    const [currentCache, setCurrentCache] = useState<Geocache | null>(null);
+    const [currentCacheId, setCurrentCacheId] = useState<string | null>(null);
 
     const toggle = () => {
         setisOpen(!isOpen);
     };
 
-    const handleOnClick = (cache: Geocache) => {
-        setCurrentCache(cache);
+    const handleOnClick = (cacheId: string) => {
+        setCurrentCacheId(cacheId);
     };
 
     return (
@@ -38,7 +38,7 @@ const Map = ({
                             })}
                             eventHandlers={{
                                 click: () => {
-                                    handleOnClick(cache);
+                                    handleOnClick(cache.referenceCode);
                                     toggle();
                                 },
                             }}
@@ -47,7 +47,7 @@ const Map = ({
                     );
                 })
             }
-            <GeocacheModal isOpen={isOpen} toggle={toggle} cache={currentCache} />
+            <GeocacheModal isOpen={isOpen} toggle={toggle} cacheId={currentCacheId} />
         </>
     );
 };

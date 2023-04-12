@@ -2,7 +2,9 @@ import { Router } from "express";
 import { generateGeoCaches } from "../util/generateGeocaches";
 import { Filters } from "../../../frontend/src/model/Filters";
 import { SearchRequest } from "../../../frontend/src/api/geocaches";
-import { Geocache } from "../../../frontend/src/model/Geocache";
+import { Geocache, GeocacheMapDetails } from "../../../frontend/src/model/Geocache";
+import { users, getUser } from "../data/users";
+import { sessions } from "../data/sessions";
 
 export const geocacheRouter = Router();
 
@@ -42,9 +44,29 @@ geocacheRouter.get("/", async (request, response) => {
 });
 
 geocacheRouter.get("/:id", async (request, response) => {
+    const cookies = request.cookies;
+    const session = sessions.get(cookies["SID"]);
+    if(!session){
+        return response.status(401).send("Not allowed");
+    }
+    const user = getUser(session.userId);
+    if(!user){
+        return response.status(401).send("Not allowed");
+    }
     const geocache = geocaches.find(g => g.referenceCode === request.params.id)
-    if (geocache !== undefined) {
-        response.json(geocache);
+    if (geocache) {
+        if(geocache.isPremiumOnly && !user.isPremium){
+            response.json({
+                ...geocache,
+                postedCoordinates: {
+                    latitude: undefined,
+                    longitude: undefined
+                }
+            });
+        }
+        else{
+            response.json(geocache);
+        }
     }
     else {
         response.status(404).send("No geocache found");
@@ -59,8 +81,8 @@ geocacheRouter.post("/search", async (request, response) => {
     if(center && distance){
         result = result.filter(c => {
             const dist = meterDistance(center, {
-                lat: c.postedCoordinates.latitude,
-                lng: c.postedCoordinates.longitude
+                lat: c.postedCoordinates.latitude!,
+                lng: c.postedCoordinates.longitude!
             }) / 1000
             return dist <= distance
         })
@@ -71,3 +93,34 @@ geocacheRouter.post("/search", async (request, response) => {
     result = result.slice(0, filters.limit ? filters.limit : LIMIT_DEFAULT);
     return response.json(result);
 })
+
+//returns only id and coordinates for the caches, not full information
+geocacheRouter.post("/mapsearch", async (request, response) => {
+    let result = [...geocaches]
+    const {filters, orderBy} = request.body as SearchRequest;
+    const center = filters.centerPoint;
+    const distance = filters.maxDistance;
+    if(center && distance){
+        result = result.filter(c => {
+            const dist = meterDistance(center, {
+                lat: c.postedCoordinates.latitude!,
+                lng: c.postedCoordinates.longitude!
+            }) / 1000
+            return dist <= distance
+        })
+    }
+    if(orderBy && orderBy === "newest"){
+        result = result.sort(sortByDate)
+    }
+    result = result.slice(0, filters.limit ? filters.limit : LIMIT_DEFAULT);
+    return response.json(result.map(c => {
+        const mapDetails: GeocacheMapDetails = {
+            referenceCode: c.referenceCode,
+            postedCoordinates: {
+                latitude: c.postedCoordinates.latitude!,
+                longitude: c.postedCoordinates.longitude!
+            }
+        }
+        return mapDetails
+    }));
+});

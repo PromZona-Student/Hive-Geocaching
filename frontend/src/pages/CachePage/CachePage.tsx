@@ -42,6 +42,10 @@ function CachePage() {
         }
     },[cacheId]);
 
+    const formatCoordinate = (coord?: number) => {
+        return coord ? coord : "***";
+    };
+
     if (cacheId && cache && cache.name) {
         return (
             <>
@@ -55,8 +59,8 @@ function CachePage() {
                         <div className="feed-section">
 
                             <p>{cache.type}</p>
-                            <p>N {cache.postedCoordinates.latitude}</p>
-                            <p>E {cache.postedCoordinates.longitude}</p>
+                            <p>N {formatCoordinate(cache.postedCoordinates.latitude)}</p>
+                            <p>E {formatCoordinate(cache.postedCoordinates.longitude)}</p>
                             <p>Piilotettu: {cache.placedDate.slice(0, 10)}</p>
                             <p>Koko: {cache.size}</p>
                             <p>{cache.shortDescription}</p>
