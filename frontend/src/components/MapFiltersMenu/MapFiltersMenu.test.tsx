@@ -108,3 +108,20 @@ test("cache size values are changed correctly", async () => {
     clickReset();
     expect(updateFilters).toHaveBeenCalledWith({...initFilters});
 });
+
+test("difficulty values are changed correctly", async () => {
+    const cacheTypeAccordion = screen.getByText("Vaikeus", { selector: "button" });
+    fireEvent.click(cacheTypeAccordion);
+    const kolme = screen.getByLabelText("3") as HTMLInputElement;
+    fireEvent.click(kolme);
+    clickConfirm();
+    expect(updateFilters).toHaveBeenCalledWith({
+        ...initFilters,
+        difficulty: {
+            ...initFilters.size,
+            3: true
+        }
+    });
+    clickReset();
+    expect(updateFilters).toHaveBeenCalledWith({...initFilters});
+});
