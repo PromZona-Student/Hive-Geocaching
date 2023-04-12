@@ -1,20 +1,20 @@
 import { useContext, useEffect, useState } from "react";
-import { searchGeoCaches } from "../../api/geocaches";
+import { searchGeoCacheMapDetails, searchGeoCaches } from "../../api/geocaches";
 import Map from "../../components/Map";
 import MapMenu from "../../components/MapMenu";
-import { Geocache } from "../../model/Geocache";
+import { Geocache, GeocacheMapDetails } from "../../model/Geocache";
 import "./MapViewPage.scss";
 import { FiltersContext } from "../../context/FiltersContextProvider";
 import { useMap } from "react-leaflet";
 
 const MapViewPage = () => {
 
-    const [geoCaches, setGeoCaches] = useState<Array<Geocache>>([]);
+    const [geoCaches, setGeoCaches] = useState<Array<GeocacheMapDetails>>([]);
     const { filters } = useContext(FiltersContext);
     const map = useMap();
 
     useEffect(() => {
-        searchGeoCaches({}, "newest").then(caches => {
+        searchGeoCacheMapDetails({}, "newest").then(caches => {
             setGeoCaches(caches);
         });
     }, []);
@@ -23,7 +23,7 @@ const MapViewPage = () => {
         const bounds = map.getBounds();
         const centerPoint = map.getCenter();
         const kmDistance = bounds.getNorthEast().distanceTo(centerPoint) / 1000;
-        const caches = await searchGeoCaches({
+        const caches = await searchGeoCacheMapDetails({
             ...filters,
             maxDistance: kmDistance,
             centerPoint: centerPoint

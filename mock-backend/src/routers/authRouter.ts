@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { users } from "../data/users";
+import { sessions } from "../data/sessions";
+import { getUser } from "../data/users";
 import { User } from "../../../frontend/src/model/User"
 import { generateSession } from "../data/sessions";
 import { UserDetails } from "../model/UserDetails";
@@ -86,4 +88,30 @@ authRouter.post("/register", async (request, response) => {
             isPremium: newUser.isPremium
         } as User
     );
+});
+
+authRouter.get("/session", (request, response) => {
+    const sessionID = request.cookies["SID"];
+    const invalidSessionResponse = {
+        user: null
+    }
+    if(!sessionID){
+        return response.json(invalidSessionResponse);
+    }
+    const session = sessions.get(sessionID);
+    if(!session){
+        return response.json(invalidSessionResponse);
+    }
+    const user = getUser(session.userId);
+    if(!user){
+        return response.json(invalidSessionResponse);
+    }
+    return response.json({
+        user: {
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            isPremium: user.isPremium
+        }
+    });
 });

@@ -32,3 +32,13 @@ export const register = async (username: string, email: string, password: string
         return { status: status, message: msg };
     }
 };
+
+export const refreshSession = async () => {
+    const response = await axios.get("/api/auth/session");
+    if(response.data.user){
+        return response.data.user as User;
+    }
+    else{
+        return null;
+    }
+};
