@@ -4,6 +4,7 @@ import "./HomePage.scss";
 import { Geocache } from "../../model/Geocache";
 import GeocacheList from "../../components/GeocacheList";
 import PageLayout from "../../components/PageLayout";
+import { Button } from "react-bootstrap";
 
 const HomePage = () => {
 
@@ -21,12 +22,12 @@ const HomePage = () => {
                 <div className="feed-section">
                     <h3>Uusimmat geokätköt</h3>
                     <GeocacheList geocaches={geocaches} />
-                    <button className="button">Näytä lisää</button>
+                    <Button variant="light">Näytä lisää</Button>
                 </div>
                 <div className="feed-section">
                     <h3>Tulevat miitit</h3>
                     <p>Miitti-dataa</p>
-                    <button className="button">Näytä lisää</button>
+                    <Button variant="light">Näytä lisää</Button>
                 </div>
             </div>
         </PageLayout>

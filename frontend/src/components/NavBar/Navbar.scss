@@ -11,5 +11,8 @@
 }
 
 .logo-navbar{
-    font-family: 'Open Sans', sans-serif;
+    transform: scale(1.4);
+    @media screen and (max-width: 400px){
+        transform: scale(1.2);
+    }
 }
