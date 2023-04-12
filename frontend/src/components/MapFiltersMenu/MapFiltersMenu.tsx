@@ -11,6 +11,7 @@ import ButtonPrimary from "../Buttons/ButtonPrimary";
 import ButtonWarning from "../Buttons/ButtonWarning";
 import { initFilters } from "../../model/Filters";
 import NameContainsFilter from "../MapFilters/NameContainsFilter";
+import PublishedHiddenFilter from "../MapFilters/PublishedHiddenFilter";
 
 interface Props {
     show: boolean
@@ -61,6 +62,15 @@ const MapFiltersMenu = ({
         });
     };
 
+    const modifyIsPublic = (isPublic: string, publicSince: string, publicUntil: string) => {
+        setMapFilters({
+            ...mapFilters,
+            isPublic,
+            publicSince,
+            publicUntil
+        });
+    };
+
     const confirmFilters = () => {
         updateFilters({ ...mapFilters });
         onConfirmFilters();
@@ -82,7 +92,9 @@ const MapFiltersMenu = ({
                     <LimitFilter onChange={modifyLimit} limit={mapFilters.limit} eventKey="1"/>
                     <CacheTypeFilter onChange={modifyCacheTypes} cacheTypes={mapFilters.cacheTypes} eventKey="2"/>
                     <CacheSizeFilter onChange={modifyCacheSize} size={mapFilters.size} eventKey="3"/>
-                    <NameContainsFilter onChange={modifyNameContains} nameContains={mapFilters.nameContains} eventKey="4"/> 
+                    <NameContainsFilter onChange={modifyNameContains} nameContains={mapFilters.nameContains} eventKey="4"/>
+                    <PublishedHiddenFilter onChange={modifyIsPublic} isPublic={mapFilters.isPublic} publicSince=
+                        {mapFilters.publicSince} publicUntil={mapFilters.publicUntil} eventKey="8"/>
                 </Accordion>
             </Offcanvas.Body>
             <div className="mapfilters-buttons-section">

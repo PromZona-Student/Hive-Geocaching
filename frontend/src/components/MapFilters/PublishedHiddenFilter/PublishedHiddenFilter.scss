@@ -1,0 +1,27 @@
+@import "../../../styles/common.scss";
+
+.published-hidden-filters{
+    padding: 10px;  
+    background-color: #234E4D;
+}
+
+.radio-button-filter{
+    padding: 5px;
+    
+    input{
+        position: relative;
+    }
+    label{
+        margin-left: 5px;
+    }
+}  
+
+.public-input{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    input{
+        width: 100%;
+    }
+    
+}
