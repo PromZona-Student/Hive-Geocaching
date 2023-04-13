@@ -85,7 +85,8 @@ const MapFiltersMenu = ({
     };
 
     const resetFilters = () => {
-        mapFilters.publicUntil = undefined;
+        mapFilters.publicSince = "";
+        mapFilters.publicUntil = "";
         setMapFilters(initFilters);
         updateFilters({ ...initFilters });
     };
