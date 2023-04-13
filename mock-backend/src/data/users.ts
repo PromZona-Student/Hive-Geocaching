@@ -16,3 +16,7 @@ export const users: Array<UserDetails> = [
         isPremium: false
     }
 ]
+
+export const getUser = (userId: string) => {
+    return users.find(u => u.id === userId);
+};

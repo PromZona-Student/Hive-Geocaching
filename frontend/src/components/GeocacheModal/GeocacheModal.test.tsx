@@ -9,7 +9,7 @@ const toggle = jest.fn();
 test("Component loads", async () => {
     render(
         <BrowserRouter>
-            <GeocacheModal isOpen={isOpen} toggle={toggle} cache={null}/>
+            <GeocacheModal isOpen={isOpen} toggle={toggle} cacheId={null}/>
         </BrowserRouter>
     );
     await waitFor(()=>{

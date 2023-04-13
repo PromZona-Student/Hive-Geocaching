@@ -6,18 +6,20 @@ interface Session{
 };
 
 type UserId = string;
+type SessionId = string;
 
-const sessions = new Map<UserId, Session>();
+export const sessions = new Map<SessionId, Session>();
 
 export function getSession(userId: string){
     return sessions.get(userId)
 }
 
 export function generateSession(userId: string){
+    const sessionId = randomUUID();
     const session = {
-        sessionId: randomUUID(),
+        sessionId,
         userId
     };
-    sessions.set(userId, session);
+    sessions.set(sessionId, session);
     return session;
 }
