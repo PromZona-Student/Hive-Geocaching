@@ -43,6 +43,8 @@ export interface Difficulty {
 
 export const initFilters: Filters = {};
 
+export const DEFAULT_IS_PUBLIC = "julkaistu";
+
 export interface Filters{
     limit?: number
     customRule?: string

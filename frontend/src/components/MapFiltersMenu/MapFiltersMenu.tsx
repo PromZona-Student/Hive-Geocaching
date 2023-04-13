@@ -70,7 +70,7 @@ const MapFiltersMenu = ({
         });
     };
 
-    const modifyIsPublic = (isPublic: string, publicSince: string, publicUntil: string) => {
+    const modifyIsPublic = (isPublic: string, publicSince: string | undefined, publicUntil: string | undefined) => {
         setMapFilters({
             ...mapFilters,
             isPublic,
@@ -85,6 +85,7 @@ const MapFiltersMenu = ({
     };
 
     const resetFilters = () => {
+        mapFilters.publicUntil = undefined;
         setMapFilters(initFilters);
         updateFilters({ ...initFilters });
     };
@@ -103,7 +104,7 @@ const MapFiltersMenu = ({
                     <NameContainsFilter onChange={modifyNameContains} nameContains={mapFilters.nameContains} eventKey="4"/>
                     <DifficultyFilter onChange={modifyDifficulty} difficulty={mapFilters.difficulty} eventKey="6"/> 
                     <PublishedHiddenFilter onChange={modifyIsPublic} isPublic={mapFilters.isPublic} publicSince=
-                        {mapFilters.publicSince} publicUntil={mapFilters.publicUntil} eventKey="8"/>
+                        {mapFilters.publicSince} publicUntil={mapFilters.publicUntil} eventKey="9"/>
                 </Accordion>
             </Offcanvas.Body>
             <div className="mapfilters-buttons-section">

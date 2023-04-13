@@ -1,14 +1,17 @@
 import "./PublishedHiddenFilter.scss";
 import { ChangeEvent, useState } from "react";
 import MapFilterItem from "../../MapFilterItem";
+import { DEFAULT_IS_PUBLIC } from "../../../model/Filters";
+
 
 interface Props {
-    onChange: (isPublic: string, publicSince: string, publicUntil: string) => void;
-    isPublic?: string | "julkaistu";
-    publicSince?: string | "";
-    publicUntil?: string | "";
+    onChange: (isPublic: string, publicSince: string | undefined, publicUntil: string | undefined) => void;
+    isPublic?: string;
+    publicSince?: string;
+    publicUntil?: string;
     eventKey: string;
 }
+
 
 const DEFAULT_DISPLAY_VALUE = false;
 
@@ -20,44 +23,28 @@ const PublishedHiddenFilter = ({
     eventKey
 }: Props) => {
 
-    if(publicSince === undefined) publicSince = "";
-    if(publicUntil === undefined) publicUntil = "";
-    if(isPublic === undefined) isPublic = "julkaistu";
+    if(!isPublic) isPublic = DEFAULT_IS_PUBLIC;
 
     const [since, setSince] = useState(publicSince);
     const [until, setUntil] = useState(publicUntil);
     const [status, setStatus] = useState(isPublic);
 
-    if (!isPublic) {
-        isPublic = "julkaistu";
-        console.log("Reset");
-        setStatus(isPublic);
-        onChange(isPublic, since, until);
-        console.log(isPublic, since, until);
-    }
-
     const modifyIsPublic = (e: ChangeEvent<HTMLInputElement>) => {
-        const choice = e.target.value;
-        console.log("isPublic:", choice);
-        setStatus(choice);
+        const choice: string = e.target.value;
+        setStatus(choice);     
         onChange(choice, since, until);
-        console.log(choice, since, until);
     };
 
     const modifyPublicSince = (e: ChangeEvent<HTMLInputElement>) => {
-        const choice = e.target.value;
-        console.log("since:", choice);
+        const choice: string = e.target.value;
         setSince(choice);
         onChange(status, choice, until);
-        console.log(status, choice, until);
     };
 
     const modifyPublicUntil = (e: ChangeEvent<HTMLInputElement>) => {
-        const choice = e.target.value;
-        console.log("until:", choice);
+        const choice: string = e.target.value;
         setUntil(choice);
         onChange(status, since, choice);
-        console.log(status, since, choice);
     };
 
     const isSelected = (value: string): boolean => isPublic === value;
@@ -75,8 +62,9 @@ const PublishedHiddenFilter = ({
                             value="julkaistu"
                             checked={isSelected("julkaistu") || DEFAULT_DISPLAY_VALUE}
                             onChange={modifyIsPublic}
+                            
                         />
-                        <label htmlFor="julkaistu"> julkaistu</label>
+                        <label htmlFor="julkaistu">julkaistu</label>
                     </div>
                     <div className="radio-button-filter">
                         <input
@@ -87,7 +75,7 @@ const PublishedHiddenFilter = ({
                             checked={isSelected("piilotettu") || DEFAULT_DISPLAY_VALUE}
                             onChange={modifyIsPublic}
                         />
-                        <label htmlFor="piilotettu"> piilotettu</label>
+                        <label htmlFor="piilotettu">piilotettu</label>
                     </div>
                     <div className="radio-button-filter">
                         <input
@@ -98,7 +86,7 @@ const PublishedHiddenFilter = ({
                             checked={isSelected("julkaistuTaiPiilotettu") || DEFAULT_DISPLAY_VALUE}
                             onChange={modifyIsPublic}
                         />
-                        <label htmlFor="julkaistuTaiPiilotettu"> julkaistu tai piilotettu</label>
+                        <label htmlFor="julkaistuTaiPiilotettu">julkaistu tai piilotettu</label>
                     </div>
 
                     <div className="public-text-input">
@@ -109,6 +97,7 @@ const PublishedHiddenFilter = ({
                             id="publicSince"
                             onChange={modifyPublicSince}
                             value={publicSince}
+                            placeholder="dd.mm.yyyy"
                             data-testid="public-since-input"></input>
                     </div>
 
@@ -120,6 +109,7 @@ const PublishedHiddenFilter = ({
                             id="publicUntil"
                             onChange={modifyPublicUntil}
                             value={publicUntil}
+                            placeholder="dd.mm.yyyy"
                             data-testid="public-until-input"></input>
                     </div>
                 </div>

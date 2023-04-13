@@ -6,6 +6,7 @@ import { Geocache, GeocacheMapDetails } from "../../model/Geocache";
 import "./MapViewPage.scss";
 import { FiltersContext } from "../../context/FiltersContextProvider";
 import { useMap } from "react-leaflet";
+import { DEFAULT_IS_PUBLIC } from "../../model/Filters";
 
 const MapViewPage = () => {
 
@@ -23,10 +24,12 @@ const MapViewPage = () => {
         const bounds = map.getBounds();
         const centerPoint = map.getCenter();
         const kmDistance = bounds.getNorthEast().distanceTo(centerPoint) / 1000;
+        if(!filters.isPublic) filters.isPublic = DEFAULT_IS_PUBLIC;
         const caches = await searchGeoCacheMapDetails({
             ...filters,
             maxDistance: kmDistance,
-            centerPoint: centerPoint
+            centerPoint: centerPoint,
+            isPublic: filters.isPublic
         });
         setGeoCaches(caches);
     };
