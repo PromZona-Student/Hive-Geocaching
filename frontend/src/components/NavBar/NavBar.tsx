@@ -17,13 +17,11 @@ import { Accordion, Offcanvas } from "react-bootstrap";
 import { RxHamburgerMenu, RxHand } from "react-icons/rx";
 
 interface Props {
-    fixedTop?: boolean;
-    sticky?: boolean;
+    fixedTop?: boolean
 }
 
 const NavBar = ({
-    fixedTop = false,
-    sticky = false
+    fixedTop = false
 }: Props) => {
     const [isOpen, setisOpen] = useState(false);
     const userContext = useContext(UserContext);
@@ -76,7 +74,7 @@ const NavBar = ({
     };
     return (
         <>
-            <div className="gc-navbar">
+            <div className={`gc-navbar ${fixedTop && "gc-navbar--fixed"}`}>
                 <div className="gc-navbar-content">
                     <div className="gc-navbar-item">
                         <RxHamburgerMenu size="30px" color="white" onClick={toggleNavMenu}/>
@@ -94,7 +92,7 @@ const NavBar = ({
             </div>
             <Offcanvas show={showNavMenu} onHide={toggleNavMenu}>
                 <Offcanvas.Header closeButton>
-                    Valinnat
+                    Valikko
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                     <Accordion>
