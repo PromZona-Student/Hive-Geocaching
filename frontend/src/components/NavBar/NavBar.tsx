@@ -7,13 +7,14 @@ import { Link } from "react-router-dom";
 import "./Navbar.scss";
 import { AiOutlineUser } from "react-icons/ai";
 import { GrLogout } from "react-icons/gr";
-import {ReactComponent as GeocachingFiLogo} from "../../images/gcfi.svg";
+import { ReactComponent as GeocachingFiLogo } from "../../images/gcfi.svg";
 import CustomModal from "../CustomModal";
 import { useState } from "react";
 import UserContext, { UserContextType } from "../../context/UserContext";
 import { useContext } from "react";
 import premiumOn from "../../images/premium_on.png";
 import { Accordion, Offcanvas } from "react-bootstrap";
+import { RxHamburgerMenu, RxHand } from "react-icons/rx";
 
 interface Props {
     fixedTop?: boolean;
@@ -26,6 +27,8 @@ const NavBar = ({
 }: Props) => {
     const [isOpen, setisOpen] = useState(false);
     const userContext = useContext(UserContext);
+    const [showUserDropdown, setShowUserDropdown] = useState(false);
+    const [showNavMenu, setShowNavMenu] = useState(false); 
 
     const toggle = () => {
         setisOpen(!isOpen);
@@ -43,68 +46,67 @@ const NavBar = ({
         }
     };
 
+    const toggleNavMenu = () => {
+        setShowNavMenu(!showNavMenu);
+    };
+
     const getDropDownContent = (userContext: UserContextType) => {
         if (userContext.user == null) {
             return (
-                <div>
-                    <NavDropdown.Item
-                        href="#"
-                        onClick={toggle}
-                    >
+                <div className="dropdown-content">
+                    <div className="dropdown-item" onClick={toggle}>
                         <GrLogout size={"25px"} /> Kirjaudu/Rekisteröidy
-                    </NavDropdown.Item>
+                    </div>
                 </div>
             );
         } else {
             return (
-                <div>
-                    <NavDropdown.Item href="#">
+                <div className="dropdown-content">
+                    <div className="dropdown-item">
                         {userContext.user.username}  {getPremiumContent(userContext.user.isPremium)}
-                    </NavDropdown.Item>
-                    <NavDropdown.Item href="#">Saldo: 0.00 €</NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item
-                        href="#"
-                        onClick={logout}
-                    >
+                    </div>
+                    <div className="dropdown-item">Saldo: 0.00 €</div>
+                    <hr />
+                    <div className="dropdown-item" onClick={logout}>
                         <GrLogout size={"25px"} /> Kirjaudu ulos
-                    </NavDropdown.Item>
+                    </div>
                 </div>
             );
         }
     };
     return (
         <>
-            <Navbar fixed={fixedTop ? "top" : undefined} sticky={sticky ? "top" : undefined} className="color-nav" variant="dark" expand="false">
-                <Container fluid>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Brand as={Link} to="/"><GeocachingFiLogo className="logo-navbar"/></Navbar.Brand>
-                    <NavDropdown
-                        className="color-link"
-                        align={"end"}
-                        title={
-                            <Button data-testid="drop-button" className="color-link"><AiOutlineUser size={"25px"} /></Button>
-                        }
-                    >
-                        {getDropDownContent(userContext)}
-                    </NavDropdown>
-                    <Navbar.Offcanvas>
-                        <Offcanvas.Header closeButton>
-                            Valinnat
-                        </Offcanvas.Header>
-                        <Offcanvas.Body>
-                            <Accordion>
-                                <Accordion.Header>
-                                    Kätköt
-                                </Accordion.Header>
-                                <Accordion.Body>
-                                    <Nav.Link as={Link} to="/map">Kartta</Nav.Link>
-                                </Accordion.Body>
-                            </Accordion>
-                        </Offcanvas.Body>
-                    </Navbar.Offcanvas>
-                </Container>
-            </Navbar>
+            <div className="gc-navbar">
+                <div className="gc-navbar-content">
+                    <div className="gc-navbar-item">
+                        <RxHamburgerMenu size="30px" color="white" onClick={toggleNavMenu}/>
+                    </div>
+                    <div className="gc-navbar-item">
+                        <Link to="/"><GeocachingFiLogo className="logo-navbar" /></Link>
+                    </div>
+                    <div className="gc-navbar-item">
+                        <AiOutlineUser color="white" size="30px" onClick={() => setShowUserDropdown(!showUserDropdown)} />
+                        <div className="gc-navbar-user-menu" hidden={!showUserDropdown}>
+                            {getDropDownContent(userContext)}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <Offcanvas show={showNavMenu} onHide={toggleNavMenu}>
+                <Offcanvas.Header closeButton>
+                    Valinnat
+                </Offcanvas.Header>
+                <Offcanvas.Body>
+                    <Accordion>
+                        <Accordion.Header>
+                            Kätköt
+                        </Accordion.Header>
+                        <Accordion.Body>
+                            <Nav.Link as={Link} to="/map">Kartta</Nav.Link>
+                        </Accordion.Body>
+                    </Accordion>
+                </Offcanvas.Body>
+            </Offcanvas>
             <CustomModal isOpen={isOpen} toggle={toggle} />
         </>
     );

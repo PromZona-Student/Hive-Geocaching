@@ -7,7 +7,7 @@ import NavBar from "../NavBar";
 const MapViewPageWrapper = () => {
     return (
         <>
-            <NavBar fixedTop />
+            <NavBar/>
             <FiltersContextProvider>
                 <MapContext>
                     <MapViewPage />

@@ -20,12 +20,16 @@ const HomePage = () => {
         <PageLayout>
             <div className="home-page-content">
                 <div className="feed-section">
-                    <h3>Uusimmat geokätköt</h3>
+                    <div className="feed-header">
+                        <h3>Uusimmat geokätköt</h3>
+                    </div>
                     <GeocacheList geocaches={geocaches} />
                     <Button variant="light">Näytä lisää</Button>
                 </div>
                 <div className="feed-section">
-                    <h3>Tulevat miitit</h3>
+                    <div className="feed-header">
+                        <h3>Tulevat miitit</h3>
+                    </div>
                     <p>Miitti-dataa</p>
                     <Button variant="light">Näytä lisää</Button>
                 </div>
