@@ -129,14 +129,14 @@ test("difficulty values are changed correctly", async () => {
 test("terrain values are changed correctly", async () => {
     const terrainAccordion = screen.getByText("Maasto", { selector: "button" });
     fireEvent.click(terrainAccordion);
-    const puolitoista = screen.getByLabelText("1,5") as HTMLInputElement;
-    fireEvent.click(puolitoista);
+    const kaksi = screen.getByLabelText("2") as HTMLInputElement;
+    fireEvent.click(kaksi);
     clickConfirm();
     expect(updateFilters).toHaveBeenCalledWith({
         ...initFilters,
         terrain: {
             ...initFilters.size,
-            1.5: true
+            2: true
         }
     });
     clickReset();
