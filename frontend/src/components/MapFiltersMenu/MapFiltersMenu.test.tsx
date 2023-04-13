@@ -120,3 +120,20 @@ test("cache description filter search box text is saved correctly", async () => 
     fireEvent.change(searchInput, { target: { value: "test" }});
     expect(searchInput.value).toBe("test");
 });
+
+test("difficulty values are changed correctly", async () => {
+    const cacheTypeAccordion = screen.getByText("Vaikeus", { selector: "button" });
+    fireEvent.click(cacheTypeAccordion);
+    const kolme = screen.getByLabelText("3") as HTMLInputElement;
+    fireEvent.click(kolme);
+    clickConfirm();
+    expect(updateFilters).toHaveBeenCalledWith({
+        ...initFilters,
+        difficulty: {
+            ...initFilters.size,
+            3: true
+        }
+    });
+    clickReset();
+    expect(updateFilters).toHaveBeenCalledWith({...initFilters});
+});

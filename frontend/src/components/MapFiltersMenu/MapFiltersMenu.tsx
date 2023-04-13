@@ -1,10 +1,11 @@
 import { Accordion, Offcanvas } from "react-bootstrap";
 import "./MapFiltersMenu.scss";
 import { useContext, useState } from "react";
-import { CacheTypes, CacheSize, Filters } from "../../model/Filters";
+import { CacheTypes, CacheSize, Difficulty, Filters } from "../../model/Filters";
 import { FiltersContext } from "../../context/FiltersContextProvider";
 import CacheTypeFilter from "../MapFilters/CacheTypeFilter";
 import CacheSizeFilter from "../MapFilters/CacheSizeFilter";
+import DifficultyFilter from "../MapFilters/DifficultyFilter";
 import LimitFilter from "../MapFilters/LimitFilter";
 import CustomRuleFilter from "../MapFilters/CustomRuleFilter";
 import ButtonPrimary from "../Buttons/ButtonPrimary";
@@ -69,6 +70,13 @@ const MapFiltersMenu = ({
         });
     };
 
+    const modifyDifficulty = (difficulty: Difficulty) => {
+        setMapFilters({
+            ...mapFilters,
+            difficulty
+        });
+    };
+    
     const confirmFilters = () => {
         updateFilters({ ...mapFilters });
         onConfirmFilters();
@@ -92,6 +100,7 @@ const MapFiltersMenu = ({
                     <CacheSizeFilter onChange={modifyCacheSize} size={mapFilters.size} eventKey="3"/>
                     <NameContainsFilter onChange={modifyNameContains} nameContains={mapFilters.nameContains} eventKey="4"/>
                     <CacheDescriptionFilter onChange={modifyDescriptionContains} description={mapFilters.description} eventKey="5"/> 
+                    <DifficultyFilter onChange={modifyDifficulty} difficulty={mapFilters.difficulty} eventKey="6"/> 
                 </Accordion>
             </Offcanvas.Body>
             <div className="mapfilters-buttons-section">
