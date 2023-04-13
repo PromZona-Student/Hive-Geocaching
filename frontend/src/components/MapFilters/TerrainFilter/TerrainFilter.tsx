@@ -57,8 +57,9 @@ const TerrainFilter = ({
                         name="2"
                         onChange={modifyTerrain}
                         checked={terrain?.[2] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="terrain-2"
                     />
-                    <label htmlFor="kaksi">2</label>
+                    <label htmlFor="2">2</label>
                 </div>
                 <div className="check-box-filter">
                     <input

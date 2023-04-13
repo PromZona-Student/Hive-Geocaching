@@ -118,7 +118,7 @@ test("difficulty values are changed correctly", async () => {
     expect(updateFilters).toHaveBeenCalledWith({
         ...initFilters,
         difficulty: {
-            ...initFilters.size,
+            ...initFilters.difficulty,
             3: true
         }
     });
@@ -129,13 +129,13 @@ test("difficulty values are changed correctly", async () => {
 test("terrain values are changed correctly", async () => {
     const terrainAccordion = screen.getByText("Maasto", { selector: "button" });
     fireEvent.click(terrainAccordion);
-    const kaksi = screen.getByLabelText("2") as HTMLInputElement;
+    const kaksi = screen.getByTestId("terrain-2") as HTMLInputElement;
     fireEvent.click(kaksi);
     clickConfirm();
     expect(updateFilters).toHaveBeenCalledWith({
         ...initFilters,
         terrain: {
-            ...initFilters.size,
+            ...initFilters.terrain,
             2: true
         }
     });
