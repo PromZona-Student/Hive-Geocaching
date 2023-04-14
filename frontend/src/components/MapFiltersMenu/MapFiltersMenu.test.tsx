@@ -112,8 +112,8 @@ test("cache size values are changed correctly", async () => {
 test("difficulty values are changed correctly", async () => {
     const difficultyAccordion = screen.getByText("Vaikeus", { selector: "button" });
     fireEvent.click(difficultyAccordion);
-    const kolme = screen.getByLabelText("3") as HTMLInputElement;
-    fireEvent.click(kolme);
+    const three = screen.getByTestId("difficulty-3") as HTMLInputElement;
+    fireEvent.click(three);
     clickConfirm();
     expect(updateFilters).toHaveBeenCalledWith({
         ...initFilters,
@@ -129,8 +129,8 @@ test("difficulty values are changed correctly", async () => {
 test("terrain values are changed correctly", async () => {
     const terrainAccordion = screen.getByText("Maasto", { selector: "button" });
     fireEvent.click(terrainAccordion);
-    const kaksi = screen.getByTestId("terrain-2") as HTMLInputElement;
-    fireEvent.click(kaksi);
+    const two = screen.getByTestId("terrain-2") as HTMLInputElement;
+    fireEvent.click(two);
     clickConfirm();
     expect(updateFilters).toHaveBeenCalledWith({
         ...initFilters,

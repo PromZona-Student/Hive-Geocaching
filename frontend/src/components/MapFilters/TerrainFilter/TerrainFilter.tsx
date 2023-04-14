@@ -37,6 +37,7 @@ const TerrainFilter = ({
                         name="1"
                         onChange={modifyTerrain}
                         checked={terrain?.[1] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="terrain-1"
                     />
                     <label htmlFor="1">1</label>
                 </div>
@@ -47,6 +48,7 @@ const TerrainFilter = ({
                         name="1.5"
                         onChange={modifyTerrain}
                         checked={terrain?.[1.5] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="terrain-1.5"
                     />
                     <label htmlFor="1.5">1,5</label>
                 </div>
@@ -68,6 +70,7 @@ const TerrainFilter = ({
                         name="2.5"
                         onChange={modifyTerrain}
                         checked={terrain?.[2.5] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="terrain-2.5"
                     />
                     <label htmlFor="2.5">2,5</label>
                 </div>
@@ -78,6 +81,7 @@ const TerrainFilter = ({
                         name="3"
                         onChange={modifyTerrain}
                         checked={terrain?.[3] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="terrain-3"
                     />
                     <label htmlFor="3">3</label>
                 </div>
@@ -88,6 +92,7 @@ const TerrainFilter = ({
                         name="3.5"
                         onChange={modifyTerrain}
                         checked={terrain?.[3.5] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="terrain-3.5"
                     />
                     <label htmlFor="3.5">3,5</label>
                 </div>
@@ -98,6 +103,7 @@ const TerrainFilter = ({
                         name="4"
                         onChange={modifyTerrain}
                         checked={terrain?.[4] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="terrain-4"
                     />
                     <label htmlFor="4">4</label>
                 </div>
@@ -108,6 +114,7 @@ const TerrainFilter = ({
                         name="4.5"
                         onChange={modifyTerrain}
                         checked={terrain?.[4.5] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="terrain-4.5"
                     />
                     <label htmlFor="4.5">4,5</label>
                 </div>
@@ -118,6 +125,7 @@ const TerrainFilter = ({
                         name="5"
                         onChange={modifyTerrain}
                         checked={terrain?.[5] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="terrain-5"
                     />
                     <label htmlFor="5">5</label>
                 </div>
