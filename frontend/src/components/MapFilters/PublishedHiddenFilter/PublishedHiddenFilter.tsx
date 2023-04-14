@@ -41,7 +41,7 @@ const PublishedHiddenFilter = ({
     const checkDate = (dateStr: string) => {
         if(dateStr === "") return true; // TODO: jos kenttä tyhjennetty, mitä tapahtuu
         
-        const regex = new RegExp("([0-3]{0,1})([0-9])(.{1})([0-9]?)([0-9])(.{0,1})([0-9]{0,4})", "gm");
+        const regex = new RegExp("([0-3]{0,1})([0-9])(.{1})([0-1]?)([0-9])(.{0,1})([0-9]{0,4})", "gm");
         const dateOk = regex.test(dateStr);
         console.log(regex);
         if(!dateOk) return false;
