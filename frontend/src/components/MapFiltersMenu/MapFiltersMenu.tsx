@@ -1,7 +1,7 @@
 import { Accordion, Offcanvas } from "react-bootstrap";
 import "./MapFiltersMenu.scss";
 import { useContext, useState } from "react";
-import { CacheTypes, CacheSize, Difficulty, Filters } from "../../model/Filters";
+import { CacheTypes, CacheSize, Difficulty, Terrain, Filters } from "../../model/Filters";
 import { FiltersContext } from "../../context/FiltersContextProvider";
 import CacheTypeFilter from "../MapFilters/CacheTypeFilter";
 import CacheSizeFilter from "../MapFilters/CacheSizeFilter";
@@ -12,6 +12,8 @@ import ButtonPrimary from "../Buttons/ButtonPrimary";
 import ButtonWarning from "../Buttons/ButtonWarning";
 import { initFilters } from "../../model/Filters";
 import NameContainsFilter from "../MapFilters/NameContainsFilter";
+import CacheDescriptionFilter from "../MapFilters/CacheDescriptionFilter";
+import TerrainFilter from "../MapFilters/TerrainFilter";
 import PublishedHiddenFilter from "../MapFilters/PublishedHiddenFilter";
 
 interface Props {
@@ -63,10 +65,24 @@ const MapFiltersMenu = ({
         });
     };
 
+    const modifyDescriptionContains = (description: string) => {
+        setMapFilters({
+            ...mapFilters,
+            description
+        });
+    };
+
     const modifyDifficulty = (difficulty: Difficulty) => {
         setMapFilters({
             ...mapFilters,
             difficulty
+        });
+    };
+
+    const modifyTerrain = (terrain: Terrain) => {
+        setMapFilters({
+            ...mapFilters,
+            terrain
         });
     };
 
@@ -77,7 +93,7 @@ const MapFiltersMenu = ({
             publicSince,
             publicUntil
         });
-    };
+    };  
     
     const confirmFilters = () => {
         updateFilters({ ...mapFilters });
@@ -101,7 +117,9 @@ const MapFiltersMenu = ({
                     <CacheTypeFilter onChange={modifyCacheTypes} cacheTypes={mapFilters.cacheTypes} eventKey="2"/>
                     <CacheSizeFilter onChange={modifyCacheSize} size={mapFilters.size} eventKey="3"/>
                     <NameContainsFilter onChange={modifyNameContains} nameContains={mapFilters.nameContains} eventKey="4"/>
-                    <DifficultyFilter onChange={modifyDifficulty} difficulty={mapFilters.difficulty} eventKey="6"/> 
+                    <CacheDescriptionFilter onChange={modifyDescriptionContains} description={mapFilters.description} eventKey="5"/> 
+                    <DifficultyFilter onChange={modifyDifficulty} difficulty={mapFilters.difficulty} eventKey="6"/>
+                    <TerrainFilter onChange={modifyTerrain} terrain={mapFilters.terrain} eventKey="7"/> 
                     <PublishedHiddenFilter onChange={modifyIsPublic} isPublic={mapFilters.isPublic} publicSince=
                         {mapFilters.publicSince} publicUntil={mapFilters.publicUntil} eventKey="9"/>
                 </Accordion>
