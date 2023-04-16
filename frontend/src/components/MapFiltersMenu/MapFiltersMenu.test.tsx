@@ -92,8 +92,8 @@ test("cache types values are changed correctly", async () => {
 });
 
 test("cache size values are changed correctly", async () => {
-    const cacheTypeAccordion = screen.getByText("Koko", { selector: "button" });
-    fireEvent.click(cacheTypeAccordion);
+    const cacheSizeAccordion = screen.getByText("Koko", { selector: "button" });
+    fireEvent.click(cacheSizeAccordion);
     const virtuaali = screen.getByLabelText("Virtuaali") as HTMLInputElement;
     expect(virtuaali.checked).toEqual(false);
     fireEvent.click(virtuaali);
@@ -124,14 +124,31 @@ test("cache description filter search box text is saved correctly", async () => 
 test("difficulty values are changed correctly", async () => {
     const difficultyAccordion = screen.getByText("Vaikeus", { selector: "button" });
     fireEvent.click(difficultyAccordion);
-    const kolme = screen.getByLabelText("3") as HTMLInputElement;
-    fireEvent.click(kolme);
+    const three = screen.getByTestId("difficulty-3") as HTMLInputElement;
+    fireEvent.click(three);
     clickConfirm();
     expect(updateFilters).toHaveBeenCalledWith({
         ...initFilters,
         difficulty: {
             ...initFilters.difficulty,
             3: true
+        }
+    });
+    clickReset();
+    expect(updateFilters).toHaveBeenCalledWith({...initFilters});
+});
+
+test("terrain values are changed correctly", async () => {
+    const terrainAccordion = screen.getByText("Maasto", { selector: "button" });
+    fireEvent.click(terrainAccordion);
+    const two = screen.getByTestId("terrain-2") as HTMLInputElement;
+    fireEvent.click(two);
+    clickConfirm();
+    expect(updateFilters).toHaveBeenCalledWith({
+        ...initFilters,
+        terrain: {
+            ...initFilters.terrain,
+            2: true
         }
     });
     clickReset();

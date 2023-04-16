@@ -10,7 +10,7 @@ beforeEach(() => {
     mockMatchMedia();
 });
 
-test("Filter menu is opened when pressing filter button and closed when pressing confirm", async () => {
+test("Filter menu is opened when pressing filter button and closed when pressing confirm", async () => {  
     const onSearchClicked = jest.fn();
     render(
         <BrowserRouter>
