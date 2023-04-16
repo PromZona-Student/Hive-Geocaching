@@ -37,6 +37,9 @@ test("Loads and navigates", async () => {
         expect(history.location.pathname).toEqual("/");
     });
     userEvent.click(screen.getByLabelText("Avaa valikko"));
+    await waitFor(() => {
+        expect(screen.getByText("Kätköt")).toBeVisible();
+    });
     userEvent.click(screen.getByText("Kätköt"));
     userEvent.click(screen.getByText("Kartta"));
     await waitFor(()=>{
