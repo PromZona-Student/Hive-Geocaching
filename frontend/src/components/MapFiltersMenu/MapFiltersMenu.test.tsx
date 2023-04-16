@@ -109,16 +109,28 @@ test("cache size values are changed correctly", async () => {
     expect(updateFilters).toHaveBeenCalledWith({...initFilters});
 });
 
+test("name contains filter search box text is saved correctly", async () => {
+    const searchInput = screen.getByTestId("name-contains-filter") as HTMLInputElement;
+    fireEvent.change(searchInput, { target: { value: "test" }});
+    expect(searchInput.value).toBe("test");
+});
+
+test("cache description filter search box text is saved correctly", async () => {
+    const searchInput = screen.getByTestId("description-contains-filter") as HTMLInputElement;
+    fireEvent.change(searchInput, { target: { value: "test" }});
+    expect(searchInput.value).toBe("test");
+});
+
 test("difficulty values are changed correctly", async () => {
-    const cacheTypeAccordion = screen.getByText("Vaikeus", { selector: "button" });
-    fireEvent.click(cacheTypeAccordion);
+    const difficultyAccordion = screen.getByText("Vaikeus", { selector: "button" });
+    fireEvent.click(difficultyAccordion);
     const kolme = screen.getByLabelText("3") as HTMLInputElement;
     fireEvent.click(kolme);
     clickConfirm();
     expect(updateFilters).toHaveBeenCalledWith({
         ...initFilters,
         difficulty: {
-            ...initFilters.size,
+            ...initFilters.difficulty,
             3: true
         }
     });

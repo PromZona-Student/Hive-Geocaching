@@ -12,6 +12,7 @@ import ButtonPrimary from "../Buttons/ButtonPrimary";
 import ButtonWarning from "../Buttons/ButtonWarning";
 import { initFilters } from "../../model/Filters";
 import NameContainsFilter from "../MapFilters/NameContainsFilter";
+import CacheDescriptionFilter from "../MapFilters/CacheDescriptionFilter";
 
 interface Props {
     show: boolean
@@ -62,6 +63,13 @@ const MapFiltersMenu = ({
         });
     };
 
+    const modifyDescriptionContains = (description: string) => {
+        setMapFilters({
+            ...mapFilters,
+            description
+        });
+    };
+
     const modifyDifficulty = (difficulty: Difficulty) => {
         setMapFilters({
             ...mapFilters,
@@ -89,8 +97,9 @@ const MapFiltersMenu = ({
                     <CustomRuleFilter onChange={modifyCustomRule} customRule={mapFilters.customRule} eventKey="0"/>
                     <LimitFilter onChange={modifyLimit} limit={mapFilters.limit} eventKey="1"/>
                     <CacheTypeFilter onChange={modifyCacheTypes} cacheTypes={mapFilters.cacheTypes} eventKey="2"/>
-                    <CacheSizeFilter onChange={modifyCacheSize} size={mapFilters.size} eventKey="3"/>       
+                    <CacheSizeFilter onChange={modifyCacheSize} size={mapFilters.size} eventKey="3"/>
                     <NameContainsFilter onChange={modifyNameContains} nameContains={mapFilters.nameContains} eventKey="4"/>
+                    <CacheDescriptionFilter onChange={modifyDescriptionContains} description={mapFilters.description} eventKey="5"/> 
                     <DifficultyFilter onChange={modifyDifficulty} difficulty={mapFilters.difficulty} eventKey="6"/> 
                 </Accordion>
             </Offcanvas.Body>
