@@ -1,0 +1,15 @@
+@import "../../../styles/common.scss";
+
+.description-contains-filter{
+    padding: 10px;  
+    background-color: #234E4D;
+
+}
+
+.description-contains-search{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    input{
+        width: 100%;
+    }
+}  
