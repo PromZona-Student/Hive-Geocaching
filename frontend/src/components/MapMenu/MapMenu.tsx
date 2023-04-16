@@ -1,11 +1,9 @@
 import "./MapMenu.scss";
-import { ReactComponent as FilterLogo } from "../../images/filter.svg";
 import MapTypeSelection from "../MapTypeSelection/MapTypeSelection";
 import { VscGlobe } from "react-icons/vsc";
 import { BiFilterAlt } from "react-icons/bi";
 import { useState } from "react";
 import MapFiltersMenu from "../MapFiltersMenu";
-import { Button } from "react-bootstrap";
 
 const iconSizePx = 25;
 

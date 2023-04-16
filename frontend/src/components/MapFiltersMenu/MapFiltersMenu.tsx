@@ -1,4 +1,4 @@
-import { Accordion, Offcanvas } from "react-bootstrap";
+import { Accordion } from "react-bootstrap";
 import "./MapFiltersMenu.scss";
 import { useContext, useState } from "react";
 import { CacheTypes, CacheSize, Filters } from "../../model/Filters";
@@ -11,6 +11,7 @@ import ButtonPrimary from "../Buttons/ButtonPrimary";
 import ButtonWarning from "../Buttons/ButtonWarning";
 import { initFilters } from "../../model/Filters";
 import NameContainsFilter from "../MapFilters/NameContainsFilter";
+import OffcanvasMenu from "../OffcanvasMenu";
 
 interface Props {
     show: boolean
@@ -72,24 +73,27 @@ const MapFiltersMenu = ({
     };
 
     return (
-        <Offcanvas show={show} onHide={onHide}>
-            <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Tarkenna hakua</Offcanvas.Title>
-            </Offcanvas.Header>
-            <Offcanvas.Body>
+
+        <OffcanvasMenu
+            open={show}
+            onClose={onHide}
+            header="Tarkenna hakua"
+            body={
                 <Accordion alwaysOpen>
-                    <CustomRuleFilter onChange={modifyCustomRule} customRule={mapFilters.customRule} eventKey="0"/>
-                    <LimitFilter onChange={modifyLimit} limit={mapFilters.limit} eventKey="1"/>
-                    <CacheTypeFilter onChange={modifyCacheTypes} cacheTypes={mapFilters.cacheTypes} eventKey="2"/>
-                    <CacheSizeFilter onChange={modifyCacheSize} size={mapFilters.size} eventKey="3"/>
-                    <NameContainsFilter onChange={modifyNameContains} nameContains={mapFilters.nameContains} eventKey="4"/> 
+                    <CustomRuleFilter onChange={modifyCustomRule} customRule={mapFilters.customRule} eventKey="0" />
+                    <LimitFilter onChange={modifyLimit} limit={mapFilters.limit} eventKey="1" />
+                    <CacheTypeFilter onChange={modifyCacheTypes} cacheTypes={mapFilters.cacheTypes} eventKey="2" />
+                    <CacheSizeFilter onChange={modifyCacheSize} size={mapFilters.size} eventKey="3" />
+                    <NameContainsFilter onChange={modifyNameContains} nameContains={mapFilters.nameContains} eventKey="4" />
                 </Accordion>
-            </Offcanvas.Body>
-            <div className="mapfilters-buttons-section">
-                <ButtonPrimary onClick={confirmFilters} data-test-id="confirmFiltersButton">Käytä</ButtonPrimary>
-                <ButtonWarning onClick={resetFilters}>Tyhjennä</ButtonWarning>
-            </div>
-        </Offcanvas>
+            }
+            footer={
+                <div className="mapfilters-buttons-section">
+                    <ButtonPrimary onClick={confirmFilters} data-test-id="confirmFiltersButton">Käytä</ButtonPrimary>
+                    <ButtonWarning onClick={resetFilters}>Tyhjennä</ButtonWarning>
+                </div>
+            }
+        />
     );
 };
 

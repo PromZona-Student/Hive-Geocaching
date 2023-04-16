@@ -1,4 +1,4 @@
-import {render, screen, waitFor} from "@testing-library/react";
+import {fireEvent, render, screen, waitFor} from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { createMemoryHistory } from "history";
 import {Router} from "react-router-dom";
@@ -36,15 +36,13 @@ test("Loads and navigates", async () => {
     await waitFor(()=>{
         expect(history.location.pathname).toEqual("/");
     });
-    userEvent.click(screen.getByText("Home"));
-    await waitFor(()=>{
-        expect(history.location.pathname).toEqual("/");
-    });
-    userEvent.click(screen.getByText("Map"));
+    userEvent.click(screen.getByLabelText("Avaa valikko"));
+    userEvent.click(screen.getByText("Kätköt"));
+    userEvent.click(screen.getByText("Kartta"));
     await waitFor(()=>{
         expect(history.location.pathname).toEqual("/map");
     });
-    userEvent.click(screen.getByLabelText("Geocache.fi"));
+    userEvent.click(screen.getByLabelText("Etusivulle"));
     await waitFor(()=>{
         expect(history.location.pathname).toEqual("/");
     });
@@ -52,7 +50,7 @@ test("Loads and navigates", async () => {
 
 test("Test Dropdown logged off", async () => {
     render(<NavBar />, {wrapper: BrowserRouter});
-    userEvent.click(screen.getByTestId("drop-button"));
+    userEvent.click(screen.getByLabelText("Käyttäjätiedot"));
     await waitFor(()=>{
         expect(screen.getByText("Kirjaudu/Rekisteröidy")).toBeVisible();
     });
@@ -83,7 +81,7 @@ describe("Test Dropdown logged in", () => {
     ].forEach(({scenario, user}) => {
         test(scenario, async () => {            
             customRender(<NavBar/>, user);
-            userEvent.click(screen.getByTestId("drop-button"));
+            userEvent.click(screen.getByLabelText("Käyttäjätiedot"));
             await waitFor(()=>{
                 expect(screen.getByText("Kirjaudu ulos")).toBeVisible();                
             });    

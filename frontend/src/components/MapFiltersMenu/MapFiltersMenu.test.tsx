@@ -4,7 +4,6 @@ import MapFiltersMenu from "./MapFiltersMenu";
 import { BrowserRouter } from "react-router-dom";
 import { MapContext } from "../../context/MapContext";
 import { FiltersContext } from "../../context/FiltersContextProvider";
-import { mockMatchMedia } from "../../tests/mockMatchMedia";
 import { initFilters } from "../../model/Filters";
 
 const onHide = jest.fn();
@@ -14,7 +13,6 @@ let filters = {...initFilters};
 const updateFilters = jest.fn();
 
 beforeEach(() => {
-    mockMatchMedia();
     render(
         <BrowserRouter>
             <FiltersContext.Provider value={{filters, updateFilters}}>

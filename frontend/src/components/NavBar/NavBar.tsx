@@ -15,6 +15,7 @@ import { useContext } from "react";
 import premiumOn from "../../images/premium_on.png";
 import { Accordion, Offcanvas } from "react-bootstrap";
 import { RxHamburgerMenu, RxHand } from "react-icons/rx";
+import OffcanvasMenu from "../OffcanvasMenu";
 
 interface Props {
     fixedTop?: boolean
@@ -26,7 +27,7 @@ const NavBar = ({
     const [isOpen, setisOpen] = useState(false);
     const userContext = useContext(UserContext);
     const [showUserDropdown, setShowUserDropdown] = useState(false);
-    const [showNavMenu, setShowNavMenu] = useState(false); 
+    const [navMenuOpen, setNavMenuOpen] = useState(false);
 
     const toggle = () => {
         setisOpen(!isOpen);
@@ -44,8 +45,12 @@ const NavBar = ({
         }
     };
 
-    const toggleNavMenu = () => {
-        setShowNavMenu(!showNavMenu);
+    const closeNavMenu = () => {
+        setNavMenuOpen(false);
+    };
+
+    const showNavMenu = () => {
+        setNavMenuOpen(true);
     };
 
     const getDropDownContent = (userContext: UserContextType) => {
@@ -76,25 +81,25 @@ const NavBar = ({
         <>
             <div className={`gc-navbar ${fixedTop && "gc-navbar--fixed"}`}>
                 <div className="gc-navbar-content">
-                    <div className="gc-navbar-item">
-                        <RxHamburgerMenu size="30px" color="white" onClick={toggleNavMenu}/>
+                    <div className="gc-navbar-item" aria-label="Avaa valikko" onClick={showNavMenu}>
+                        <RxHamburgerMenu size="30px" color="white"/>
                     </div>
                     <div className="gc-navbar-item">
-                        <Link to="/"><GeocachingFiLogo className="logo-navbar" /></Link>
+                        <Link to="/"><GeocachingFiLogo className="logo-navbar" aria-label="Etusivulle"/></Link>
                     </div>
                     <div className="gc-navbar-item">
-                        <AiOutlineUser color="white" size="30px" onClick={() => setShowUserDropdown(!showUserDropdown)} />
+                        <AiOutlineUser color="white" size="30px" onClick={() => setShowUserDropdown(!showUserDropdown)} aria-label="Käyttäjätiedot" role="button"/>
                         <div className="gc-navbar-user-menu" hidden={!showUserDropdown}>
                             {getDropDownContent(userContext)}
                         </div>
                     </div>
                 </div>
             </div>
-            <Offcanvas show={showNavMenu} onHide={toggleNavMenu}>
-                <Offcanvas.Header closeButton>
-                    Valikko
-                </Offcanvas.Header>
-                <Offcanvas.Body>
+            <OffcanvasMenu
+                open={navMenuOpen}
+                onClose={closeNavMenu}
+                header="Valikko"
+                body={
                     <Accordion>
                         <Accordion.Header>
                             Kätköt
@@ -103,8 +108,11 @@ const NavBar = ({
                             <Nav.Link as={Link} to="/map">Kartta</Nav.Link>
                         </Accordion.Body>
                     </Accordion>
-                </Offcanvas.Body>
-            </Offcanvas>
+                }
+                footer={
+                    <></>
+                }
+            />
             <CustomModal isOpen={isOpen} toggle={toggle} />
         </>
     );
