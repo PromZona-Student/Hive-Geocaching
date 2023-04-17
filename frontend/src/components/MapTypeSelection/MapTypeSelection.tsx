@@ -1,5 +1,5 @@
 import "./MapTypeSelection.scss";
-import { useState } from "react";
+import React, { useState } from "react";
 import { TiTick } from "react-icons/ti";
 
 interface Props {
@@ -28,7 +28,6 @@ const MapTypeSelection = ({
                         <DropdownItem tick={chosen == 4 ? true : false} text={"Taustakartta"} onClick={() => chooseMap(4)} />
                         <DropdownItem tick={chosen == 5 ? true : false} text={"MapAnt"} onClick={() => chooseMap(5)} />
                         <DropdownItem tick={chosen == 6 ? true : false} text={"Trailmap"} onClick={() => chooseMap(6)} />
-
                     </ul>
                 </div>) : (
                 <div></div>

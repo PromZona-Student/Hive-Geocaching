@@ -1,17 +1,34 @@
-import { Icon } from "leaflet";
-import { Marker, TileLayer } from "react-leaflet";
-import { Geocache, GeocacheMapDetails } from "../../model/Geocache";
+import { Icon, LatLng, LatLngBounds } from "leaflet";
+import { Marker, TileLayer, useMap, useMapEvent } from "react-leaflet";
+import { GeocacheMapDetails } from "../../model/Geocache";
 import { useState } from "react";
 import GeocacheModal from "../GeocacheModal";
 
 interface Props {
     geocaches: Array<GeocacheMapDetails>
+    onBoundsChanged: (bounds: LatLngBounds, centerPoint: LatLng) => void;
 }
 const Map = ({
     geocaches,
+    onBoundsChanged
 }: Props) => {
     const [isOpen, setisOpen] = useState(false);
     const [currentCacheId, setCurrentCacheId] = useState<string | null>(null);
+    const map = useMap();
+
+    const handleBoundsChange = () => {
+        const bounds = map.getBounds();
+        const centerPoint = map.getCenter();
+        onBoundsChanged(bounds, centerPoint);
+    };
+
+    useMapEvent("zoomend", () => {
+        handleBoundsChange();
+    });
+
+    useMapEvent("moveend", () => {
+        handleBoundsChange();
+    });
 
     const toggle = () => {
         setisOpen(!isOpen);

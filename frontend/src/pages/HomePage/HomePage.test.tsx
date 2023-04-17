@@ -1,12 +1,10 @@
-
 import HomePage from "./HomePage";
-
 //test("component loads", async () => {<HomePage />;});
-
 import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import * as GeocacheApi from "../../api/geocaches";
 import { BrowserRouter } from "react-router-dom";
+
 jest.mock("axios");
 
 test("component loads", async () => {

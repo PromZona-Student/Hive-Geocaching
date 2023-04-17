@@ -1,9 +1,11 @@
 import "./MapMenu.scss";
-import { ReactComponent as FilterLogo } from "../../images/filter.svg";
 import MapTypeSelection from "../MapTypeSelection/MapTypeSelection";
 import { VscGlobe } from "react-icons/vsc";
+import { BiFilterAlt } from "react-icons/bi";
 import { useState } from "react";
 import MapFiltersMenu from "../MapFiltersMenu";
+
+const iconSizePx = 25;
 
 interface Props{
     onSearchClicked: () => void
@@ -35,10 +37,9 @@ const MapMenu = ({ onSearchClicked }: Props) => {
     return (
         <div className="map-menu-container">
             <div className="map-menu-toolbar-left">
-                <button className="map-menu-toolbar-item map-menu-button" onClick={showFilterMenu} aria-label="Tarkenna hakua"><FilterLogo/></button>
-                <button className="map-menu-toolbar-item map-menu-button" onClick={mapTypeButtonOnClick}><VscGlobe/></button>
+                <button className="map-menu-toolbar-item map-menu-button" onClick={showFilterMenu} aria-label="Tarkenna hakua"><BiFilterAlt size={`${iconSizePx}px`}/></button>
+                <button className="map-menu-toolbar-item map-menu-button" onClick={mapTypeButtonOnClick}><VscGlobe size={`${iconSizePx}px`}/></button>
                 <MapTypeSelection open={isOpen} />
-                
             </div>
             <div className="map-menu-toolbar-bottom">
                 <button className="map-menu-toolbar-item map-menu-button" onClick={searchButtonOnClick}>Etsi alueelta</button>

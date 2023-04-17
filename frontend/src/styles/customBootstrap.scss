@@ -4,7 +4,8 @@ $theme-colors: (
     "primary": $color-dark-green,
     "secondary": $color-green,
     "success": $color-light-green,
-    "danger": $color-orange
+    "danger": $color-orange,
+    "light": $color-white
 );
 $offcanvas-bg-color: $color-dark-green;
 $offcanvas-color: $color-white;
@@ -19,16 +20,3 @@ $btn-close-color: $color-white;
 
 /* import bootstrap to set changes */
 @import "~bootstrap/scss/bootstrap";
-
-.dropdown-menu{
-    background-color: $color-dark-green;
-}
-
-.dropdown-item{
-    color: $color-white;
-}
-
-.dropdown-divider {
-    color: $color-white;
-    border-top: .25px solid;
-}

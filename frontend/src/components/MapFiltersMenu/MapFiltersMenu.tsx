@@ -1,4 +1,4 @@
-import { Accordion, Offcanvas } from "react-bootstrap";
+import { Accordion } from "react-bootstrap";
 import "./MapFiltersMenu.scss";
 import { useContext, useState } from "react";
 import { CacheTypes, CacheSize, Difficulty, Terrain, Filters } from "../../model/Filters";
@@ -12,6 +12,7 @@ import ButtonPrimary from "../Buttons/ButtonPrimary";
 import ButtonWarning from "../Buttons/ButtonWarning";
 import { initFilters } from "../../model/Filters";
 import NameContainsFilter from "../MapFilters/NameContainsFilter";
+import OffcanvasMenu from "../OffcanvasMenu";
 import CacheDescriptionFilter from "../MapFilters/CacheDescriptionFilter";
 import TerrainFilter from "../MapFilters/TerrainFilter";
 
@@ -96,11 +97,12 @@ const MapFiltersMenu = ({
     };
 
     return (
-        <Offcanvas show={show} onHide={onHide}>
-            <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Tarkenna hakua</Offcanvas.Title>
-            </Offcanvas.Header>
-            <Offcanvas.Body>
+
+        <OffcanvasMenu
+            open={show}
+            onClose={onHide}
+            header="Tarkenna hakua"
+            body={
                 <Accordion alwaysOpen>
                     <CustomRuleFilter onChange={modifyCustomRule} customRule={mapFilters.customRule} eventKey="0"/>
                     <LimitFilter onChange={modifyLimit} limit={mapFilters.limit} eventKey="1"/>
@@ -111,12 +113,14 @@ const MapFiltersMenu = ({
                     <DifficultyFilter onChange={modifyDifficulty} difficulty={mapFilters.difficulty} eventKey="6"/>
                     <TerrainFilter onChange={modifyTerrain} terrain={mapFilters.terrain} eventKey="7"/>
                 </Accordion>
-            </Offcanvas.Body>
-            <div className="mapfilters-buttons-section">
-                <ButtonPrimary onClick={confirmFilters} data-test-id="confirmFiltersButton">Käytä</ButtonPrimary>
-                <ButtonWarning onClick={resetFilters}>Tyhjennä</ButtonWarning>
-            </div>
-        </Offcanvas>
+            }
+            footer={
+                <div className="mapfilters-buttons-section">
+                    <ButtonPrimary onClick={confirmFilters} data-test-id="confirmFiltersButton">Käytä</ButtonPrimary>
+                    <ButtonWarning onClick={resetFilters}>Tyhjennä</ButtonWarning>
+                </div>
+            }
+        />
     );
 };
 
