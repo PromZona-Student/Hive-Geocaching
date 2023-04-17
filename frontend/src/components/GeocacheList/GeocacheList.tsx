@@ -18,7 +18,7 @@ const GeocacheList = ({geocaches}: Props) => {
                             <Link to={`/geocaches/${cache.referenceCode}`}>
                                 <div className="geocache-item">                                                                     
                                     <GeocacheTitle date={ new Date(cache.placedDate)}></GeocacheTitle>
-                                    <hr/>
+                                    <hr className="yellow-hr"/>
                                     <b>{cache.name}</b>
                                 </div>
                             </Link>

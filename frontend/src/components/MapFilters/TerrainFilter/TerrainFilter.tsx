@@ -1,43 +1,43 @@
-import "./DifficultyFilter.scss";
+import "./TerrainFilter.scss";
 import { ChangeEvent } from "react";
-import { Difficulty } from "../../../model/Filters";
+import { Terrain } from "../../../model/Filters";
 import MapFilterItem from "../../MapFilterItem";
 
 interface Props {
-    onChange: (difficulty: Difficulty) => void;
-    difficulty?: Difficulty;
+    onChange: (terrain: Terrain) => void;
+    terrain?: Terrain;
     eventKey: string;
 }
 
 const DEFAULT_DISPLAY_VALUE = false;
 
-const DifficultyFilter = ({
+const TerrainFilter = ({
     onChange,
-    difficulty,
+    terrain,
     eventKey
 }: Props) => {
 
-    const modifyDifficulty = (e: ChangeEvent<HTMLInputElement>) => {
+    const modifyTerrain = (e: ChangeEvent<HTMLInputElement>) => {
         const name = e.target.name;
         const value = e.target.checked;
         onChange({
-            ...difficulty,
+            ...terrain,
             [name]: value
         });
     };
 
     return (
 
-        <MapFilterItem header="Vaikeus" eventKey={eventKey}>
+        <MapFilterItem header="Maasto" eventKey={eventKey}>
             <div className="check-box-filters">
                 <div className="check-box-filter">
                     <input
                         id="1"
                         type="checkbox"
                         name="1"
-                        onChange={modifyDifficulty}
-                        checked={difficulty?.[1] || DEFAULT_DISPLAY_VALUE}
-                        data-testid="difficulty-1"
+                        onChange={modifyTerrain}
+                        checked={terrain?.[1] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="terrain-1"
                     />
                     <label htmlFor="1">1</label>
                 </div>
@@ -46,9 +46,9 @@ const DifficultyFilter = ({
                         id="1.5"
                         type="checkbox"
                         name="1.5"
-                        onChange={modifyDifficulty}
-                        checked={difficulty?.[1.5] || DEFAULT_DISPLAY_VALUE}
-                        data-testid="difficulty-1.5"
+                        onChange={modifyTerrain}
+                        checked={terrain?.[1.5] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="terrain-1.5"
                     />
                     <label htmlFor="1.5">1,5</label>
                 </div>
@@ -57,20 +57,20 @@ const DifficultyFilter = ({
                         id="2"
                         type="checkbox"
                         name="2"
-                        onChange={modifyDifficulty}
-                        checked={difficulty?.[2] || DEFAULT_DISPLAY_VALUE}
-                        data-testid="difficulty-2"
+                        onChange={modifyTerrain}
+                        checked={terrain?.[2] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="terrain-2"
                     />
-                    <label htmlFor="kaksi">2</label>
+                    <label htmlFor="2">2</label>
                 </div>
                 <div className="check-box-filter">
                     <input
                         id="2.5"
                         type="checkbox"
                         name="2.5"
-                        onChange={modifyDifficulty}
-                        checked={difficulty?.[2.5] || DEFAULT_DISPLAY_VALUE}
-                        data-testid="difficulty-2.5"
+                        onChange={modifyTerrain}
+                        checked={terrain?.[2.5] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="terrain-2.5"
                     />
                     <label htmlFor="2.5">2,5</label>
                 </div>
@@ -79,9 +79,9 @@ const DifficultyFilter = ({
                         id="3"
                         type="checkbox"
                         name="3"
-                        onChange={modifyDifficulty}
-                        checked={difficulty?.[3] || DEFAULT_DISPLAY_VALUE}
-                        data-testid="difficulty-3"
+                        onChange={modifyTerrain}
+                        checked={terrain?.[3] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="terrain-3"
                     />
                     <label htmlFor="3">3</label>
                 </div>
@@ -90,9 +90,9 @@ const DifficultyFilter = ({
                         id="3.5"
                         type="checkbox"
                         name="3.5"
-                        onChange={modifyDifficulty}
-                        checked={difficulty?.[3.5] || DEFAULT_DISPLAY_VALUE}
-                        data-testid="difficulty-3.5"
+                        onChange={modifyTerrain}
+                        checked={terrain?.[3.5] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="terrain-3.5"
                     />
                     <label htmlFor="3.5">3,5</label>
                 </div>
@@ -101,9 +101,9 @@ const DifficultyFilter = ({
                         id="4"
                         type="checkbox"
                         name="4"
-                        onChange={modifyDifficulty}
-                        checked={difficulty?.[4] || DEFAULT_DISPLAY_VALUE}
-                        data-testid="difficulty-4"
+                        onChange={modifyTerrain}
+                        checked={terrain?.[4] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="terrain-4"
                     />
                     <label htmlFor="4">4</label>
                 </div>
@@ -112,9 +112,9 @@ const DifficultyFilter = ({
                         id="4.5"
                         type="checkbox"
                         name="4.5"
-                        onChange={modifyDifficulty}
-                        checked={difficulty?.[4.5] || DEFAULT_DISPLAY_VALUE}
-                        data-testid="difficulty-4.5"
+                        onChange={modifyTerrain}
+                        checked={terrain?.[4.5] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="terrain-4.5"
                     />
                     <label htmlFor="4.5">4,5</label>
                 </div>
@@ -123,9 +123,9 @@ const DifficultyFilter = ({
                         id="5"
                         type="checkbox"
                         name="5"
-                        onChange={modifyDifficulty}
-                        checked={difficulty?.[5] || DEFAULT_DISPLAY_VALUE}
-                        data-testid="difficulty-5"
+                        onChange={modifyTerrain}
+                        checked={terrain?.[5] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="terrain-5"
                     />
                     <label htmlFor="5">5</label>
                 </div>
@@ -133,4 +133,4 @@ const DifficultyFilter = ({
         </MapFilterItem>
     );
 };
-export default DifficultyFilter;
+export default TerrainFilter;

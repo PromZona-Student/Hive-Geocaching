@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import "./Navbar.scss";
 import { AiOutlineUser } from "react-icons/ai";
-import { GrLogout } from "react-icons/gr";
+import { GrLogout, GrLogin } from "react-icons/gr";
 import { ReactComponent as GeocachingFiLogo } from "../../images/gcfi.svg";
 import CustomModal from "../CustomModal";
 import { useState } from "react";
@@ -56,15 +56,15 @@ const NavBar = ({
     const getDropDownContent = (userContext: UserContextType) => {
         if (userContext.user == null) {
             return (
-                <div className="dropdown-content">
+                <>
                     <div className="dropdown-item" onClick={toggle}>
-                        <GrLogout size={"25px"} /> Kirjaudu/Rekisteröidy
+                        <GrLogin size={"25px"} /> Kirjaudu/Rekisteröidy
                     </div>
-                </div>
+                </>
             );
         } else {
             return (
-                <div className="dropdown-content">
+                <>
                     <div className="dropdown-item">
                         {userContext.user.username}  {getPremiumContent(userContext.user.isPremium)}
                     </div>
@@ -73,7 +73,7 @@ const NavBar = ({
                     <div className="dropdown-item" onClick={logout}>
                         <GrLogout size={"25px"} /> Kirjaudu ulos
                     </div>
-                </div>
+                </>
             );
         }
     };
@@ -82,13 +82,13 @@ const NavBar = ({
             <div className={`gc-navbar ${fixedTop && "gc-navbar--fixed"}`}>
                 <div className="gc-navbar-content">
                     <div className="gc-navbar-item" aria-label="Avaa valikko" onClick={showNavMenu}>
-                        <RxHamburgerMenu size="30px" color="white"/>
+                        <RxHamburgerMenu size="30px" color="white" />
                     </div>
                     <div className="gc-navbar-item">
-                        <Link to="/"><GeocachingFiLogo className="logo-navbar" aria-label="Etusivulle"/></Link>
+                        <Link to="/"><GeocachingFiLogo className="logo-navbar" aria-label="Etusivulle" /></Link>
                     </div>
                     <div className="gc-navbar-item">
-                        <AiOutlineUser color="white" size="30px" onClick={() => setShowUserDropdown(!showUserDropdown)} aria-label="Käyttäjätiedot" role="button"/>
+                        <AiOutlineUser color="white" size="30px" onClick={() => setShowUserDropdown(!showUserDropdown)} aria-label="Käyttäjätiedot" role="button" />
                         <div className="gc-navbar-user-menu" hidden={!showUserDropdown}>
                             {getDropDownContent(userContext)}
                         </div>
