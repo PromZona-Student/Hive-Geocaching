@@ -5,86 +5,143 @@ import { DEFAULT_IS_PUBLIC } from "../../../model/Filters";
 
 
 interface Props {
-    onChange: (isPublic: string, publicSince: string | undefined, publicUntil: string | undefined) => void;
+    onChange: (isPublic: string, publicSince: string | undefined, publicUntil: string | undefined, pSince: string | undefined, pUntil: string | undefined) => void;
     isPublic?: string;
     publicSince?: string;
     publicUntil?: string;
+    pSince?: string;
+    pUntil?: string;
     eventKey: string;
 }
 
 const DEFAULT_DISPLAY_VALUE = false;
-
-let day = 0;
-let month = 0;
-let year = 0;
 
 const PublishedHiddenFilter = ({
     onChange,
     isPublic,
     publicSince,
     publicUntil,
+    pSince,
+    pUntil,    
     eventKey
 }: Props) => {
 
     if(!isPublic) isPublic = DEFAULT_IS_PUBLIC;
 
-    const [since, setSince] = useState(publicSince);
-    const [until, setUntil] = useState(publicUntil);
-    const [status, setStatus] = useState(isPublic);
+    const [since, setSince] = useState(pSince);
+    const [until, setUntil] = useState(pUntil);
+    const [publicHidden, setPublic] = useState(isPublic);
+
+    const [modifiedSince, setModifiedSince] = useState(publicSince);
+    const [modifiedUntil, setModifiedUntil] = useState(publicUntil);
 
     const modifyIsPublic = (e: ChangeEvent<HTMLInputElement>) => {
         const choice: string = e.target.value;
-        setStatus(choice);     
-        onChange(choice, since, until);
+        setPublic(choice);     
+        onChange(choice, modifiedSince, modifiedUntil, since, until);
     };
 
-    const checkDate = (dateStr: string) => {
-        if(dateStr === "") return true; // TODO: jos kenttä tyhjennetty, mitä tapahtuu
-        
-        const regex = new RegExp("([0-3]{0,1})([0-9])(.{1})([0-1]?)([0-9])(.{0,1})([0-9]{0,4})", "gm");
+    const checkDate = (dateStr: string, location: string) => {
+        if(dateStr === "") return { status: 204, date: "" };
+        const wrongDateFormat = "Päivämäärän muoto on väärä";
+        const wrongDateContent = "Päivämäärä on virheellinen";
+        const regex = new RegExp("^([0-3]{0,1})+([0-9]{1})+([.]{1})+([0-1]{0,1})+([0-9]{1})+([.]{0,1})+([0-9]{0,4})$");
+        const isDateOkay = dateStr.match(regex);
         const dateOk = regex.test(dateStr);
+        console.log(isDateOkay, dateOk);
         console.log(regex);
-        if(!dateOk) return false;
+        if(!dateOk) return { status: 400, message: wrongDateFormat };
+
+        let day = 0;
+        let month = 0;
+        let year = 0;
+
         const parts = dateStr.split(".");
-        if(parts.length < 2 || parts.length > 3) return false;
+        if(parts.length < 2 || parts.length > 3) return { status: 400, message: wrongDateFormat };
         day = parseInt(parts[0]);
         month = parseInt(parts[1]);
-        year = 0;
+        year = -1;
         console.log("day:", day, "month:", month, "year:", year);
         if(parts.length == 3) {
             year = parseInt(parts[2]);
-            if(!year) year = 0;
+            if(!year) {
+                if(parts[2] == "") {
+                    year = -1;
+                } else {
+                    year = 0;
+                }
+            }
             console.log("year:", year);
         }
-        if(day < 1 || month < 1) return false;
-        if(month > 12 || day > 31) return false;
-        if(day == 31 && (month == 4 || month == 6 || month == 9 || month == 11)) return false;
-        if(day > 29 && month == 2) return false;
-        if(year > 0 && year < 100) year += 2000;
-        if(year > 99 && year < 1900) return false;
-        if(year > 2100) return false;
+        if(day < 1 || month < 1) return { status: 400, message: wrongDateContent };
+        if(month > 12 || day > 31) return { status: 400, message: wrongDateContent };
+        if(day == 31 && (month == 4 || month == 6 || month == 9 || month == 11)) return { status: 400, message: wrongDateContent };
+        if(day > 29 && month == 2) return { status: 400, message: wrongDateContent };
+        if(year >= 0 && year < 100) year += 2000;
+        if(year > 99 && year < 2000) return { status: 400, message: wrongDateContent };
+        if(year >= 2100) return { status: 400, message: wrongDateContent };
         if(month == 2 && day == 29 && year != 0 && year%400 != 0) {
-            if(year%100 == 0) return false;
-            if(year%4 != 0) return false;
+            if(year%100 == 0) return { status: 400, message: wrongDateContent };
+            if(year%4 != 0) return { status: 400, message: wrongDateContent };
         }
+        console.log(year, month, day);
+        if(year == -1) {
+            if(location == "since") { 
+                year = 2000;
+            } else {
+                year = 2099;
+            }
+        }
+        console.log(year, month, day);
+        let modifiedDate = year.toString() + "-";
+        if(month.toString().length == 1) modifiedDate += "0";
+        modifiedDate += month.toString() + "-";
+        if(day.toString().length == 1) modifiedDate += "0";
+        modifiedDate += day.toString();
+        console.log(modifiedDate);
 
-        return true;
+        return { status: 200, date: modifiedDate };
+    };
+
+    const showDateError = (message: string, location: string) => {
+        console.log(message + " in " + location);
     };
 
     const modifyPublicSince = (e: ChangeEvent<HTMLInputElement>) => {
         const dateStr: string = e.target.value;
-        const dateOk = checkDate(dateStr);
         setSince(dateStr);
-        onChange(status, dateStr, until);
-        console.log(dateStr, dateOk);
+        const dateData = checkDate(dateStr, "since");
+        if(dateData.status == 204) return;
+        if(dateData.status == 200) { 
+            const modifiedDate = dateData.date;
+            if(modifiedDate) setModifiedSince(modifiedDate);
+            onChange(publicHidden, modifiedDate, modifiedUntil, dateStr, until);
+            console.log(dateStr, modifiedDate);
+        } else {
+            let msg = "";
+            const noMsg = "Päivämäärä ei kelpaa";
+            if(dateData.status == 400) {if(dateData.message){msg = dateData.message;} else {msg = noMsg;}} else {msg = noMsg;}
+            showDateError(msg, "since");
+        }
+        
     };
 
     const modifyPublicUntil = (e: ChangeEvent<HTMLInputElement>) => {
         const dateStr: string = e.target.value;
-        const dateOk = checkDate(dateStr);
         setUntil(dateStr);
-        onChange(status, since, dateStr);
-        console.log(dateStr, dateOk);
+        const dateData = checkDate(dateStr, "until");
+        if(dateData.status == 204) return;
+        if(dateData.status == 200) { 
+            const modifiedDate = dateData.date;
+            if(modifiedDate) setModifiedUntil(modifiedDate);
+            onChange(publicHidden,  modifiedSince, modifiedDate, since, dateStr);
+            console.log(dateStr, modifiedDate);
+        } else {
+            let msg = "";
+            const noMsg = "Päivämäärä ei kelpaa";
+            if(dateData.status == 400) {if(dateData.message){msg = dateData.message;} else {msg = noMsg;}} else {msg = noMsg;}
+            showDateError(msg, "until");
+        }
     };
 
     const isSelected = (value: string): boolean => isPublic === value;
@@ -136,7 +193,7 @@ const PublishedHiddenFilter = ({
                             type="text"
                             id="publicSince"
                             onChange={modifyPublicSince}
-                            value={publicSince}
+                            value={since || ""}
                             placeholder="dd.mm.yyyy"
                             data-testid="public-since-input"></input>
                     </div>
@@ -148,7 +205,7 @@ const PublishedHiddenFilter = ({
                             type="text"
                             id="publicUntil"
                             onChange={modifyPublicUntil}
-                            value={publicUntil}
+                            value={until || ""}
                             placeholder="dd.mm.yyyy"
                             data-testid="public-until-input"></input>
                     </div>

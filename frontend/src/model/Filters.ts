@@ -70,6 +70,8 @@ export interface Filters{
     isPublic?: string
     publicSince?: string
     publicUntil?: string
+    pSince?: string
+    pUntil?: string
     attributesSelectType?: string
     attributes?: Array<string>
     centerPoint?: LatLng
