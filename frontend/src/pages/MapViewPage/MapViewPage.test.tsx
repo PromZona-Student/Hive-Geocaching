@@ -4,11 +4,8 @@ import MapViewPage from "./MapViewPage";
 import { BrowserRouter } from "react-router-dom";
 import { MapContext } from "../../context/MapContext";
 import { FiltersContextProvider } from "../../context/FiltersContextProvider";
-import { mockMatchMedia } from "../../tests/mockMatchMedia";
 
 test("Component loads and shows map menu", async () => {
-    mockMatchMedia();
-
     render(
         <BrowserRouter>
             <FiltersContextProvider>

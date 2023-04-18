@@ -6,7 +6,7 @@ import { MapContext } from "../../context/MapContext";
 test("component loads", async () => {
     render(
         <MapContext>
-            <Map geocaches={[]}/>
+            <Map geocaches={[]} onBoundsChanged={() => {return;}}/>
         </MapContext>
     );
     expect(screen.getByText("OpenStreetMap")).toBeVisible();

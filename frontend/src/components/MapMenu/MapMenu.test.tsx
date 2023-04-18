@@ -3,14 +3,9 @@ import "@testing-library/jest-dom";
 import { BrowserRouter } from "react-router-dom";
 import { MapContext } from "../../context/MapContext";
 import { FiltersContextProvider } from "../../context/FiltersContextProvider";
-import { mockMatchMedia } from "../../tests/mockMatchMedia";
 import MapMenu from "./MapMenu";
 
-beforeEach(() => {
-    mockMatchMedia();
-});
-
-test("Filter menu is opened when pressing filter button and closed when pressing confirm", async () => {  
+test("Filter menu is opened when pressing filter button and closed when pressing confirm", async () => {
     const onSearchClicked = jest.fn();
     render(
         <BrowserRouter>

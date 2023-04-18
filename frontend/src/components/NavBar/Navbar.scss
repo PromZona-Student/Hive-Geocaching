@@ -1,9 +1,5 @@
 @import "../../styles/common.scss";
 
-.color-nav{
-    background-color: #163E3D;
-}
-
 .color-link{
     color: white;
     background-color: transparent !important;
@@ -11,5 +7,60 @@
 }
 
 .logo-navbar{
+    transform: scale(1.4);
+    @media screen and (max-width: 400px){
+        transform: scale(1.2);
+    }
+}
+
+.gc-navbar{
+    position: sticky;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: $navbar-height;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #163E3D;
+    z-index: 1000;
+
+    &--fixed{
+        position: absolute;
+    }
+}
+.gc-navbar-content{
+    height: $navbar-height;
+    align-items: center;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.gc-navbar-item{
+    position: relative;
+    cursor: pointer;
+}
+
+.gc-navbar-user-menu{
+    position: absolute;
+    right: 0%;
+    top: 120%;
+    color: white;
+    background-color: $color-dark-green;
+    padding: 10px;
+    width: 220px;
+    hr{
+        color: $color-white;
+    }
+}
+
+.dropdown-item{
+    display: inline-block;
+    margin: 5px;
     font-family: 'Open Sans', sans-serif;
+
+    svg path {
+        stroke: white;
+    }
 }
