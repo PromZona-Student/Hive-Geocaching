@@ -35,6 +35,9 @@ const PublishedHiddenFilter = ({
     const [modifiedSince, setModifiedSince] = useState(publicSince);
     const [modifiedUntil, setModifiedUntil] = useState(publicUntil);
 
+    const [sinceAlert, setSinceAlert] = useState("");
+    const [untilAlert, setUntilAlert] = useState("");
+
     const modifyIsPublic = (e: ChangeEvent<HTMLInputElement>) => {
         const choice: string = e.target.value;
         setPublic(choice);     
@@ -46,10 +49,10 @@ const PublishedHiddenFilter = ({
         const wrongDateFormat = "Päivämäärän muoto on väärä";
         const wrongDateContent = "Päivämäärä on virheellinen";
         const regex = new RegExp("^([0-3]{0,1})+([0-9]{1})+([.]{1})+([0-1]{0,1})+([0-9]{1})+([.]{0,1})+([0-9]{0,4})$");
-        const isDateOkay = dateStr.match(regex);
         const dateOk = regex.test(dateStr);
-        console.log(isDateOkay, dateOk);
-        console.log(regex);
+        //const isDateOkay = dateStr.match(regex);
+        //console.log(isDateOkay, dateOk);
+        //console.log(regex);
         if(!dateOk) return { status: 400, message: wrongDateFormat };
 
         let day = 0;
@@ -61,7 +64,7 @@ const PublishedHiddenFilter = ({
         day = parseInt(parts[0]);
         month = parseInt(parts[1]);
         year = -1;
-        console.log("day:", day, "month:", month, "year:", year);
+        //console.log("day:", day, "month:", month, "year:", year);
         if(parts.length == 3) {
             year = parseInt(parts[2]);
             if(!year) {
@@ -71,7 +74,7 @@ const PublishedHiddenFilter = ({
                     year = 0;
                 }
             }
-            console.log("year:", year);
+            //console.log("year:", year);
         }
         if(day < 1 || month < 1) return { status: 400, message: wrongDateContent };
         if(month > 12 || day > 31) return { status: 400, message: wrongDateContent };
@@ -81,10 +84,14 @@ const PublishedHiddenFilter = ({
         if(year > 99 && year < 2000) return { status: 400, message: wrongDateContent };
         if(year >= 2100) return { status: 400, message: wrongDateContent };
         if(month == 2 && day == 29 && year != 0 && year%400 != 0) {
-            if(year%100 == 0) return { status: 400, message: wrongDateContent };
-            if(year%4 != 0) return { status: 400, message: wrongDateContent };
+            if(year != -1) {
+                if(year%100 == 0) day = 28; // All non leap years February has 28 days
+                if(year%4 != 0) day = 28; // All non leap years February has 28 days
+            } else {
+                if(location == "until") day = 28; // February 2099 has 28 days
+            } 
         }
-        console.log(year, month, day);
+        //console.log(year, month, day);
         if(year == -1) {
             if(location == "since") { 
                 year = 2000;
@@ -92,36 +99,33 @@ const PublishedHiddenFilter = ({
                 year = 2099;
             }
         }
-        console.log(year, month, day);
+        //console.log(year, month, day);
         let modifiedDate = year.toString() + "-";
         if(month.toString().length == 1) modifiedDate += "0";
         modifiedDate += month.toString() + "-";
         if(day.toString().length == 1) modifiedDate += "0";
         modifiedDate += day.toString();
-        console.log(modifiedDate);
+        //console.log(modifiedDate);
 
         return { status: 200, date: modifiedDate };
-    };
-
-    const showDateError = (message: string, location: string) => {
-        console.log(message + " in " + location);
     };
 
     const modifyPublicSince = (e: ChangeEvent<HTMLInputElement>) => {
         const dateStr: string = e.target.value;
         setSince(dateStr);
+        setSinceAlert("");
         const dateData = checkDate(dateStr, "since");
         if(dateData.status == 204) return;
         if(dateData.status == 200) { 
             const modifiedDate = dateData.date;
             if(modifiedDate) setModifiedSince(modifiedDate);
             onChange(publicHidden, modifiedDate, modifiedUntil, dateStr, until);
-            console.log(dateStr, modifiedDate);
+            //console.log(dateStr, modifiedDate);
         } else {
             let msg = "";
             const noMsg = "Päivämäärä ei kelpaa";
             if(dateData.status == 400) {if(dateData.message){msg = dateData.message;} else {msg = noMsg;}} else {msg = noMsg;}
-            showDateError(msg, "since");
+            setSinceAlert(msg);
         }
         
     };
@@ -129,18 +133,19 @@ const PublishedHiddenFilter = ({
     const modifyPublicUntil = (e: ChangeEvent<HTMLInputElement>) => {
         const dateStr: string = e.target.value;
         setUntil(dateStr);
+        setUntilAlert("");
         const dateData = checkDate(dateStr, "until");
         if(dateData.status == 204) return;
         if(dateData.status == 200) { 
             const modifiedDate = dateData.date;
             if(modifiedDate) setModifiedUntil(modifiedDate);
             onChange(publicHidden,  modifiedSince, modifiedDate, since, dateStr);
-            console.log(dateStr, modifiedDate);
+            //console.log(dateStr, modifiedDate);
         } else {
             let msg = "";
             const noMsg = "Päivämäärä ei kelpaa";
             if(dateData.status == 400) {if(dateData.message){msg = dateData.message;} else {msg = noMsg;}} else {msg = noMsg;}
-            showDateError(msg, "until");
+            setUntilAlert(msg);
         }
     };
 
@@ -195,7 +200,9 @@ const PublishedHiddenFilter = ({
                             onChange={modifyPublicSince}
                             value={since || ""}
                             placeholder="dd.mm.yyyy"
-                            data-testid="public-since-input"></input>
+                            data-testid="public-since-input" 
+                        />
+                        <label id="since">{sinceAlert || ""}</label>
                     </div>
 
                     <div className="public-text-input">
@@ -207,7 +214,9 @@ const PublishedHiddenFilter = ({
                             onChange={modifyPublicUntil}
                             value={until || ""}
                             placeholder="dd.mm.yyyy"
-                            data-testid="public-until-input"></input>
+                            data-testid="public-until-input" 
+                        />
+                        <label id="until">{untilAlert || ""}</label>
                     </div>
                 </div>
             </MapFilterItem >
