@@ -13,6 +13,7 @@ interface Props {
 }
 
 const DEFAULT_DISPLAY_VALUE = false;
+const DEFAULT_DISPLAY_TEXT = "";
 const WRONG_DATE_CONTENT = "Päivämäärä ei kelpaa";
 
 const PublishedHiddenFilter = ({
@@ -43,7 +44,7 @@ const PublishedHiddenFilter = ({
     };
 
     const checkDay = (dayStr: string, monthStr: string) => {
-        const regex = new RegExp("^([0-9]*$)");
+        const regex = new RegExp("^([0-9]{0,2}$)");
         if(!regex.test(dayStr)) return false;
         const day = Number(dayStr);
         const month = Number(monthStr);
@@ -58,7 +59,7 @@ const PublishedHiddenFilter = ({
     };
 
     const checkMonth = (monthStr: string, dayStr: string) => {  
-        const regex = new RegExp("^([0-9]*$)");
+        const regex = new RegExp("^([0-9]{0,2}$)");
         if(!regex.test(monthStr)) return false;
         const month = Number(monthStr);
         const day = Number(dayStr);
@@ -73,7 +74,7 @@ const PublishedHiddenFilter = ({
     };
 
     const checkYear = (yearStr: string, monthStr: string, dayStr: string) => {
-        const regex = new RegExp("^([0-9]*$)");
+        const regex = new RegExp("^([0-9]{0,4}$)");
         if(!regex.test(yearStr)) return false;
         let year = Number(yearStr);
         console.log(yearStr, year);
@@ -294,7 +295,7 @@ const PublishedHiddenFilter = ({
                             type="text"
                             id="sinceDay"
                             onChange={modifySinceDay}
-                            value={sinceDay || ""}
+                            value={sinceDay || DEFAULT_DISPLAY_TEXT}
                             placeholder="dd"
                             data-testid="since-input-day" 
                         />
@@ -303,7 +304,7 @@ const PublishedHiddenFilter = ({
                             type="text"
                             id="sinceMonth"
                             onChange={modifySinceMonth}
-                            value={sinceMonth || ""}
+                            value={sinceMonth || DEFAULT_DISPLAY_TEXT}
                             placeholder="mm"
                             data-testid="since-input-month" 
                         />
@@ -312,11 +313,11 @@ const PublishedHiddenFilter = ({
                             type="text"
                             id="sinceYear"
                             onChange={modifySinceYear}
-                            value={sinceYear || ""}
+                            value={sinceYear || DEFAULT_DISPLAY_TEXT}
                             placeholder="yy"
                             data-testid="since-input-year" 
                         />
-                        <label id="since">{sinceAlert || ""}</label>
+                        <label id="since">{sinceAlert || DEFAULT_DISPLAY_TEXT}</label>
                     </div>
 
                     <div className="public-text-input">
@@ -326,7 +327,7 @@ const PublishedHiddenFilter = ({
                             type="text"
                             id="untilDay"
                             onChange={modifyUntilDay}
-                            value={untilDay || ""}
+                            value={untilDay || DEFAULT_DISPLAY_TEXT}
                             placeholder="dd"
                             data-testid="until-input-day" 
                         />
@@ -335,7 +336,7 @@ const PublishedHiddenFilter = ({
                             type="text"
                             id="untilMonth"
                             onChange={modifyUntilMonth}
-                            value={untilMonth || ""}
+                            value={untilMonth || DEFAULT_DISPLAY_TEXT}
                             placeholder="mm"
                             data-testid="until-input-month" 
                         />
@@ -344,11 +345,11 @@ const PublishedHiddenFilter = ({
                             type="text"
                             id="untilYear"
                             onChange={modifyUntilYear}
-                            value={untilYear || ""}
+                            value={untilYear || DEFAULT_DISPLAY_TEXT}
                             placeholder="yy"
                             data-testid="until-input-year" 
                         />
-                        <label id="until">{untilAlert || ""}</label>
+                        <label id="until">{untilAlert || DEFAULT_DISPLAY_TEXT}</label>
                     </div>
                 </div>
             </MapFilterItem >
