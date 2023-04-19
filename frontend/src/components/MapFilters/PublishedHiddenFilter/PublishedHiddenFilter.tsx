@@ -327,7 +327,7 @@ const PublishedHiddenFilter = ({
                             id="untilDay"
                             onChange={modifyUntilDay}
                             value={untilDay || ""}
-                            placeholder="päivä"
+                            placeholder="dd"
                             data-testid="until-input-day" 
                         />
                         <input
@@ -336,7 +336,7 @@ const PublishedHiddenFilter = ({
                             id="untilMonth"
                             onChange={modifyUntilMonth}
                             value={untilMonth || ""}
-                            placeholder="kuu"
+                            placeholder="mm"
                             data-testid="until-input-month" 
                         />
                         <input
@@ -345,7 +345,7 @@ const PublishedHiddenFilter = ({
                             id="untilYear"
                             onChange={modifyUntilYear}
                             value={untilYear || ""}
-                            placeholder="vuosi"
+                            placeholder="yy"
                             data-testid="until-input-year" 
                         />
                         <label id="until">{untilAlert || ""}</label>
