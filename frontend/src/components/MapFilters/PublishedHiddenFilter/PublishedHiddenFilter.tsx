@@ -42,19 +42,33 @@ const PublishedHiddenFilter = ({
         onChange(choice, publicSince, publicUntil);
     };
 
-    const checkDay = (dayStr: string) => {
+    const checkDay = (dayStr: string, monthStr: string) => {
         const regex = new RegExp("^([0-9]*$)");
         if(!regex.test(dayStr)) return false;
         const day = Number(dayStr);
+        const month = Number(monthStr);
         if(day < 1 || day > 31) return false;
+        if(day == 31 && (month == 4 || month == 6 || month == 9 || month == 11)) {
+            return false;
+        }
+        if(month == 2 && day > 29) {
+            return false;
+        }
         return true;
     };
 
-    const checkMonth = (monthStr: string) => {
+    const checkMonth = (monthStr: string, dayStr: string) => {  
         const regex = new RegExp("^([0-9]*$)");
         if(!regex.test(monthStr)) return false;
         const month = Number(monthStr);
+        const day = Number(dayStr);
         if(month < 1 || month > 12) return false;
+        if(day == 31 && (month == 4 || month == 6 || month == 9 || month == 11)) {
+            return false;
+        }
+        if(month == 2 && day > 29) {
+            return false;
+        }
         return true;
     };
 
@@ -68,12 +82,6 @@ const PublishedHiddenFilter = ({
         if(year < 0 || year > 2099) return false;
         if(year > 99 && year < 2000) return false;
         if(year < 100) year += 2000;
-        if(day == 31 && (month == 4 || month == 6 || month == 9 || month == 11)) {
-            return false;
-        }
-        if(month == 2 && day > 29) {
-            return false;
-        }
         if(month == 2 && day == 29) {
             if(year%400 != 0) {
                 if(year%100 == 0) return false;
@@ -89,7 +97,7 @@ const PublishedHiddenFilter = ({
         setSinceAlert("");
         let status = true;
         if(value !== "") {
-            status = checkDay(value);
+            status = checkDay(value, sinceMonth);
         }
         if(!status) {
             setSinceAlert(WRONG_DATE_CONTENT);
@@ -116,7 +124,7 @@ const PublishedHiddenFilter = ({
         setSinceAlert("");
         let status = true;
         if(value !== "") {
-            status = checkMonth(value);
+            status = checkMonth(value, sinceDay);
         }
         if(!status) {
             setSinceAlert(WRONG_DATE_CONTENT);
@@ -166,7 +174,7 @@ const PublishedHiddenFilter = ({
         setUntilAlert("");
         let status = true;
         if(value !== "") {
-            status = checkDay(value);
+            status = checkDay(value, untilMonth);
         }
         if(!status) {
             setUntilAlert(WRONG_DATE_CONTENT);
@@ -193,7 +201,7 @@ const PublishedHiddenFilter = ({
         setUntilAlert("");
         let status = true;
         if(value !== "") {
-            status = checkMonth(value);
+            status = checkMonth(value, untilDay);
         }
         if(!status) {
             setUntilAlert(WRONG_DATE_CONTENT);
