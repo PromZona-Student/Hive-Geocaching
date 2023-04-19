@@ -1,7 +1,7 @@
 import { Accordion } from "react-bootstrap";
 import "./MapFiltersMenu.scss";
 import { useContext, useState } from "react";
-import { CacheTypes, CacheSize, Difficulty, Terrain, Filters } from "../../model/Filters";
+import { CacheTypes, CacheSize, Difficulty, Terrain, StartEndDate, Filters } from "../../model/Filters";
 import { FiltersContext } from "../../context/FiltersContextProvider";
 import CacheTypeFilter from "../MapFilters/CacheTypeFilter";
 import CacheSizeFilter from "../MapFilters/CacheSizeFilter";
@@ -87,14 +87,12 @@ const MapFiltersMenu = ({
         });
     };
 
-    const modifyIsPublic = (isPublic: string, publicSince: string | undefined, publicUntil: string | undefined, pSince: string | undefined, pUntil: string | undefined) => {
+    const modifyIsPublic = (isPublic: string | undefined, publicSince: StartEndDate | undefined, publicUntil: StartEndDate | undefined) => {
         setMapFilters({
             ...mapFilters,
             isPublic,
             publicSince,
-            publicUntil,
-            pSince,
-            pUntil
+            publicUntil
         });
     };  
     
@@ -125,8 +123,7 @@ const MapFiltersMenu = ({
                     <DifficultyFilter onChange={modifyDifficulty} difficulty={mapFilters.difficulty} eventKey="6"/>
                     <TerrainFilter onChange={modifyTerrain} terrain={mapFilters.terrain} eventKey="7"/> 
                     <PublishedHiddenFilter onChange={modifyIsPublic} isPublic={mapFilters.isPublic} publicSince=
-                        {mapFilters.publicSince} publicUntil={mapFilters.publicUntil} pSince={mapFilters.pSince} pUntil=
-                        {mapFilters.pUntil} eventKey="9"/>
+                        {mapFilters.publicSince} publicUntil={mapFilters.publicUntil} eventKey="9"/>
                 </Accordion>
             }
             footer={

@@ -23,18 +23,18 @@ const MapViewPage = () => {
     }, []);
 
     const searchCaches = async () => {
+        if(!filters.isPublic) filters.isPublic = DEFAULT_IS_PUBLIC;
         const caches = await searchGeoCacheMapDetails(filters);
         setGeoCaches(caches);
     };
 
     const updateBounds = (bounds: LatLngBounds, centerPoint: LatLng) => {
         const kmDistance = bounds.getNorthEast().distanceTo(centerPoint) / 1000;
-        if(!filters.isPublic) filters.isPublic = DEFAULT_IS_PUBLIC;
+        
         updateFilters({
             ...filters,
             maxDistance: kmDistance,
             centerPoint,
-            isPublic: filters.isPublic
         });
     };
 
