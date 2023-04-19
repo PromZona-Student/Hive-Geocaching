@@ -77,7 +77,6 @@ const PublishedHiddenFilter = ({
         const regex = new RegExp("^([0-9]{0,4}$)");
         if(!regex.test(yearStr)) return false;
         let year = Number(yearStr);
-        console.log(yearStr, year);
         const month = Number(monthStr);
         const day = Number(dayStr);
         if(year < 0 || year > 2099) return false;
