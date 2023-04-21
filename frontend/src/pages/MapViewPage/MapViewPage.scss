@@ -1,15 +1,15 @@
 @import "../../styles/common.scss";
 @import "leaflet/dist/leaflet.css";
 
-.map-view-page{
-    height: calc(100% - $navbar-height);
-}
-
 .leaflet-container {
     height: 100%;
 }
 
-.map-menu-wrapper{
+.map-view-page {
+    height: calc(100% - $navbar-height);
+}
+
+.map-menu-wrapper {
     position: fixed;
     top: 0;
     left: 0;
@@ -23,5 +23,6 @@
 //Set leaflet's attribution label lower so it won't go over menu elements
 .leaflet-top,
 .leaflet-bottom {
-    z-index: 999 !important;
+
+    z-index: 999 !important
 }
