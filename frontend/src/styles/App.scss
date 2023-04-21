@@ -4,3 +4,7 @@
 body{
     background-color: $color-dark-green;
 }
+
+body, html, #root, .app{
+    height: 100%;
+}

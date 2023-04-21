@@ -36,7 +36,7 @@ const MapViewPage = () => {
 
     return (
         <>
-            <NavBar fixedTop />
+            <NavBar />
             <div className="map-view-page">
                 <div className="map-menu-wrapper">
                     <MapMenu onSearchClicked={searchCaches}/>

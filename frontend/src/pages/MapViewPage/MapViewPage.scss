@@ -1,24 +1,27 @@
 @import "../../styles/common.scss";
 @import "leaflet/dist/leaflet.css";
 
-.leaflet-container {
-    width: 100%;
-    height: 100vh;
+.map-view-page{
+    height: calc(100% - $navbar-height);
 }
 
-.map-view-page{
-   height: 100vh;
-   width: 100%;
-   position: relative;
+.leaflet-container {
+    height: 100%;
 }
 
 .map-menu-wrapper{
-    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
     height: calc(100% - $navbar-height);
     width: 100%;
     margin-top: $navbar-height;
+    z-index: 1000;
+    pointer-events: none;
 }
 
-body{
-    margin: 0;
+//Set leaflet's attribution label lower so it won't go over menu elements
+.leaflet-top,
+.leaflet-bottom {
+    z-index: 999 !important;
 }
