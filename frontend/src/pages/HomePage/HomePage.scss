@@ -12,10 +12,6 @@
 }
 
 .feed-section{
-    @media screen and (min-width: 1080px){
-        width: 40%;
-    }
-    width: 60%;
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -23,4 +19,27 @@
 
 .feed-header{
     text-align: center;
+}
+
+.home-page-banner-container{
+    height: 100px;
+    width: 100%;
+    overflow-y: hidden;
+    position: relative;
+}
+
+.home-page-banner-title{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family:'Times New Roman', Times, serif;
+    text-align: center;
+    z-index: 20;
+    font-size: x-large;
+    color: $color-dark-green;
+}
+
+.home-page-banner{
+    width: 100%;
 }

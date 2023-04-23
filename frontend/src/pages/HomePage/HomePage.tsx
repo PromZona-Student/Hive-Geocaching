@@ -18,6 +18,10 @@ const HomePage = () => {
 
     return (
         <PageLayout>
+            <div className="home-page-banner-container">
+                <img src="/gcfi-frontpage-banner3.jpg" className="home-page-banner"></img>
+                <h1 className="home-page-banner-title">Tervetuloa geokätköilemään</h1>
+            </div>
             <div className="home-page-content">
                 <div className="feed-section">
                     <div className="feed-header">
