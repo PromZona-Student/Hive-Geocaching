@@ -19,8 +19,13 @@
     align-items: center;
     display: flex;
     flex-direction: column;
+    gap: 40px;
 }
 
 .feed-header{
     text-align: center;
+}
+
+.load-button{
+    width: 105px;
 }
