@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getGeoCaches, getMeetings } from "../../api/geocaches";
+import { getGeoCaches } from "../../api/geocaches";
 import "./HomePage.scss";
 import { Geocache } from "../../model/Geocache";
 import GeocacheList from "../../components/GeocacheList";
@@ -10,16 +10,17 @@ const HomePage = () => {
 
     const [geocaches, setGeocaches] = useState<Array<Geocache>>([]);
     const [meetings, setMeetings] = useState<Array<Geocache>>([]);
-
+    
     useEffect(() => {
+        const meetingTypes: Array<string> = ["tapahtuma", "megatapahtuma", "siivoustapahtuma","yhteisöjuhla"];
         getGeoCaches({ limit: 6 }).then(geocachesResult => {
-            setGeocaches(geocachesResult);
+            const result: Array<Geocache> = geocachesResult.filter(cache => !meetingTypes.includes(cache.type.toLowerCase()));
+            setGeocaches(result);
         });
-    }, []);
 
-    useEffect(() => {
-        getMeetings({ limit: 6 }).then(meetingResult => {
-            setMeetings(meetingResult);
+        getGeoCaches({ limit: 6 }).then(meetingResult => {
+            const result: Array<Geocache> = meetingResult.filter(cache => meetingTypes.includes(cache.type.toLowerCase()));
+            setMeetings(result);
         });
     }, []);
 

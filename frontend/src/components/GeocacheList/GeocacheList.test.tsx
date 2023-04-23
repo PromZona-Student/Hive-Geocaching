@@ -14,7 +14,6 @@ test("component loads", async () => {
                 longitude: 20
             },
             name: "Geo 1",
-            isMeeting: false,
             placedDate: "2004-07-22T00:00:00.000",
             publishedDate: "2004-07-22T00:00:00.000",
             type: "Type1",
@@ -41,7 +40,6 @@ test("component loads", async () => {
                 longitude: 1,
             },
             name: "Geo 2",
-            isMeeting: false,
             placedDate: "2004-07-22T00:00:00.000",
             publishedDate: "2004-07-22T00:00:00.000",
             type: "Type2",

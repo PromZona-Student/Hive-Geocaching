@@ -2,7 +2,6 @@ export interface Geocache{
 
     referenceCode: string;
     name: string;
-    isMeeting: boolean;
     placedDate: string;
     publishedDate: string;
     type: string;

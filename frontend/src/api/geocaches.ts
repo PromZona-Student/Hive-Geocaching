@@ -12,11 +12,6 @@ export const getGeoCaches = async (filters?: Filters) => {
     return geocaches.data as Array<Geocache>;
 };
 
-export const getMeetings = async (filters?: Filters) => {
-    const meetings = await axios.get("/api/meetings", {params: filters});
-    return meetings.data as Array<Geocache>;
-};
-
 export const getCache = async (id: string) => {
     const path = "/api/geocaches/" + id;
     const response = await axios.get(path);
