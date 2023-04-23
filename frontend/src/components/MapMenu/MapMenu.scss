@@ -59,3 +59,9 @@ $map-menu-button-size: 50px;
         background-color: $color-green;
     }
 }
+
+.map-menu-toolbar-submenu{
+    overflow-y: visible;
+    max-height: $map-menu-button-size;
+    z-index: 999;
+}

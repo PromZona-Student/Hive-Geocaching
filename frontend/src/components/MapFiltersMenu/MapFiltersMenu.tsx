@@ -94,6 +94,7 @@ const MapFiltersMenu = ({
     const resetFilters = () => {
         setMapFilters(initFilters);
         updateFilters({ ...initFilters });
+        onHide();
     };
 
     return (
