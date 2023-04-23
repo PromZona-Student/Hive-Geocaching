@@ -13,7 +13,7 @@ test("component loads", async () => {
         name: "Esimerkkikätkö",
         placedDate: "",
         publishedDate: "",
-        type: "Oma kätkö",
+        type: "multikätkö",
         size: "Joku",
         postedCoordinates: {
             latitude: 0,

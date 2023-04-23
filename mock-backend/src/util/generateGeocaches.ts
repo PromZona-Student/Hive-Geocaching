@@ -1,4 +1,4 @@
-import { Geocache } from "../../../frontend/src/model/Geocache";
+import { GeoCacheType, Geocache } from "../../../frontend/src/model/Geocache";
 import { randomBytes } from "crypto";
 import seedrandom from "seedrandom";
 import fs from "fs"
@@ -6,7 +6,7 @@ import path from "path"
 
 seedrandom("geoCacheRandomSeed123", { global: true });
 
-const words = ["Harvinainen", "Virallinen", "Outo", "Hauska", "Metsä", "Luonto"]
+const cacheTypes: Array<GeoCacheType> = ["peruskätkö", "multikätkö", "mysteerikätkö", "geolodju", "geokohde", "whereigokätkö", "virtuaalikätkö", "webcamkätkö", "tapahtuma", "megatapahtuma", "siivoustapahtuma", "yhteisöjuhla"]
 
 function randomNumInRange(min: number, max: number) {
     return Math.random() * (max - min) + min;
@@ -22,14 +22,6 @@ function randomDate(startDate: number, endDate: number) {
 
 function randomBool() {
     return Math.random() > 0.5 ? true : false;
-}
-
-function randomSentence(length: number) {
-    let list = [];
-    for (let i = 0; i < length; i++) {
-        list.push(words[randomIntInRange(0, words.length)])
-    };
-    return list.join(" ").trim();
 }
 
 function randomId(length: number) {
@@ -55,7 +47,7 @@ export function generateGeoCaches(amount: number) {
          name: "Testikätkö",
          placedDate: placedDate.toISOString(),
          publishedDate: placedDate.toISOString(),
-         type: "Multikätkö",
+         type: "multikätkö",
          size: "Joku",
          postedCoordinates: {
              latitude: randomNumInRange(60.085318, 68.542486),
@@ -87,7 +79,7 @@ export function generateGeoCaches(amount: number) {
          name: "Esimerkkikätkö",
          placedDate: placedDate2.toISOString(),
          publishedDate: placedDate2.toISOString(),
-         type: "Multikätkö",
+         type: "peruskätkö",
          size: "Joku",
          postedCoordinates: {
              latitude: randomNumInRange(60.085318, 68.542486),
@@ -118,7 +110,7 @@ export function generateGeoCaches(amount: number) {
             name: `Geocache ${i}`,
             placedDate: placedDate.toISOString(),
             publishedDate: placedDate.toISOString(),
-            type: "GeocachingHq",
+            type: cacheTypes[randomIntInRange(0, cacheTypes.length)],
             size: "Other",
             postedCoordinates: {
                 latitude: randomNumInRange(60.085318, 68.542486),

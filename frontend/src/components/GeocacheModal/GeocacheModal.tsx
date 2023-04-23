@@ -1,10 +1,12 @@
 import Modal from "react-bootstrap/Modal";
-import { Geocache } from "../../model/Geocache";
+import { GeoCacheTypeIconUrls, Geocache, defaultGeoCacheTypeIconUrl } from "../../model/Geocache";
 import { Link } from "react-router-dom";
 import "./GeocacheModal.scss";
 import { useEffect, useState } from "react";
 import { getCache } from "../../api/geocaches";
 import Spinner from "react-bootstrap/Spinner";
+
+const ICON_DIMENSIONS = [36 / 1.5, 27 / 1.5];
 
 interface ModalProps {
     isOpen: boolean;
@@ -56,7 +58,7 @@ const GeocacheModal = (props: ModalProps) => {
                     {handlePremiumCont(cache.isPremiumOnly)}
 
                     <div className="flex-row">
-                        <img width="20px" src="katko2.gif" /> <div className="cache-text">{cache.type}</div>
+                        <img width={ICON_DIMENSIONS[0]} height={ICON_DIMENSIONS[1]} src={GeoCacheTypeIconUrls[cache.type] || defaultGeoCacheTypeIconUrl} /> <div className="cache-text">{cache.type}</div>
                     </div>
 
                     <div className="flex-row">
