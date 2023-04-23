@@ -7,8 +7,11 @@ import { users, getUser } from "../data/users";
 import { sessions } from "../data/sessions";
 
 export const geocacheRouter = Router();
+export const meetingRouter = Router();
 
-const geocaches = generateGeoCaches(1000);
+const isCache = true;
+const geocaches = generateGeoCaches(1000, isCache);
+const meetings = generateGeoCaches(100, !isCache);
 
 const LIMIT_DEFAULT = 100;
 
@@ -41,6 +44,11 @@ const sortByDate = (a: Geocache, b: Geocache) => {
 geocacheRouter.get("/", async (request, response) => {
     const limit = request.query.limit ? parseInt(request.query.limit as string) : LIMIT_DEFAULT
     response.json(geocaches.slice(0, limit));
+});
+
+meetingRouter.get("/", async (request, response) => {
+    const limit = request.query.limit ? parseInt(request.query.limit as string) : LIMIT_DEFAULT
+    response.json(meetings.slice(0, limit));
 });
 
 geocacheRouter.get("/:id", async (request, response) => {

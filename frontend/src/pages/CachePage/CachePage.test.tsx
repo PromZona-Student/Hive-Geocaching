@@ -11,6 +11,7 @@ test("component loads", async () => {
     const cache: Geocache = {
         referenceCode: "zyx",
         name: "Esimerkkikätkö",
+        isMeeting: false,
         placedDate: "",
         publishedDate: "",
         type: "Oma kätkö",

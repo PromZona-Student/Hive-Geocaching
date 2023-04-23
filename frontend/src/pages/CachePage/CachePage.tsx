@@ -10,6 +10,7 @@ function CachePage() {
     const [cache, setCache] = useState<Geocache>({
         referenceCode: "",
         name: "",
+        isMeeting: false,
         placedDate: "",
         publishedDate: "",
         type: "",
