@@ -1,16 +1,17 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import MapViewPage from "./MapViewPage";
+import MapView from "./MapView";
 import { BrowserRouter } from "react-router-dom";
 import { MapContext } from "../../context/MapContext";
 import { FiltersContextProvider } from "../../context/FiltersContextProvider";
+
 
 test("Component loads and shows map menu", async () => {
     render(
         <BrowserRouter>
             <FiltersContextProvider>
                 <MapContext>
-                    <MapViewPage />
+                    <MapView />
                 </MapContext>
             </FiltersContextProvider>
         </BrowserRouter>

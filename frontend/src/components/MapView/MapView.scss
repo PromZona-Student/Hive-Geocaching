@@ -1,0 +1,25 @@
+.map-menu-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: calc(100% - $navbar-height);
+    width: 100%;
+    margin-top: $navbar-height;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+//Set leaflet's attribution label lower so it won't go over menu elements
+.leaflet-top,
+.leaflet-bottom {
+
+    z-index: 999 !important
+}
+
+.leaflet-container {
+    height: 100%;
+}
+
+.map-view{
+    height: 100%;
+}
