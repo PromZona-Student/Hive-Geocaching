@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./GeocacheModal.scss";
 import { useEffect, useState } from "react";
 import { getCache } from "../../api/geocaches";
-import Spinner from "react-bootstrap/Spinner";
+import Spinner from "../Spinner";
 
 interface ModalProps {
     isOpen: boolean;
@@ -94,7 +94,7 @@ const GeocacheModal = (props: ModalProps) => {
             return (
                 <div style={{display: "flex", alignItems: "center", "flexDirection": "column"}}>
                     <p>Ladataan...</p>
-                    <Spinner animation="border" variant="secondary" role="status"/>
+                    <Spinner />
                 </div>
             );
         }
