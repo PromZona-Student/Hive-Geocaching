@@ -11,6 +11,9 @@ test("component loads", async () => {
     jest.spyOn(GeocacheApi, "getGeoCaches").mockImplementation(async () => {
         return [];
     });
+    jest.spyOn(GeocacheApi, "getMeetings").mockImplementation(async () => {
+        return [];
+    });
 
     render(<HomePage />, {wrapper: BrowserRouter});
     await waitFor(() => {
