@@ -7,15 +7,16 @@
         width: 400px;
     }
     width: 100%;
-    
-    a {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    a{
         text-decoration: none;
     }
+    margin: 0;
 }
 
 .geocache-item{
-    margin-top: 20px;
-    margin-bottom: 20px;
     border: solid 1px $color-light-green;
     border-radius: 6px;
     background-color: white;
