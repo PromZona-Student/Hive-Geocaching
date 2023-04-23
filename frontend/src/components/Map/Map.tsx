@@ -1,8 +1,12 @@
-import { Icon, LatLng, LatLngBounds } from "leaflet";
+import { Icon, LatLng, LatLngBounds, Path } from "leaflet";
 import { Marker, TileLayer, useMap, useMapEvent } from "react-leaflet";
 import { GeocacheMapDetails } from "../../model/Geocache";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GeocacheModal from "../GeocacheModal";
+import L from "leaflet";
+import "./Map.scss";
+
+const locationIcon = new L.DivIcon({ className: "location-icon", iconSize: [20, 20] });
 
 interface Props {
     geocaches: Array<GeocacheMapDetails>
@@ -14,7 +18,19 @@ const Map = ({
 }: Props) => {
     const [isOpen, setisOpen] = useState(false);
     const [currentCacheId, setCurrentCacheId] = useState<string | null>(null);
+    const [userPos, setUserPos] = useState<GeolocationPosition | null>(null);
     const map = useMap();
+
+    const onUserPosEnabled = (geoPos: GeolocationPosition) => {
+        setUserPos(geoPos);
+        navigator.geolocation.watchPosition((newPos) => {
+            setUserPos(newPos);
+        });
+    };
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(onUserPosEnabled);
+    }, []);
 
     const handleBoundsChange = () => {
         const bounds = map.getBounds();
@@ -65,6 +81,11 @@ const Map = ({
                 })
             }
             <GeocacheModal isOpen={isOpen} toggle={toggle} cacheId={currentCacheId} />
+            {
+                userPos && (
+                    <Marker position={[userPos.coords.latitude, userPos.coords.longitude]} icon={locationIcon}></Marker>
+                )
+            }
         </>
     );
 };
