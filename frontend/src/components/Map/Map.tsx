@@ -1,34 +1,33 @@
-import { Icon, LatLng, LatLngBounds } from "leaflet";
-import { Marker, TileLayer, useMap, useMapEvent } from "react-leaflet";
+import { Icon } from "leaflet";
+import { Marker, TileLayer } from "react-leaflet";
 import { GeocacheMapDetails } from "../../model/Geocache";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import GeocacheModal from "../GeocacheModal";
+import L from "leaflet";
+import "./Map.scss";
+
+const locationIcon = new L.DivIcon({ className: "location-icon", iconSize: [20, 20] });
 
 interface Props {
     geocaches: Array<GeocacheMapDetails>
-    onBoundsChanged: (bounds: LatLngBounds, centerPoint: LatLng) => void;
 }
 const Map = ({
-    geocaches,
-    onBoundsChanged
+    geocaches
 }: Props) => {
     const [isOpen, setisOpen] = useState(false);
     const [currentCacheId, setCurrentCacheId] = useState<string | null>(null);
-    const map = useMap();
+    const [userPos, setUserPos] = useState<GeolocationPosition | null>(null);
 
-    const handleBoundsChange = () => {
-        const bounds = map.getBounds();
-        const centerPoint = map.getCenter();
-        onBoundsChanged(bounds, centerPoint);
-    };
+    const updateUserPos = useCallback((newPos: GeolocationPosition) => {
+        setUserPos(newPos);
+    }, []);
 
-    useMapEvent("zoomend", () => {
-        handleBoundsChange();
-    });
-
-    useMapEvent("moveend", () => {
-        handleBoundsChange();
-    });
+    useEffect(() => {
+        navigator.geolocation.watchPosition(updateUserPos, null, {
+            enableHighAccuracy: true,
+            timeout: 20000
+        });
+    }, [updateUserPos]);
 
     const toggle = () => {
         setisOpen(!isOpen);
@@ -59,12 +58,18 @@ const Map = ({
                                     toggle();
                                 },
                             }}
+                            zIndexOffset={0}
                         >
                         </Marker>
                     );
                 })
             }
             <GeocacheModal isOpen={isOpen} toggle={toggle} cacheId={currentCacheId} />
+            {
+                userPos && (
+                    <Marker position={[userPos.coords.latitude, userPos.coords.longitude]} icon={locationIcon} zIndexOffset={10}></Marker>
+                )
+            }
         </>
     );
 };
