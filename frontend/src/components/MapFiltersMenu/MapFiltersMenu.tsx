@@ -1,7 +1,7 @@
 import { Accordion, Offcanvas } from "react-bootstrap";
 import "./MapFiltersMenu.scss";
 import { useContext, useState } from "react";
-import { CacheTypes, CacheSize, Difficulty, Filters } from "../../model/Filters";
+import { CacheTypes, CacheSize, Difficulty, Filters, Attributes } from "../../model/Filters";
 import { FiltersContext } from "../../context/FiltersContextProvider";
 import CacheTypeFilter from "../MapFilters/CacheTypeFilter";
 import CacheSizeFilter from "../MapFilters/CacheSizeFilter";
@@ -12,6 +12,7 @@ import ButtonPrimary from "../Buttons/ButtonPrimary";
 import ButtonWarning from "../Buttons/ButtonWarning";
 import { initFilters } from "../../model/Filters";
 import NameContainsFilter from "../MapFilters/NameContainsFilter";
+import AttributesFilter from "../MapFilters/AttributesFilter";
 
 interface Props {
     show: boolean
@@ -79,6 +80,13 @@ const MapFiltersMenu = ({
         updateFilters({ ...initFilters });
     };
 
+    const modifyAttributes = (attributes: Attributes) => {
+        setMapFilters({
+            ...mapFilters,
+            attributes
+        });
+    };
+
     return (
         <Offcanvas show={show} onHide={onHide}>
             <Offcanvas.Header closeButton>
@@ -91,7 +99,8 @@ const MapFiltersMenu = ({
                     <CacheTypeFilter onChange={modifyCacheTypes} cacheTypes={mapFilters.cacheTypes} eventKey="2"/>
                     <CacheSizeFilter onChange={modifyCacheSize} size={mapFilters.size} eventKey="3"/>       
                     <NameContainsFilter onChange={modifyNameContains} nameContains={mapFilters.nameContains} eventKey="4"/>
-                    <DifficultyFilter onChange={modifyDifficulty} difficulty={mapFilters.difficulty} eventKey="6"/> 
+                    <DifficultyFilter onChange={modifyDifficulty} difficulty={mapFilters.difficulty} eventKey="6"/>
+                    <AttributesFilter onChange={modifyAttributes} attributes={mapFilters.attributes} eventKey="7"/>
                 </Accordion>
             </Offcanvas.Body>
             <div className="mapfilters-buttons-section">

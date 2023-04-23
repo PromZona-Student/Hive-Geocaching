@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import { searchGeoCacheMapDetails, searchGeoCaches } from "../../api/geocaches";
+import { searchGeoCacheMapDetails } from "../../api/geocaches";
 import Map from "../../components/Map";
 import MapMenu from "../../components/MapMenu";
-import { Geocache, GeocacheMapDetails } from "../../model/Geocache";
+import { GeocacheMapDetails } from "../../model/Geocache";
 import "./MapViewPage.scss";
 import { FiltersContext } from "../../context/FiltersContextProvider";
 import { useMap } from "react-leaflet";
