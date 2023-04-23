@@ -25,7 +25,7 @@ function App() {
     }, [setUser]);
 
     return (
-        <div className="App">
+        <div className="app">
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route element={<Authorize allowedRoles={["basic", "premium"]} unauthorizedMsg={unauthorizedMsg.map} />}>
