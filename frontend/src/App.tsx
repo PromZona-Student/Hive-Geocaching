@@ -6,7 +6,6 @@ import Authorize from "./components/Authorize";
 import { useContext, useEffect } from "react";
 import { refreshSession } from "./api/auth";
 import UserContext from "./context/UserContext";
-import { FiltersContextProvider } from "./context/FiltersContextProvider";
 import MapViewPage from "./pages/MapViewPage";
 
 const unauthorizedMsg = {
@@ -25,11 +24,11 @@ function App() {
     }, [setUser]);
 
     return (
-        <div className="App">
+        <div className="app">
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route element={<Authorize allowedRoles={["basic", "premium"]} unauthorizedMsg={unauthorizedMsg.map} />}>
-                    <Route path="/map" element={<FiltersContextProvider><MapViewPage /></FiltersContextProvider>} />
+                    <Route path="/map" element={<MapViewPage />} />
                 </Route>
                 <Route element={<Authorize allowedRoles={["basic", "premium"]} unauthorizedMsg={unauthorizedMsg.cache} />}>
                     <Route path="/geocaches/:cacheId" element={<CachePage />} />

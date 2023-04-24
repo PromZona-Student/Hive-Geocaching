@@ -3,8 +3,10 @@ import { Geocache, GeocacheMapDetails } from "../model/Geocache";
 import { Filters } from "../model/Filters";
 
 export interface SearchRequest{
-    filters: Filters;
+    filters: Filters
     orderBy?: "newest"
+    skip?: number
+    take?: number
 }
 
 export const getGeoCaches = async (filters?: Filters) => {
@@ -23,10 +25,12 @@ export const getCache = async (id: string) => {
     return response.data as Geocache;
 };
 
-export const searchGeoCaches = async (filters: Filters, orderBy?: string): Promise<Array<Geocache>> => {
+export const searchGeoCaches = async (filters: Filters, orderBy?: string, skip?: number, take?: number): Promise<Array<Geocache>> => {
     const response = await axios.post("/api/geocaches/search", {
         filters,
-        orderBy
+        orderBy,
+        skip,
+        take
     } as SearchRequest);
     return response.data as Array<Geocache>;
 };

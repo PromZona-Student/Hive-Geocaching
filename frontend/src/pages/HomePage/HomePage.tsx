@@ -1,10 +1,14 @@
-import { useState, useEffect } from "react";
-import { getGeoCaches, getMeetings } from "../../api/geocaches";
 import "./HomePage.scss";
+import { useState, useEffect, useCallback } from "react";
+import { getGeoCaches, getMeetings, searchGeoCaches } from "../../api/geocaches";
 import { Geocache } from "../../model/Geocache";
 import GeocacheList from "../../components/GeocacheList";
 import PageLayout from "../../components/PageLayout";
 import { Button } from "react-bootstrap";
+import Spinner from "../../components/Spinner";
+
+
+const TAKE_AMOUNT = 6;
 
 const HomePage = () => {
 
@@ -23,6 +27,24 @@ const HomePage = () => {
             setMeetings(result);
         });
     }, []);
+    
+    const [cachesIndex, setCachesIndex] = useState(0);
+    const [loadingCaches, setLoadingCaches] = useState(false);
+
+    const fetchMoreCaches = useCallback(async () => {
+        setLoadingCaches(true);
+        const newCaches = await searchGeoCaches({}, "newest", cachesIndex, TAKE_AMOUNT);
+        setGeocaches([...geocaches, ...newCaches]);
+        setCachesIndex(cachesIndex + TAKE_AMOUNT);
+        setLoadingCaches(false);
+    }, [cachesIndex, geocaches]);
+
+    useEffect(() => {
+        if (cachesIndex == 0) {
+            fetchMoreCaches();
+        }
+    }, [cachesIndex, fetchMoreCaches]);
+
 
     return (
         <PageLayout>
@@ -32,7 +54,8 @@ const HomePage = () => {
                         <h3>Uusimmat geokätköt</h3>
                     </div>
                     <GeocacheList geocaches={geocaches} />
-                    <Button variant="light">Näytä lisää</Button>
+                    {loadingCaches && <Spinner />}
+                    <Button disabled={loadingCaches} variant="light" className="load-button" onClick={fetchMoreCaches}>Näytä lisää</Button>
                 </div>
                 <div className="feed-section">
                     <div className="feed-header">
@@ -40,7 +63,7 @@ const HomePage = () => {
                     </div>
                     <p>Miitti-dataa</p>
                     <GeocacheList geocaches={meetings} />
-                    <Button variant="light">Näytä lisää</Button>
+                    <Button variant="light" className="load-button">Näytä lisää</Button>
                 </div>
             </div>
         </PageLayout>

@@ -8,7 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 jest.mock("axios");
 
 test("component loads", async () => {
-    jest.spyOn(GeocacheApi, "getGeoCaches").mockImplementation(async () => {
+    jest.spyOn(GeocacheApi, "searchGeoCaches").mockImplementation(async () => {
         return [];
     });
 
