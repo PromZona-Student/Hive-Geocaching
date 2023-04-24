@@ -1,10 +1,12 @@
-import { Icon } from "leaflet";
+import { Icon, PointExpression } from "leaflet";
 import { Marker, TileLayer } from "react-leaflet";
-import { GeocacheMapDetails } from "../../model/Geocache";
+import { GeoCacheMapIconUrls, GeocacheMapDetails, defaultMapIconUrl } from "../../model/Geocache";
 import { useCallback, useEffect, useState } from "react";
 import GeocacheModal from "../GeocacheModal";
 import L from "leaflet";
 import "./Map.scss";
+
+const MAP_ICON_DIMENSIONS = [36 / 1.5, 27 / 1.5];
 
 const locationIcon = new L.DivIcon({ className: "location-icon", iconSize: [20, 20] });
 
@@ -49,8 +51,8 @@ const Map = ({
                         <Marker key={cache.referenceCode}
                             position={[cache.postedCoordinates.latitude, cache.postedCoordinates.longitude]}
                             icon={new Icon({
-                                iconUrl: "katko2.gif",
-                                iconSize: [24, 18]
+                                iconUrl: GeoCacheMapIconUrls[cache.type] || defaultMapIconUrl,
+                                iconSize: MAP_ICON_DIMENSIONS as PointExpression
                             })}
                             eventHandlers={{
                                 click: () => {

@@ -3,6 +3,9 @@
 .geocachelist{
     list-style-type: none;
     padding: 0;
+    @media screen and (min-width: 600px){
+        width: 400px;
+    }
     width: 100%;
     display: flex;
     flex-direction: column;
