@@ -5,6 +5,7 @@ import { GeocacheMapDetails } from "../../model/Geocache";
 import MapMenu from "../MapMenu";
 import Map from "../Map/Map";
 import { useMap } from "react-leaflet";
+import { LatLng } from "leaflet";
 
 const MapView = () => {
 
@@ -21,7 +22,13 @@ const MapView = () => {
     const searchCaches = async () => {
         const bounds = map.getBounds();
         const centerPoint = map.getCenter();
-        const kmDistance = bounds.getNorthEast().distanceTo(centerPoint) / 1000;
+        let kmDistance: number;
+        if(window.screen.availWidth > window.screen.availHeight){
+            kmDistance = (new LatLng(bounds.getNorthEast().lat, centerPoint.lng)).distanceTo(centerPoint) / 1000;
+        }
+        else{
+            kmDistance = (new LatLng(centerPoint.lat, bounds.getNorthEast().lng)).distanceTo(centerPoint) / 1000;
+        }
         const caches = await searchGeoCacheMapDetails({...filters, maxDistance: kmDistance, centerPoint});
         setGeoCaches(caches);
     };

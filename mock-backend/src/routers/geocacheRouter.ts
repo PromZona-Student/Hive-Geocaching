@@ -128,7 +128,8 @@ geocacheRouter.post("/mapsearch", async (request, response) => {
             postedCoordinates: {
                 latitude: c.postedCoordinates.latitude!,
                 longitude: c.postedCoordinates.longitude!
-            }
+            },
+            type: c.type
         }
         return mapDetails
     }));
