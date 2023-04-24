@@ -8,11 +8,16 @@ import { BrowserRouter } from "react-router-dom";
 jest.mock("axios");
 
 test("component loads", async () => {
+
+    jest.spyOn(GeocacheApi, "getMeetings").mockImplementation(async () => {
+        return [];
+    });
+
     jest.spyOn(GeocacheApi, "searchGeoCaches").mockImplementation(async () => {
         return [];
     });
 
-    jest.spyOn(GeocacheApi, "getMeetings").mockImplementation(async () => {
+    jest.spyOn(GeocacheApi, "searchGeoCaches").mockImplementation(async () => {
         return [];
     });
 

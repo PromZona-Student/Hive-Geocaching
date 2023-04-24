@@ -17,11 +17,6 @@ const HomePage = () => {
     
     useEffect(() => {
         const meetingTypes: Array<string> = ["tapahtuma", "megatapahtuma", "siivoustapahtuma","yhteisöjuhla"];
-        getGeoCaches({}).then(geocachesResult => {
-            const result: Array<Geocache> = geocachesResult.filter(cache => !meetingTypes.includes(cache.type.toLowerCase())).slice(0,6);
-            setGeocaches(result);
-        });
-
         getMeetings({}).then(meetingResult => {
             const result: Array<Geocache> = meetingResult.filter(cache => meetingTypes.includes(cache.type.toLowerCase())).slice(0,6);
             setMeetings(result);
