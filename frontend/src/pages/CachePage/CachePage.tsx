@@ -7,32 +7,7 @@ import "./CachePage.scss";
 
 function CachePage() {
     const { cacheId } = useParams();
-    const [cache, setCache] = useState<Geocache>({
-        referenceCode: "",
-        name: "",
-        placedDate: "",
-        publishedDate: "",
-        type: "",
-        size: "",
-        postedCoordinates: {
-            latitude: 0,
-            longitude: 0
-        },
-        lastVisitedDate: "",
-        isPremiumOnly: false,
-        shortDescription: "",
-        longDescription: "",
-        hints: "",
-        location: {
-            country: "",
-            countryId: 0,
-            state: "",
-            stateId: 0,
-        },
-        ownerAlias: "",
-        difficulty: 0,
-        terrain: 0
-    });
+    const [cache, setCache] = useState<Geocache | null>(null);
 
     useEffect(() => {
         if (cacheId !== undefined) {
@@ -46,7 +21,7 @@ function CachePage() {
         return coord ? coord : "***";
     };
 
-    if (cacheId && cache && cache.name) {
+    if (cacheId && cache) {
         return (
             <>
                 <NavBar fixedTop />

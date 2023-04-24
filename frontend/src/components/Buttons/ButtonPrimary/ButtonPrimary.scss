@@ -3,6 +3,7 @@
 .gc-button-primary{
     background-color: $color-light-green;
     border: none;
+    color: $color-dark-green;
 
     &:active{
         background-color: $color-green;

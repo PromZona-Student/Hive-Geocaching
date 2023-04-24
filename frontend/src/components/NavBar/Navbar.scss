@@ -25,7 +25,7 @@
     z-index: 1000;
 
     &--fixed{
-        position: absolute;
+        position: fixed;
     }
 }
 .gc-navbar-content{
@@ -44,7 +44,7 @@
 
 .gc-navbar-user-menu{
     position: absolute;
-    right: 0%;
+    right: -10px;
     top: 120%;
     color: white;
     background-color: $color-dark-green;
