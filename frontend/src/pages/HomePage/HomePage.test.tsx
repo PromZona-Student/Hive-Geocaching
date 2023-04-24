@@ -12,6 +12,10 @@ test("component loads", async () => {
         return [];
     });
 
+    jest.spyOn(GeocacheApi, "getMeetings").mockImplementation(async () => {
+        return [];
+    });
+
     render(<HomePage />, {wrapper: BrowserRouter});
     await waitFor(() => {
         expect(screen.getByText("Uusimmat geokätköt")).toBeVisible();

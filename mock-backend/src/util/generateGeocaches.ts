@@ -54,7 +54,6 @@ export function generateGeoCaches(amount: number, isCache: boolean) {
 
             referenceCode: "abc123",
             name: "Testikätkö",
-            isMeeting: false,
             placedDate: placedDate.toISOString(),
             publishedDate: placedDate.toISOString(),
             type: "Multikätkö",
@@ -87,7 +86,6 @@ export function generateGeoCaches(amount: number, isCache: boolean) {
 
             referenceCode: "zyx",
             name: "Esimerkkikätkö",
-            isMeeting: false,
             placedDate: placedDate2.toISOString(),
             publishedDate: placedDate2.toISOString(),
             type: "Multikätkö",
@@ -121,7 +119,6 @@ export function generateGeoCaches(amount: number, isCache: boolean) {
 
             referenceCode: "M-abc321",
             name: "Esimerkkimiitti",
-            isMeeting: true,
             placedDate: placedDate.toISOString(),
             publishedDate: placedDate.toISOString(),
             type: "Tapahtuma",
@@ -154,7 +151,6 @@ export function generateGeoCaches(amount: number, isCache: boolean) {
 
             referenceCode: "zyx",
             name: "Testikokous",
-            isMeeting: false,
             placedDate: placedDate2.toISOString(),
             publishedDate: placedDate2.toISOString(),
             type: "Tapahtuma",
@@ -190,7 +186,6 @@ export function generateGeoCaches(amount: number, isCache: boolean) {
         const cache: Geocache = {
             referenceCode: randomId(6),
             name: cacheName,
-            isMeeting: !isCache,
             placedDate: placedDate.toISOString(),
             publishedDate: placedDate.toISOString(),
             type: cacheType,
