@@ -27,8 +27,19 @@ const MapFiltersMenu = ({
     onHide,
     onConfirmFilters
 }: Props) => {
+
+    let filters: Filters = {};
+    if(!localStorage.getItem("filters")) {
+        localStorage.setItem("filters", JSON.stringify(initFilters));
+    }
+
+    const filterData = localStorage.getItem("filters");
+    if(filterData) filters = JSON.parse(filterData);
+    console.log("%c Filters", "color: orange; font-weight: bold");
+    console.log(filters);
+
     const { updateFilters } = useContext(FiltersContext);
-    const [mapFilters, setMapFilters] = useState<Filters>(initFilters);
+    const [mapFilters, setMapFilters] = useState<Filters>(filters);
 
     const modifyCustomRule = (customRule: string) => {
         setMapFilters({
@@ -88,12 +99,14 @@ const MapFiltersMenu = ({
     
     const confirmFilters = () => {
         updateFilters({ ...mapFilters });
+        localStorage.setItem("filters", JSON.stringify(mapFilters));
         onConfirmFilters();
     };
 
     const resetFilters = () => {
         setMapFilters(initFilters);
         updateFilters({ ...initFilters });
+        localStorage.setItem("filters", JSON.stringify(initFilters));
         onHide();
     };
 
