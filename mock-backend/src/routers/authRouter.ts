@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { users } from "../data/users";
 import { sessions } from "../data/sessions";
-import { getUser } from "../data/users";
+import { getUser, getUserByEmail } from "../data/users";
 import { User } from "../../../frontend/src/model/User"
 import { generateSession } from "../data/sessions";
 import { UserDetails } from "../model/UserDetails";
@@ -66,6 +66,11 @@ authRouter.post("/register", async (request, response) => {
 
     if (foundUser !== undefined) {
         return response.status(400).send("Käyttäjänimi on jo käytössä");
+    }
+
+    const user = getUserByEmail(registerRequest.email);
+    if(user!== undefined){
+        return response.status(400).send("Sähköpostiosoite on jo olemassa");
     }
 
     const newUser: UserDetails = {
