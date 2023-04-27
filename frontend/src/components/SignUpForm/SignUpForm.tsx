@@ -11,12 +11,17 @@ import UserContext from "../../context/UserContext";
 import { useContext } from "react";
 //import { User } from "../../model/User";
 
-interface SignUpProps {
-    handleOnClick: () => void;
+interface Props {
+    onSubmit: () => void;
+    onLoginClicked: () => void;
     toggleShowParent: () => void;
 }
 
-const SignUpForm = (props: SignUpProps) => {
+const SignUpForm = ({
+    onSubmit,
+    onLoginClicked,
+    toggleShowParent
+}: Props) => {
 
     const userContext = useContext(UserContext);
 
@@ -47,7 +52,7 @@ const SignUpForm = (props: SignUpProps) => {
                         register(values.username, values.email, values.password, values.confirm).then((result) => {
                             if (result.data) {
                                 userContext.setUser(result.data);
-                                props.toggleShowParent();
+                                toggleShowParent();
                             } 
                             else {
                                 if(result.message) {
@@ -57,9 +62,8 @@ const SignUpForm = (props: SignUpProps) => {
                                 }
                                 setShowAlert(true);
                             }
-
+                            onSubmit();
                         });
-
                     }}
                     initialValues={{
                         username: "",
@@ -141,7 +145,7 @@ const SignUpForm = (props: SignUpProps) => {
 
             </Modal.Body>
             <Modal.Footer>
-                <Button data-testid="login-button" variant="link" onClick={props.handleOnClick}>
+                <Button data-testid="login-button" variant="link" onClick={onLoginClicked}>
                     Kirjaudu
                 </Button>
             </Modal.Footer>

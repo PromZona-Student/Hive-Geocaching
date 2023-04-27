@@ -10,12 +10,17 @@ import Alert from "react-bootstrap/Alert";
 import UserContext from "../../context/UserContext";
 import {useContext} from "react";
 
-interface LoginProps {
-    handleOnClick: () => void;
+interface Props {
+    onSubmit: () => void;
+    onRegisterClicked: () => void;
     toggleShowParent: () => void;
 }
 
-const LoginForm = (props: LoginProps) => {
+const LoginForm = ({
+    onSubmit,
+    onRegisterClicked,
+    toggleShowParent
+}: Props) => {
 
     const userContext = useContext(UserContext);
 
@@ -46,10 +51,10 @@ const LoginForm = (props: LoginProps) => {
                             }
                             else{      
                                 userContext.setUser(result);
-                                props.toggleShowParent();                              
+                                toggleShowParent();                              
                             }
+                            onSubmit();
                         });
-                        
                     }}
                     initialValues={{
                         username: "",
@@ -92,7 +97,7 @@ const LoginForm = (props: LoginProps) => {
                                 </Form.Control.Feedback>
                             </Form.Group>
                             <Form.Group as={Row} md="3" className="mt-3">
-                                <Button data-testid="login-submit"  type="submit">Kirjaudu</Button>
+                                <Button data-testid="login-submit"  type="submit" >Kirjaudu</Button>
                             </Form.Group>
                             
                         </Form>
@@ -104,7 +109,7 @@ const LoginForm = (props: LoginProps) => {
                 <Button variant="link">
                 Salasana unohtui?
                 </Button>
-                <Button data-testid="signup-button" variant="link" onClick={props.handleOnClick}>
+                <Button data-testid="signup-button" variant="link" onClick={onRegisterClicked}>
                 Rekisteröidy
                 </Button>
             </Modal.Footer>

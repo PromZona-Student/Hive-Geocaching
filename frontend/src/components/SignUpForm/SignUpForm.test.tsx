@@ -8,9 +8,10 @@ jest.mock("axios");
 
 const toggleContent = jest.fn();
 const toggleShowParent = jest.fn();
+const onSubmit = jest.fn();
 
 test("Component loads", async () => {
-    render(<SignUpForm handleOnClick={toggleContent} toggleShowParent={toggleShowParent}/>);
+    render(<SignUpForm onSubmit={onSubmit} onLoginClicked={toggleContent} toggleShowParent={toggleShowParent}/>);
     await waitFor(()=>{
         expect(screen.getByTestId("signup-title")).toBeVisible();
     });

@@ -8,8 +8,11 @@ import NavBar from "./NavBar";
 import {User} from "../../model/User";
 import UserContext from "../../context/UserContext";
 import {UserContextType} from "../../context/UserContext";
+import * as AuthApi from "../../api/auth";
 
 type UserContextProviderType = React.ReactNode;
+
+const logoutMockFn = jest.spyOn(AuthApi, "logout").mockImplementation(() => Promise.resolve());
 
 const customRender = (children: UserContextProviderType, mockUser: User) => {
     const mockSetUser = jest.fn();
@@ -97,5 +100,24 @@ describe("Test Dropdown logged in", () => {
                 }
             });
         });
+    });
+});
+
+test("Logout api is called and user menu is closed after logout is pressed", async () => {
+    const user = {
+        id: "usr1",
+        username: "teppo",
+        password: "teppo123",
+        email: "teppo@gmail.com",
+        isPremium: true
+    } as User;
+    customRender(<NavBar/>, user);
+    userEvent.click(screen.getByLabelText("Käyttäjätiedot"));
+    await waitFor(() => {
+        userEvent.click(screen.getByText("Kirjaudu ulos"));
+    });
+    expect(logoutMockFn).toHaveBeenCalled();
+    await waitFor(() => {
+        expect(screen.queryByText("Kirjaudu ulos")).not.toBeInTheDocument();
     });
 });
