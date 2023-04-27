@@ -15,6 +15,7 @@ import NameContainsFilter from "../MapFilters/NameContainsFilter";
 import OffcanvasMenu from "../OffcanvasMenu";
 import CacheDescriptionFilter from "../MapFilters/CacheDescriptionFilter";
 import TerrainFilter from "../MapFilters/TerrainFilter";
+import UserContext from "../../context/UserContext";
 
 interface Props {
     show: boolean
@@ -28,14 +29,30 @@ const MapFiltersMenu = ({
     onConfirmFilters
 }: Props) => {
 
+    const userContext = useContext(UserContext);
     let filters: Filters = {};
-    if(!localStorage.getItem("filters")) {
+    if (!localStorage.getItem("filters")) {
         localStorage.setItem("filters", JSON.stringify(initFilters));
     }
 
+    if (localStorage.getItem("user")) {
+        const userData = localStorage.getItem("user");
+        if (userData && userContext.user) {
+            const savedUsername = JSON.parse(userData).username;
+            const currentUsername = userContext.user.username;
+            console.log(savedUsername, " => ", currentUsername);
+            if (savedUsername !== currentUsername) {
+                localStorage.setItem("filters", JSON.stringify(initFilters));
+            }
+        } else {
+            localStorage.setItem("filters", JSON.stringify(initFilters));
+        }
+    }
+
     const filterData = localStorage.getItem("filters");
-    if(filterData) filters = JSON.parse(filterData);
-    console.log("%c Filters", "color: orange; font-weight: bold");
+    if (filterData) filters = JSON.parse(filterData);
+
+    
     console.log(filters);
 
     const { updateFilters } = useContext(FiltersContext);
@@ -96,10 +113,11 @@ const MapFiltersMenu = ({
             terrain
         });
     };
-    
+
     const confirmFilters = () => {
         updateFilters({ ...mapFilters });
         localStorage.setItem("filters", JSON.stringify(mapFilters));
+        localStorage.setItem("user", JSON.stringify(userContext.user));
         onConfirmFilters();
     };
 
@@ -118,14 +136,14 @@ const MapFiltersMenu = ({
             header="Tarkenna hakua"
             body={
                 <Accordion alwaysOpen>
-                    <CustomRuleFilter onChange={modifyCustomRule} customRule={mapFilters.customRule} eventKey="0"/>
-                    <LimitFilter onChange={modifyLimit} limit={mapFilters.limit} eventKey="1"/>
-                    <CacheTypeFilter onChange={modifyCacheTypes} cacheTypes={mapFilters.cacheTypes} eventKey="2"/>
-                    <CacheSizeFilter onChange={modifyCacheSize} size={mapFilters.size} eventKey="3"/>
-                    <NameContainsFilter onChange={modifyNameContains} nameContains={mapFilters.nameContains} eventKey="4"/>
-                    <CacheDescriptionFilter onChange={modifyDescriptionContains} description={mapFilters.description} eventKey="5"/> 
-                    <DifficultyFilter onChange={modifyDifficulty} difficulty={mapFilters.difficulty} eventKey="6"/>
-                    <TerrainFilter onChange={modifyTerrain} terrain={mapFilters.terrain} eventKey="7"/>
+                    <CustomRuleFilter onChange={modifyCustomRule} customRule={mapFilters.customRule} eventKey="0" />
+                    <LimitFilter onChange={modifyLimit} limit={mapFilters.limit} eventKey="1" />
+                    <CacheTypeFilter onChange={modifyCacheTypes} cacheTypes={mapFilters.cacheTypes} eventKey="2" />
+                    <CacheSizeFilter onChange={modifyCacheSize} size={mapFilters.size} eventKey="3" />
+                    <NameContainsFilter onChange={modifyNameContains} nameContains={mapFilters.nameContains} eventKey="4" />
+                    <CacheDescriptionFilter onChange={modifyDescriptionContains} description={mapFilters.description} eventKey="5" />
+                    <DifficultyFilter onChange={modifyDifficulty} difficulty={mapFilters.difficulty} eventKey="6" />
+                    <TerrainFilter onChange={modifyTerrain} terrain={mapFilters.terrain} eventKey="7" />
                 </Accordion>
             }
             footer={
