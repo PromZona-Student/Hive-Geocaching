@@ -113,10 +113,11 @@ test("Logout api is called and user menu is closed after logout is pressed", asy
     } as User;
     customRender(<NavBar/>, user);
     userEvent.click(screen.getByLabelText("Käyttäjätiedot"));
-    const logoutButton = screen.getByText("Kirjaudu ulos");
-    userEvent.click(logoutButton);
+    await waitFor(() => {
+        userEvent.click(screen.getByText("Kirjaudu ulos"));
+    });
     expect(logoutMockFn).toHaveBeenCalled();
     await waitFor(() => {
-        expect(logoutButton).not.toBeVisible();
+        expect(screen.queryByText("Kirjaudu ulos")).not.toBeInTheDocument();
     });
 });
