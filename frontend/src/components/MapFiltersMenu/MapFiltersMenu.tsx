@@ -1,11 +1,13 @@
 import { Accordion } from "react-bootstrap";
 import "./MapFiltersMenu.scss";
 import { useContext, useState } from "react";
-import { CacheTypes, CacheSize, Difficulty, Terrain, Filters } from "../../model/Filters";
+import { CacheTypes, CacheSize, Difficulty, Terrain, StartEndDate, Filters } from "../../model/Filters";
 import { FiltersContext } from "../../context/FiltersContextProvider";
 import CacheTypeFilter from "../MapFilters/CacheTypeFilter";
 import CacheSizeFilter from "../MapFilters/CacheSizeFilter";
 import DifficultyFilter from "../MapFilters/DifficultyFilter";
+import TerrainFilter from "../MapFilters/TerrainFilter";
+import PublishedHiddenFilter from "../MapFilters/PublishedHiddenFilter";
 import LimitFilter from "../MapFilters/LimitFilter";
 import CustomRuleFilter from "../MapFilters/CustomRuleFilter";
 import ButtonPrimary from "../Buttons/ButtonPrimary";
@@ -14,8 +16,8 @@ import { initFilters } from "../../model/Filters";
 import NameContainsFilter from "../MapFilters/NameContainsFilter";
 import OffcanvasMenu from "../OffcanvasMenu";
 import CacheDescriptionFilter from "../MapFilters/CacheDescriptionFilter";
-import TerrainFilter from "../MapFilters/TerrainFilter";
 import UserContext from "../../context/UserContext";
+
 
 interface Props {
     show: boolean
@@ -114,6 +116,15 @@ const MapFiltersMenu = ({
         });
     };
 
+    const modifyIsPublic = (isPublic: string | undefined, publicSince: StartEndDate | undefined, publicUntil: StartEndDate | undefined) => {
+        setMapFilters({
+            ...mapFilters,
+            isPublic,
+            publicSince,
+            publicUntil
+        });
+    };  
+    
     const confirmFilters = () => {
         updateFilters({ ...mapFilters });
         localStorage.setItem("filters", JSON.stringify(mapFilters));
@@ -136,14 +147,16 @@ const MapFiltersMenu = ({
             header="Tarkenna hakua"
             body={
                 <Accordion alwaysOpen>
-                    <CustomRuleFilter onChange={modifyCustomRule} customRule={mapFilters.customRule} eventKey="0" />
-                    <LimitFilter onChange={modifyLimit} limit={mapFilters.limit} eventKey="1" />
-                    <CacheTypeFilter onChange={modifyCacheTypes} cacheTypes={mapFilters.cacheTypes} eventKey="2" />
-                    <CacheSizeFilter onChange={modifyCacheSize} size={mapFilters.size} eventKey="3" />
-                    <NameContainsFilter onChange={modifyNameContains} nameContains={mapFilters.nameContains} eventKey="4" />
-                    <CacheDescriptionFilter onChange={modifyDescriptionContains} description={mapFilters.description} eventKey="5" />
-                    <DifficultyFilter onChange={modifyDifficulty} difficulty={mapFilters.difficulty} eventKey="6" />
-                    <TerrainFilter onChange={modifyTerrain} terrain={mapFilters.terrain} eventKey="7" />
+                    <CustomRuleFilter onChange={modifyCustomRule} customRule={mapFilters.customRule} eventKey="0"/>
+                    <LimitFilter onChange={modifyLimit} limit={mapFilters.limit} eventKey="1"/>
+                    <CacheTypeFilter onChange={modifyCacheTypes} cacheTypes={mapFilters.cacheTypes} eventKey="2"/>
+                    <CacheSizeFilter onChange={modifyCacheSize} size={mapFilters.size} eventKey="3"/>
+                    <NameContainsFilter onChange={modifyNameContains} nameContains={mapFilters.nameContains} eventKey="4"/>
+                    <CacheDescriptionFilter onChange={modifyDescriptionContains} description={mapFilters.description} eventKey="5"/> 
+                    <DifficultyFilter onChange={modifyDifficulty} difficulty={mapFilters.difficulty} eventKey="6"/>
+                    <TerrainFilter onChange={modifyTerrain} terrain={mapFilters.terrain} eventKey="7"/> 
+                    <PublishedHiddenFilter onChange={modifyIsPublic} isPublic={mapFilters.isPublic} publicSince=
+                        {mapFilters.publicSince} publicUntil={mapFilters.publicUntil} eventKey="9"/>
                 </Accordion>
             }
             footer={

@@ -152,3 +152,30 @@ test("terrain values are changed correctly", async () => {
     clickReset();
     expect(updateFilters).toHaveBeenCalledWith({...initFilters});
 });
+
+test("published hidden filter values are changed correctly", async () => {
+    const sinceDay = screen.getByTestId("since-input-day") as HTMLInputElement;
+    fireEvent.change(sinceDay, { target: { value: "01" }});
+    expect(sinceDay.value).toBe("01");
+
+    const sinceMonth = screen.getByTestId("since-input-month") as HTMLInputElement;
+    fireEvent.change(sinceMonth, { target: { value: "02" }});
+    expect(sinceMonth.value).toBe("02");
+
+    const sinceYear = screen.getByTestId("since-input-year") as HTMLInputElement;
+    fireEvent.change(sinceYear, { target: { value: "2019" }});
+    expect(sinceYear.value).toBe("2019");
+
+    const untilDay = screen.getByTestId("until-input-day") as HTMLInputElement;
+    fireEvent.change(untilDay, { target: { value: "31" }});
+    expect(untilDay.value).toBe("31");
+
+    const untilMonth = screen.getByTestId("until-input-month") as HTMLInputElement;
+    fireEvent.change(untilMonth, { target: { value: "03" }});
+    expect(untilMonth.value).toBe("03");
+
+    const untilYear = screen.getByTestId("until-input-year") as HTMLInputElement;
+    fireEvent.change(untilYear, { target: { value: "2023" }});
+    expect(untilYear.value).toBe("2023");
+    
+});

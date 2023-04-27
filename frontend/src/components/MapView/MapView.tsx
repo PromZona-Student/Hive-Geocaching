@@ -6,6 +6,7 @@ import MapMenu from "../MapMenu";
 import Map from "../Map/Map";
 import { useMap } from "react-leaflet";
 import { LatLng } from "leaflet";
+import { DEFAULT_IS_PUBLIC } from "../../model/Filters";
 
 const MapView = () => {
 
@@ -23,6 +24,7 @@ const MapView = () => {
         const bounds = map.getBounds();
         const centerPoint = map.getCenter();
         let kmDistance: number;
+        if(!filters.isPublic) filters.isPublic = DEFAULT_IS_PUBLIC;
         if(window.screen.availWidth > window.screen.availHeight){
             kmDistance = (new LatLng(bounds.getNorthEast().lat, centerPoint.lng)).distanceTo(centerPoint) / 1000;
         }
