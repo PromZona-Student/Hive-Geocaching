@@ -1,7 +1,7 @@
 import { Accordion } from "react-bootstrap";
 import "./MapFiltersMenu.scss";
 import { useContext, useState } from "react";
-import { CacheTypes, CacheSize, Difficulty, Terrain, Filters } from "../../model/Filters";
+import { CacheTypes, CacheSize, Difficulty, Terrain, StartEndDate, Filters } from "../../model/Filters";
 import { FiltersContext } from "../../context/FiltersContextProvider";
 import CacheTypeFilter from "../MapFilters/CacheTypeFilter";
 import CacheSizeFilter from "../MapFilters/CacheSizeFilter";
@@ -15,6 +15,7 @@ import NameContainsFilter from "../MapFilters/NameContainsFilter";
 import OffcanvasMenu from "../OffcanvasMenu";
 import CacheDescriptionFilter from "../MapFilters/CacheDescriptionFilter";
 import TerrainFilter from "../MapFilters/TerrainFilter";
+import PublishedHiddenFilter from "../MapFilters/PublishedHiddenFilter";
 
 interface Props {
     show: boolean
@@ -85,6 +86,15 @@ const MapFiltersMenu = ({
             terrain
         });
     };
+
+    const modifyIsPublic = (isPublic: string | undefined, publicSince: StartEndDate | undefined, publicUntil: StartEndDate | undefined) => {
+        setMapFilters({
+            ...mapFilters,
+            isPublic,
+            publicSince,
+            publicUntil
+        });
+    };  
     
     const confirmFilters = () => {
         updateFilters({ ...mapFilters });
@@ -112,7 +122,9 @@ const MapFiltersMenu = ({
                     <NameContainsFilter onChange={modifyNameContains} nameContains={mapFilters.nameContains} eventKey="4"/>
                     <CacheDescriptionFilter onChange={modifyDescriptionContains} description={mapFilters.description} eventKey="5"/> 
                     <DifficultyFilter onChange={modifyDifficulty} difficulty={mapFilters.difficulty} eventKey="6"/>
-                    <TerrainFilter onChange={modifyTerrain} terrain={mapFilters.terrain} eventKey="7"/>
+                    <TerrainFilter onChange={modifyTerrain} terrain={mapFilters.terrain} eventKey="7"/> 
+                    <PublishedHiddenFilter onChange={modifyIsPublic} isPublic={mapFilters.isPublic} publicSince=
+                        {mapFilters.publicSince} publicUntil={mapFilters.publicUntil} eventKey="9"/>
                 </Accordion>
             }
             footer={
