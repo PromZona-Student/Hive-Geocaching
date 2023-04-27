@@ -70,8 +70,8 @@ const NavBar = ({
                     <div className="gc-navbar-item">
                         <Link to="/"><GeocachingFiLogo className="logo-navbar" aria-label="Etusivulle" /></Link>
                     </div>
-                    <div className="gc-navbar-item">
-                        <AiOutlineUser color="white" size="30px" onClick={toggleUserDropdown} aria-label="Käyttäjätiedot" role="button" />
+                    <div className="gc-navbar-item" onClick={toggleUserDropdown} aria-label="Käyttäjätiedot" role="button">
+                        <AiOutlineUser color="white" size="30px"/>
                         {
                             showUserDropdown && (
                                 <div className="gc-navbar-user-menu">
