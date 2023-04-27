@@ -12,6 +12,10 @@ export const login = async (username: string, password: string) => {
     }
 };
 
+export const logout = async () => {
+    await axios.post("/api/auth/logout");
+};
+
 export const register = async (username: string, email: string, password: string, confirm: string) => {
     if(password !== confirm) {
         return { status: 400, message: "Salasanat eivät täsmää" };

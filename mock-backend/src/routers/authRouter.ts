@@ -47,6 +47,14 @@ authRouter.post("/login", async (request, response) => {
     );
 });
 
+authRouter.post("/logout", async (request, response) => {
+    const sessionID = request.cookies["SID"];
+    if(sessionID){
+        sessions.delete(sessionID);
+    }
+    return response.status(200).send();
+});
+
 authRouter.post("/register", async (request, response) => {
     const registerRequest = request.body as RegisterRequest;
 

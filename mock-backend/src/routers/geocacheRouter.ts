@@ -99,7 +99,6 @@ geocacheRouter.post("/search", async (request, response) => {
     if(!skip && !take){
         result = result.slice(0, filters.limit ? filters.limit : LIMIT_DEFAULT);
     }
-    console.log(result.map(r => r.referenceCode));
     return response.json(result);
 })
 
