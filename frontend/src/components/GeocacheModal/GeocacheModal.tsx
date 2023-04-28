@@ -40,12 +40,21 @@ const GeocacheModal = (props: ModalProps) => {
     };
 
     const formatCoordinate = (coord?: number) => {
-        return coord ? coord : "***";
+        if(coord){
+            return coord.toFixed(2);
+        }
+        else{
+            return "***";
+        }
+    };
+
+    const formatTime = (num: number) => {
+        return num < 10 ? `0${num}` : num.toString();
     };
 
     const formatDate = (rawDate: string) => {
         const date = new Date(rawDate);
-        return date.getDay() + "." + date.getMonth() + "." + date.getFullYear();
+        return `${formatTime(date.getDate())}.${formatTime(date.getMonth() + 1)}.${date.getFullYear()}`;
     };
     const setContent = () => {
         if (props.cacheId && cache && !isLoading) {
