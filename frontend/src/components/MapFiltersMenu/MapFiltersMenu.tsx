@@ -42,7 +42,6 @@ const MapFiltersMenu = ({
         if (userData && userContext.user) {
             const savedUsername = JSON.parse(userData).username;
             const currentUsername = userContext.user.username;
-            console.log(savedUsername, " => ", currentUsername);
             if (savedUsername !== currentUsername) {
                 localStorage.setItem("filters", JSON.stringify(initFilters));
             }
@@ -53,10 +52,6 @@ const MapFiltersMenu = ({
 
     const filterData = localStorage.getItem("filters");
     if (filterData) filters = JSON.parse(filterData);
-
-    
-    console.log(filters);
-
     const { updateFilters } = useContext(FiltersContext);
     const [mapFilters, setMapFilters] = useState<Filters>(filters);
 
