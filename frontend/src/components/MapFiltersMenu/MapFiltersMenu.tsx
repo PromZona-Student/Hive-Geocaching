@@ -6,6 +6,8 @@ import { FiltersContext } from "../../context/FiltersContextProvider";
 import CacheTypeFilter from "../MapFilters/CacheTypeFilter";
 import CacheSizeFilter from "../MapFilters/CacheSizeFilter";
 import DifficultyFilter from "../MapFilters/DifficultyFilter";
+import TerrainFilter from "../MapFilters/TerrainFilter";
+import PublishedHiddenFilter from "../MapFilters/PublishedHiddenFilter";
 import LimitFilter from "../MapFilters/LimitFilter";
 import CustomRuleFilter from "../MapFilters/CustomRuleFilter";
 import ButtonPrimary from "../Buttons/ButtonPrimary";
@@ -14,8 +16,8 @@ import { initFilters } from "../../model/Filters";
 import NameContainsFilter from "../MapFilters/NameContainsFilter";
 import OffcanvasMenu from "../OffcanvasMenu";
 import CacheDescriptionFilter from "../MapFilters/CacheDescriptionFilter";
-import TerrainFilter from "../MapFilters/TerrainFilter";
-import PublishedHiddenFilter from "../MapFilters/PublishedHiddenFilter";
+import UserContext from "../../context/UserContext";
+
 
 interface Props {
     show: boolean
@@ -28,8 +30,30 @@ const MapFiltersMenu = ({
     onHide,
     onConfirmFilters
 }: Props) => {
+
+    const userContext = useContext(UserContext);
+    let filters: Filters = {};
+    if (!localStorage.getItem("filters")) {
+        localStorage.setItem("filters", JSON.stringify(initFilters));
+    }
+
+    if (localStorage.getItem("user")) {
+        const userData = localStorage.getItem("user");
+        if (userData && userContext.user) {
+            const savedUsername = JSON.parse(userData).username;
+            const currentUsername = userContext.user.username;
+            if (savedUsername !== currentUsername) {
+                localStorage.setItem("filters", JSON.stringify(initFilters));
+            }
+        } else {
+            localStorage.setItem("filters", JSON.stringify(initFilters));
+        }
+    }
+
+    const filterData = localStorage.getItem("filters");
+    if (filterData) filters = JSON.parse(filterData);
     const { updateFilters } = useContext(FiltersContext);
-    const [mapFilters, setMapFilters] = useState<Filters>(initFilters);
+    const [mapFilters, setMapFilters] = useState<Filters>(filters);
 
     const modifyCustomRule = (customRule: string) => {
         setMapFilters({
@@ -98,12 +122,15 @@ const MapFiltersMenu = ({
     
     const confirmFilters = () => {
         updateFilters({ ...mapFilters });
+        localStorage.setItem("filters", JSON.stringify(mapFilters));
+        localStorage.setItem("user", JSON.stringify(userContext.user));
         onConfirmFilters();
     };
 
     const resetFilters = () => {
         setMapFilters(initFilters);
         updateFilters({ ...initFilters });
+        localStorage.setItem("filters", JSON.stringify(initFilters));
         onHide();
     };
 
