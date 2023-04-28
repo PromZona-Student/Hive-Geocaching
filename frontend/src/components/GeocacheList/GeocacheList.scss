@@ -27,6 +27,11 @@
 .flex-row {
     display: flex;
     gap: 5px;
+    img{
+        position: relative;
+        top: 5px;
+        left: 5px;
+    }
 }
 
 p{
