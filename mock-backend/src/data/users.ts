@@ -20,3 +20,7 @@ export const users: Array<UserDetails> = [
 export const getUser = (userId: string) => {
     return users.find(u => u.id === userId);
 };
+
+export const getUserByEmail = (email: string) => {
+    return users.find(u => u.email === email);
+};

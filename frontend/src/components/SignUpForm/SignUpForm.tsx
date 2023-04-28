@@ -9,7 +9,6 @@ import { useState } from "react";
 import Alert from "react-bootstrap/Alert";
 import UserContext from "../../context/UserContext";
 import { useContext } from "react";
-//import { User } from "../../model/User";
 
 interface Props {
     onSubmit: () => void;
