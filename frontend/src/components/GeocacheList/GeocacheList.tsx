@@ -8,8 +8,7 @@ interface Props {
     geocaches: Array<Geocache>
 }
 
-//const ICON_DIMENSIONS = [36 / 1.5, 27 / 1.5];
-const ICON_DIMENSIONS = [18 / 1, 13.5 / 1];
+const ICON_DIMENSIONS = [36 / 1.5, 27 / 1.5];
 
 const GeocacheList = ({geocaches}: Props) => {
     return (
