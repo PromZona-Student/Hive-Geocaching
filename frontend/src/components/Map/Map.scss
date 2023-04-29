@@ -1,0 +1,21 @@
+@import "../../styles/common.scss";
+
+.location-icon{
+    border: 3px solid white;
+    border-radius: 50%;
+    animation-name: change-color;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes change-color{
+    from {
+        background-color: blue;
+    }
+
+    to{
+        background-color: rgb(44, 124, 252);
+    }
+}

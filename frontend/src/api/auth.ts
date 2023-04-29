@@ -12,10 +12,21 @@ export const login = async (username: string, password: string) => {
     }
 };
 
+export const logout = async () => {
+    await axios.post("/api/auth/logout");
+};
+
 export const register = async (username: string, email: string, password: string, confirm: string) => {
     if(password !== confirm) {
-        return { status: 400, message: "Salasanat eivät täsmää"};
+        return { status: 400, message: "Salasanat eivät täsmää" };
     }
+
+    const emailPattern = new RegExp("^[a-z0-9._%+-]+@[a-z0-9-]+[.]{1}[a-z]{2,4}$");
+    const isEmailValid = emailPattern.test(email);
+    if(!isEmailValid) {
+        return { status: 400, message: "Sähköpostiosoite ei kelpaa" };
+    }
+
     try {
         const response = await axios.post("/api/auth/register", { username, password, email });
         if (response.status == 200) {

@@ -10,7 +10,7 @@ const PageLayout = ({
 }: Props) => {
     return (
         <>
-            <NavBar fixedTop/>
+            <NavBar/>
             <div className="page-layout">
                 {children}
             </div>

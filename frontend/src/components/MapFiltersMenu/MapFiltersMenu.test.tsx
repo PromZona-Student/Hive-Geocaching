@@ -4,7 +4,6 @@ import MapFiltersMenu from "./MapFiltersMenu";
 import { BrowserRouter } from "react-router-dom";
 import { MapContext } from "../../context/MapContext";
 import { FiltersContext } from "../../context/FiltersContextProvider";
-import { mockMatchMedia } from "../../tests/mockMatchMedia";
 import { initFilters } from "../../model/Filters";
 
 const onHide = jest.fn();
@@ -14,7 +13,6 @@ let filters = {...initFilters};
 const updateFilters = jest.fn();
 
 beforeEach(() => {
-    mockMatchMedia();
     render(
         <BrowserRouter>
             <FiltersContext.Provider value={{filters, updateFilters}}>
@@ -92,8 +90,8 @@ test("cache types values are changed correctly", async () => {
 });
 
 test("cache size values are changed correctly", async () => {
-    const cacheTypeAccordion = screen.getByText("Koko", { selector: "button" });
-    fireEvent.click(cacheTypeAccordion);
+    const cacheSizeAccordion = screen.getByText("Koko", { selector: "button" });
+    fireEvent.click(cacheSizeAccordion);
     const virtuaali = screen.getByLabelText("Virtuaali") as HTMLInputElement;
     expect(virtuaali.checked).toEqual(false);
     fireEvent.click(virtuaali);
@@ -109,19 +107,75 @@ test("cache size values are changed correctly", async () => {
     expect(updateFilters).toHaveBeenCalledWith({...initFilters});
 });
 
+test("name contains filter search box text is saved correctly", async () => {
+    const searchInput = screen.getByTestId("name-contains-filter") as HTMLInputElement;
+    fireEvent.change(searchInput, { target: { value: "test" }});
+    expect(searchInput.value).toBe("test");
+});
+
+test("cache description filter search box text is saved correctly", async () => {
+    const searchInput = screen.getByTestId("description-contains-filter") as HTMLInputElement;
+    fireEvent.change(searchInput, { target: { value: "test" }});
+    expect(searchInput.value).toBe("test");
+});
+
 test("difficulty values are changed correctly", async () => {
-    const cacheTypeAccordion = screen.getByText("Vaikeus", { selector: "button" });
-    fireEvent.click(cacheTypeAccordion);
-    const kolme = screen.getByLabelText("3") as HTMLInputElement;
-    fireEvent.click(kolme);
+    const difficultyAccordion = screen.getByText("Vaikeus", { selector: "button" });
+    fireEvent.click(difficultyAccordion);
+    const three = screen.getByTestId("difficulty-3") as HTMLInputElement;
+    fireEvent.click(three);
     clickConfirm();
     expect(updateFilters).toHaveBeenCalledWith({
         ...initFilters,
         difficulty: {
-            ...initFilters.size,
+            ...initFilters.difficulty,
             3: true
         }
     });
     clickReset();
     expect(updateFilters).toHaveBeenCalledWith({...initFilters});
+});
+
+test("terrain values are changed correctly", async () => {
+    const terrainAccordion = screen.getByText("Maasto", { selector: "button" });
+    fireEvent.click(terrainAccordion);
+    const two = screen.getByTestId("terrain-2") as HTMLInputElement;
+    fireEvent.click(two);
+    clickConfirm();
+    expect(updateFilters).toHaveBeenCalledWith({
+        ...initFilters,
+        terrain: {
+            ...initFilters.terrain,
+            2: true
+        }
+    });
+    clickReset();
+    expect(updateFilters).toHaveBeenCalledWith({...initFilters});
+});
+
+test("published hidden filter values are changed correctly", async () => {
+    const sinceDay = screen.getByTestId("since-input-day") as HTMLInputElement;
+    fireEvent.change(sinceDay, { target: { value: "01" }});
+    expect(sinceDay.value).toBe("01");
+
+    const sinceMonth = screen.getByTestId("since-input-month") as HTMLInputElement;
+    fireEvent.change(sinceMonth, { target: { value: "02" }});
+    expect(sinceMonth.value).toBe("02");
+
+    const sinceYear = screen.getByTestId("since-input-year") as HTMLInputElement;
+    fireEvent.change(sinceYear, { target: { value: "2019" }});
+    expect(sinceYear.value).toBe("2019");
+
+    const untilDay = screen.getByTestId("until-input-day") as HTMLInputElement;
+    fireEvent.change(untilDay, { target: { value: "31" }});
+    expect(untilDay.value).toBe("31");
+
+    const untilMonth = screen.getByTestId("until-input-month") as HTMLInputElement;
+    fireEvent.change(untilMonth, { target: { value: "03" }});
+    expect(untilMonth.value).toBe("03");
+
+    const untilYear = screen.getByTestId("until-input-year") as HTMLInputElement;
+    fireEvent.change(untilYear, { target: { value: "2023" }});
+    expect(untilYear.value).toBe("2023");
+    
 });

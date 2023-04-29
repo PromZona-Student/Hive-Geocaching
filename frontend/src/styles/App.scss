@@ -1,1 +1,10 @@
 @import "customBootstrap";
+@import "common";
+
+body{
+    background-color: $color-dark-green;
+}
+
+html, body, #root, .app{
+    height: 100%;
+}

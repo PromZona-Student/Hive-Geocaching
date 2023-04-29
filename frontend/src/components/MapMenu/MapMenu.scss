@@ -51,9 +51,17 @@ $map-menu-button-size: 50px;
     color: white;
     border: none;
     border-radius: 2px;
+    font-family: $font-family-sans-serif;
+    font-size: medium;
     cursor:pointer;
 
     &:active{
         background-color: $color-green;
     }
+}
+
+.map-menu-toolbar-submenu{
+    overflow-y: visible;
+    max-height: $map-menu-button-size;
+    z-index: 999;
 }

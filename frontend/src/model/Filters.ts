@@ -76,9 +76,30 @@ export interface Difficulty {
     4?: boolean;
     4.5?: boolean;
     5?: boolean;
-}  
+}
+
+export interface Terrain {
+    1?: boolean;
+    1.5?: boolean;
+    2?: boolean;
+    2.5?: boolean;
+    3?: boolean;
+    3.5?: boolean;
+    4?: boolean;
+    4.5?: boolean;
+    5?: boolean;
+}
+
+export interface StartEndDate{
+    day?: string,
+    month?: string,
+    year?: string
+} 
+  
 
 export const initFilters: Filters = {};
+
+export const DEFAULT_IS_PUBLIC = "julkaistu";
 
 export interface Filters{
     limit?: number
@@ -89,10 +110,10 @@ export interface Filters{
     nameContains?: string
     description?: string
     difficulty?: Difficulty
-    terrain?: Array<string>
+    terrain?: Terrain
     isPublic?: string
-    publicSince?: string
-    publicUntil?: string
+    publicSince?: StartEndDate
+    publicUntil?: StartEndDate
     attributesSelectType?: string
     attributes?: Attributes
     centerPoint?: LatLng

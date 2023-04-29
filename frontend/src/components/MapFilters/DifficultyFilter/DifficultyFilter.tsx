@@ -37,6 +37,7 @@ const DifficultyFilter = ({
                         name="1"
                         onChange={modifyDifficulty}
                         checked={difficulty?.[1] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="difficulty-1"
                     />
                     <label htmlFor="1">1</label>
                 </div>
@@ -47,6 +48,7 @@ const DifficultyFilter = ({
                         name="1.5"
                         onChange={modifyDifficulty}
                         checked={difficulty?.[1.5] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="difficulty-1.5"
                     />
                     <label htmlFor="1.5">1,5</label>
                 </div>
@@ -57,6 +59,7 @@ const DifficultyFilter = ({
                         name="2"
                         onChange={modifyDifficulty}
                         checked={difficulty?.[2] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="difficulty-2"
                     />
                     <label htmlFor="kaksi">2</label>
                 </div>
@@ -67,6 +70,7 @@ const DifficultyFilter = ({
                         name="2.5"
                         onChange={modifyDifficulty}
                         checked={difficulty?.[2.5] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="difficulty-2.5"
                     />
                     <label htmlFor="2.5">2,5</label>
                 </div>
@@ -77,6 +81,7 @@ const DifficultyFilter = ({
                         name="3"
                         onChange={modifyDifficulty}
                         checked={difficulty?.[3] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="difficulty-3"
                     />
                     <label htmlFor="3">3</label>
                 </div>
@@ -87,6 +92,7 @@ const DifficultyFilter = ({
                         name="3.5"
                         onChange={modifyDifficulty}
                         checked={difficulty?.[3.5] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="difficulty-3.5"
                     />
                     <label htmlFor="3.5">3,5</label>
                 </div>
@@ -97,6 +103,7 @@ const DifficultyFilter = ({
                         name="4"
                         onChange={modifyDifficulty}
                         checked={difficulty?.[4] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="difficulty-4"
                     />
                     <label htmlFor="4">4</label>
                 </div>
@@ -107,6 +114,7 @@ const DifficultyFilter = ({
                         name="4.5"
                         onChange={modifyDifficulty}
                         checked={difficulty?.[4.5] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="difficulty-4.5"
                     />
                     <label htmlFor="4.5">4,5</label>
                 </div>
@@ -117,6 +125,7 @@ const DifficultyFilter = ({
                         name="5"
                         onChange={modifyDifficulty}
                         checked={difficulty?.[5] || DEFAULT_DISPLAY_VALUE}
+                        data-testid="difficulty-5"
                     />
                     <label htmlFor="5">5</label>
                 </div>

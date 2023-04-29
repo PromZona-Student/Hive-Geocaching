@@ -4,6 +4,7 @@ import "@testing-library/jest-dom";
 import * as GeocacheApi from "../../api/geocaches";
 import { BrowserRouter } from "react-router-dom";
 import { Geocache } from "../../model/Geocache";
+
 jest.mock("axios");
 
 test("component loads", async () => {
@@ -12,7 +13,7 @@ test("component loads", async () => {
         name: "Esimerkkikätkö",
         placedDate: "",
         publishedDate: "",
-        type: "Oma kätkö",
+        type: "multikätkö",
         size: "Joku",
         postedCoordinates: {
             latitude: 0,

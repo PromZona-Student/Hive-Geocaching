@@ -33,9 +33,9 @@ const meterDistance = (latlng1: LatLng, latlng2: LatLng): number => {
 }
 
 const sortByDate = (a: Geocache, b: Geocache) => {
-    const dateA = Date.parse(a.publishedDate);
-    const dateB = Date.parse(a.publishedDate);
-    return dateA - dateB;
+    const dateA = Date.parse(a.placedDate);
+    const dateB = Date.parse(b.placedDate);
+    return dateB - dateA;
 }
 
 geocacheRouter.get("/", async (request, response) => {
@@ -75,7 +75,7 @@ geocacheRouter.get("/:id", async (request, response) => {
 
 geocacheRouter.post("/search", async (request, response) => {
     let result = [...geocaches]
-    const {filters, orderBy} = request.body as SearchRequest;
+    const {filters, orderBy, skip, take} = request.body as SearchRequest;
     const center = filters.centerPoint;
     const distance = filters.maxDistance;
     if(center && distance){
@@ -90,7 +90,15 @@ geocacheRouter.post("/search", async (request, response) => {
     if(orderBy && orderBy === "newest"){
         result = result.sort(sortByDate)
     }
-    result = result.slice(0, filters.limit ? filters.limit : LIMIT_DEFAULT);
+    if(skip){
+        result = result.slice(skip, result.length);
+    }
+    if(take){
+        result = result.slice(0,take);
+    }
+    if(!skip && !take){
+        result = result.slice(0, filters.limit ? filters.limit : LIMIT_DEFAULT);
+    }
     return response.json(result);
 })
 
@@ -119,7 +127,8 @@ geocacheRouter.post("/mapsearch", async (request, response) => {
             postedCoordinates: {
                 latitude: c.postedCoordinates.latitude!,
                 longitude: c.postedCoordinates.longitude!
-            }
+            },
+            type: c.type
         }
         return mapDetails
     }));

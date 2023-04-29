@@ -1,10 +1,12 @@
 import Modal from "react-bootstrap/Modal";
-import { Geocache } from "../../model/Geocache";
+import { GeoCacheTypeIconUrls, Geocache, defaultGeoCacheTypeIconUrl } from "../../model/Geocache";
 import { Link } from "react-router-dom";
 import "./GeocacheModal.scss";
 import { useEffect, useState } from "react";
 import { getCache } from "../../api/geocaches";
-import Spinner from "react-bootstrap/Spinner";
+import Spinner from "../Spinner";
+
+const ICON_DIMENSIONS = [36 / 1.5, 27 / 1.5];
 
 interface ModalProps {
     isOpen: boolean;
@@ -38,25 +40,34 @@ const GeocacheModal = (props: ModalProps) => {
     };
 
     const formatCoordinate = (coord?: number) => {
-        return coord ? coord : "***";
+        if(coord){
+            return coord.toFixed(2);
+        }
+        else{
+            return "***";
+        }
+    };
+
+    const formatTime = (num: number) => {
+        return num < 10 ? `0${num}` : num.toString();
     };
 
     const formatDate = (rawDate: string) => {
         const date = new Date(rawDate);
-        return date.getDay() + "." + date.getMonth() + "." + date.getFullYear();
+        return `${formatTime(date.getDate())}.${formatTime(date.getMonth() + 1)}.${date.getFullYear()}`;
     };
     const setContent = () => {
         if (props.cacheId && cache && !isLoading) {
             return (
                 <div>
                     <div className="cache-name">{cache.name}</div>
-                    <hr />
+                    <hr  className="yellow-hr"/>
                     <div className="cache-code bottom-space">{`(${cache.referenceCode})`}</div>
 
                     {handlePremiumCont(cache.isPremiumOnly)}
 
                     <div className="flex-row">
-                        <img width="20px" src="katko2.gif" /> <div className="cache-text">{cache.type}</div>
+                        <img width={ICON_DIMENSIONS[0]} height={ICON_DIMENSIONS[1]} src={GeoCacheTypeIconUrls[cache.type] || defaultGeoCacheTypeIconUrl} /> <div className="cache-text">{cache.type}</div>
                     </div>
 
                     <div className="flex-row">
@@ -94,7 +105,7 @@ const GeocacheModal = (props: ModalProps) => {
             return (
                 <div style={{display: "flex", alignItems: "center", "flexDirection": "column"}}>
                     <p>Ladataan...</p>
-                    <Spinner animation="border" variant="secondary" role="status"/>
+                    <Spinner />
                 </div>
             );
         }

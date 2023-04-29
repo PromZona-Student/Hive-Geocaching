@@ -1,0 +1,102 @@
+@import "../../styles/common.scss";
+
+.gc-offcanvas-menu-container{
+    background-color: $color-dark-green;
+    width: 90vw;
+    position: fixed;
+    @media screen and (min-width: 500px){
+        width: 400px;
+    }
+    top: 0;
+    left: 0;
+    z-index: 2003;
+    height: 100%;
+    animation-name: show-animation;
+    animation-duration: 0.2s;
+    pointer-events: all;
+    padding: 1px;
+    display: grid;
+    grid-template-rows: 60px auto 130px;
+
+    &--hide{
+        animation-name: close-animation;
+        animation-duration: 0.2s;
+    }
+}
+
+@keyframes blur-background{
+    from{
+        background-color: #00000000;
+    }
+    to{
+        background-color: #00000080;
+    }
+}
+
+@keyframes clear-background{
+    from{
+        background-color: #00000080;
+    }
+    to{
+        background-color: #00000000;
+    }
+}
+
+@keyframes show-animation{
+    from{
+        left: -100%;
+    }
+    to{
+        left: 0%;
+    }
+}
+
+@keyframes close-animation{
+    from{
+        left: 0%;
+    }
+    to{
+        left: -100%;
+    }
+}
+
+.gc-offcanvas-close-btn{
+    cursor: pointer;
+}
+
+.gc-offcanvas-header{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    color: $color-white;
+    background-color: $color-dark-green;
+}
+
+.gc-offcanvas-content{
+    color: $color-white;
+    overflow-y: auto;
+}
+
+.gc-offcanvas-footer{
+    background-color: $color-dark-green;
+    width: 100%;
+    padding-top: 10px;
+}
+
+.gc-offcanvas-background{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2002;
+    background-color: #00000080;
+    animation-name: blur-background;
+    animation-duration: 0.2s;
+    pointer-events: all;
+
+    &--hide{
+        animation-name: clear-background;
+        animation-duration: 0.2s;
+    }
+}
