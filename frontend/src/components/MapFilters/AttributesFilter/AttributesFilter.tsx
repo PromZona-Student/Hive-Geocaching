@@ -1,5 +1,5 @@
 import "./AttributesFilter.scss";
-import { ChangeEvent, useState, useEffect } from "react";
+import { ChangeEvent, useState } from "react";
 import { Attributes } from "../../../model/Filters";
 import MapFilterItem from "../../MapFilterItem";
 import { abandonedBuildingNo,abandonedBuildingYes,availableNo,availableYes,bicyclesNo,bicyclesYes, boatYes,challengecacheYes,climbingNo,climbingYes,fieldPuzzleNo, fieldPuzzleYes,flashlightYes,hikeShortNo,hikeShortYes,mineYes,nightNo,nightYes,parkingNo,parkingYes,parkngrabNo,parkngrabYes,powertrailYes,rappellingYes,snowshoesYes,sToolYes,teamworkNo,teamworkYes,treeclimbingNo,treeclimbingYes,uVYes,wadingYes,winterNo,winterYes } from "../../../images/attributes";
