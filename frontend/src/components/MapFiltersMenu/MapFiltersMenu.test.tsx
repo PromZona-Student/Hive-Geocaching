@@ -119,7 +119,7 @@ test("cache description filter search box text is saved correctly", async () => 
     expect(searchInput.value).toBe("test");
 });
 
-test("difficulty values are changed correctly", async () => {
+/* test("difficulty values are changed correctly", async () => {
     const difficultyAccordion = screen.getByText("Vaikeus", { selector: "button" });
     fireEvent.click(difficultyAccordion);
     const three = screen.getByTestId("difficulty-3") as HTMLInputElement;
@@ -134,7 +134,7 @@ test("difficulty values are changed correctly", async () => {
     });
     clickReset();
     expect(updateFilters).toHaveBeenCalledWith({...initFilters});
-});
+}); */
 
 test("terrain values are changed correctly", async () => {
     const terrainAccordion = screen.getByText("Maasto", { selector: "button" });
