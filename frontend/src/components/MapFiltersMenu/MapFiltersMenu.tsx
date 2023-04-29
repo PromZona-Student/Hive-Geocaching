@@ -154,7 +154,6 @@ const MapFiltersMenu = ({
                     <CacheTypeFilter onChange={modifyCacheTypes} cacheTypes={mapFilters.cacheTypes} eventKey="2"/>
                     <CacheSizeFilter onChange={modifyCacheSize} size={mapFilters.size} eventKey="3"/>
                     <NameContainsFilter onChange={modifyNameContains} nameContains={mapFilters.nameContains} eventKey="4"/>
-                    <DifficultyFilter onChange={modifyDifficulty} difficulty={mapFilters.difficulty} eventKey="6"/>
                     <CacheDescriptionFilter onChange={modifyDescriptionContains} description={mapFilters.description} eventKey="5"/> 
                     <DifficultyFilter onChange={modifyDifficulty} difficulty={mapFilters.difficulty} eventKey="6"/>
                     <TerrainFilter onChange={modifyTerrain} terrain={mapFilters.terrain} eventKey="7"/> 
