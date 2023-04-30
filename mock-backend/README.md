@@ -16,7 +16,7 @@ You need node.js(v18) to run the mock backend.
 To install dependencies, run
 
 ```
-npm ci
+npm install
 ```
 inside the mock-backend directory.
 
