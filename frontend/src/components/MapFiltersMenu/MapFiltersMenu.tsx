@@ -1,7 +1,7 @@
 import { Accordion } from "react-bootstrap";
 import "./MapFiltersMenu.scss";
 import { useContext, useState } from "react";
-import { CacheTypes, CacheSize, Difficulty, Terrain, StartEndDate, Filters } from "../../model/Filters";
+import { CacheTypes, CacheSize, Difficulty, Terrain, StartEndDate, Filters, Attributes } from "../../model/Filters";
 import { FiltersContext } from "../../context/FiltersContextProvider";
 import CacheTypeFilter from "../MapFilters/CacheTypeFilter";
 import CacheSizeFilter from "../MapFilters/CacheSizeFilter";
@@ -14,10 +14,10 @@ import ButtonPrimary from "../Buttons/ButtonPrimary";
 import ButtonWarning from "../Buttons/ButtonWarning";
 import { initFilters } from "../../model/Filters";
 import NameContainsFilter from "../MapFilters/NameContainsFilter";
+import AttributesFilter from "../MapFilters/AttributesFilter";
 import OffcanvasMenu from "../OffcanvasMenu";
 import CacheDescriptionFilter from "../MapFilters/CacheDescriptionFilter";
 import UserContext from "../../context/UserContext";
-
 
 interface Props {
     show: boolean
@@ -134,6 +134,13 @@ const MapFiltersMenu = ({
         onHide();
     };
 
+    const modifyAttributes = (attributes: Attributes) => {
+        setMapFilters({
+            ...mapFilters,
+            attributes
+        });
+    };
+
     return (
 
         <OffcanvasMenu
@@ -150,6 +157,7 @@ const MapFiltersMenu = ({
                     <CacheDescriptionFilter onChange={modifyDescriptionContains} description={mapFilters.description} eventKey="5"/> 
                     <DifficultyFilter onChange={modifyDifficulty} difficulty={mapFilters.difficulty} eventKey="6"/>
                     <TerrainFilter onChange={modifyTerrain} terrain={mapFilters.terrain} eventKey="7"/> 
+                    <AttributesFilter onChange={modifyAttributes} attributes={mapFilters.attributes} eventKey="8"/>
                     <PublishedHiddenFilter onChange={modifyIsPublic} isPublic={mapFilters.isPublic} publicSince=
                         {mapFilters.publicSince} publicUntil={mapFilters.publicUntil} eventKey="9"/>
                 </Accordion>

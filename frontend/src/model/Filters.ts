@@ -1,5 +1,42 @@
 import { LatLng } from "leaflet";
 
+export interface Attributes {
+    abandonedBuildingNo?: boolean;
+    abandonedBuildingYes?: boolean;
+    availableNo?: boolean;
+    availableYes?: boolean;
+    bicyclesNo?: boolean;
+    bicyclesYes?: boolean; 
+    boatYes?: boolean;
+    challengecacheYes?: boolean;
+    climbingNo?: boolean;
+    climbingYes?: boolean;
+    fieldPuzzleNo?: boolean; 
+    fieldPuzzleYes?: boolean;
+    flashlightYes?: boolean;
+    hikeShortNo?: boolean;
+    hikeShortYes?: boolean;
+    mineYes?: boolean;
+    nightNo?: boolean;
+    nightYes?: boolean;
+    parkingNo?: boolean;
+    parkingYes?: boolean;
+    parkngrabNo?: boolean;
+    parkngrabYes?: boolean;
+    powertrailYes?: boolean;
+    rappellingYes?: boolean;
+    snowshoesYes?: boolean;
+    sToolYes?: boolean;
+    teamworkNo?: boolean;
+    teamworkYes?: boolean;
+    treeclimbingNo?: boolean;
+    treeclimbingYes?: boolean;
+    uVYes?: boolean;
+    wadingYes?: boolean;
+    winterNo?: boolean;
+    winterYes?: boolean;
+}
+
 export interface CacheTypes {
     peruskätkö?: boolean;
     multikätkö?: boolean;
@@ -78,6 +115,6 @@ export interface Filters{
     publicSince?: StartEndDate
     publicUntil?: StartEndDate
     attributesSelectType?: string
-    attributes?: Array<string>
+    attributes?: Attributes
     centerPoint?: LatLng
 }
